@@ -5,7 +5,7 @@ Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
 Tested up to: 6.6.2
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -238,6 +238,9 @@ With this plugin, you can hide the cart button and product price. Additionally, 
 
 = Version 1.3.7 =
 * Added support for - Simple Cloudflare Turnstile – CAPTCHA Alternative.
+
+= Version 1.3.8 =
+* Sweetalert2 is downgraded to v11.4.8.
 
 
 == Upgrade notice ==

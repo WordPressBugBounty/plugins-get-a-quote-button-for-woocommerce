@@ -21,6 +21,8 @@ class WPB_GQB_Ajax {
      */
 
     public function fire_contact_form() {
+        check_ajax_referer( 'wpb-get-a-quote-button-ajax', '_wpnonce' );
+
         $form                   = '';
         $contact_form_id        = isset( $_POST['contact_form_id'] ) ? sanitize_text_field( $_POST['contact_form_id'] ) : '';
 

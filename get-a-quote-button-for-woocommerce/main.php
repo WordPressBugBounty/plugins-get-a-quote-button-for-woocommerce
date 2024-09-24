@@ -3,7 +3,7 @@
  * Plugin Name:       Get a Quote Button for WooCommerce
  * Plugin URI:        https://wpbean.com/plugins/
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
- * Version:           1.3.7
+ * Version:           1.3.8
  * Author:            wpbean
  * Author URI:        https://wpbean.com
  * Text Domain:       wpb-get-a-quote-button
@@ -47,7 +47,7 @@ if ( defined( 'WPB_GQB_PREMIUM' ) ) {
 class WPB_Get_Quote_Button {
 
 	//  Plugin version
-	public $version = '1.3.7';
+	public $version = '1.3.8';
 
 	// The plugin url
 	public $plugin_url;
@@ -228,7 +228,6 @@ class WPB_Get_Quote_Button {
         wp_enqueue_script( 'wpb-get-a-quote-button-sweetalert2', plugins_url( 'assets/js/sweetalert2.all.min.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( 'wpb-get-a-quote-button-scripts', plugins_url( 'assets/js/frontend.js', __FILE__ ), array( 'jquery', 'wp-util' ), $this->version, true );
 		wp_localize_script( 'wpb-get-a-quote-button-scripts', 'WPB_GQB_Vars', array(
-            'ajaxurl' 		=> admin_url( 'admin-ajax.php' ),
             'nonce'   		=> wp_create_nonce( 'wpb-get-a-quote-button-ajax' ),
 		) );
 		

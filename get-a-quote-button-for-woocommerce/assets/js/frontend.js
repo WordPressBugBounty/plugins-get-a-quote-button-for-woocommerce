@@ -1,5 +1,7 @@
 +(function($) {
 
+    "use strict";
+    
     /**
      * Fire The Popup
      */

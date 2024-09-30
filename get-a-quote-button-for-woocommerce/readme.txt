@@ -76,7 +76,7 @@ https://youtu.be/_0gT9mKoVHI
 Using this plugin is super easy as we have details <a href="http://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/">online documentation</a> for this.  If you are having any issue with this plugin our expert support team always ready for you. Just open a support ticket on our <a href="https://wpbean.freshdesk.com/" rel="nofollow">support forum</a>.
 
 ### Do you use other form plugins?
-We have another <a href="https://wordpress.org/plugins/wpb-form-popup/">form popup</a> plugin that is compatible with all of the other popular form plugins. Examples include WPForms, Mailchimp, Forminator, Ninja Forms, Formidable, Form Maker by 10Web, weForms, Fluent Forms, HappyForms, WS Form, WPEverest User Registration, Bookly, Everest Forms, Kali Forms, and Bit Form. More integrations are in the works.
+We have another <a href="https://wordpress.org/plugins/wpb-form-popup/"><b>popup form</b></a> plugin that is compatible with all of the other popular form plugins. Examples include WPForms, Mailchimp, Forminator, Ninja Forms, Formidable, Form Maker by 10Web, weForms, Fluent Forms, HappyForms, WS Form, WPEverest User Registration, Bookly, Everest Forms, Kali Forms, and Bit Form. More integrations are in the works.
 
 
 == Installation ==

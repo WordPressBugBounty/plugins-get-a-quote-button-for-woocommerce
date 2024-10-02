@@ -102,6 +102,9 @@ The popup in this plugin is based on the widely used Contact Form 7. You can eff
 = Can I setup a WooCommerce price on request using this plugin? =
 With this plugin, you can hide the cart button and product price. Additionally, enable the user to get price on request by using the Product Enquiry Form Popup.
 
+= Can I use this plugin with WordPress FSE themes? =
+It integrates seamlessly with all FSE themes.
+
 == Screenshots ==
 
 1. WooCommerce request a quote button in action.

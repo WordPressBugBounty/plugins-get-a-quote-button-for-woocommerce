@@ -28,13 +28,22 @@ class WPB_GQB_Plugin_Settings {
 
     function admin_enqueue_scripts() {
         $screen = get_current_screen();
-        if( $screen->id == 'settings_page_' . $this->settings_name ){
+
+        if( $screen->id == 'toplevel_page_' . $this->settings_name ){
             $this->settings_api->admin_enqueue_scripts();
         }
     }
 
     function admin_menu() {
-        add_options_page( esc_html__( 'Get a Quote Button', 'wpb-get-a-quote-button' ), esc_html__( 'Quote Button', 'wpb-get-a-quote-button' ), 'delete_posts', $this->settings_name, array($this, 'plugin_page') );
+        add_menu_page(
+            esc_html__( 'Get a Quote Button Settings', 'wpb-get-a-quote-button-pro' ),
+            esc_html__( 'Quote Button', 'wpb-get-a-quote-button-pro' ),
+            'delete_posts',
+            $this->settings_name,
+            array( $this, 'plugin_page' ),
+            'dashicons-money-alt',
+            50
+        );
     }
 
     function get_settings_sections() {
@@ -226,7 +235,7 @@ class WPB_GQB_Plugin_Settings {
     }
 
     function plugin_page() {
-        echo '<div id="wpb-gqb-settings" class="wrap wpb-plugin-settings-wrap">';
+        echo '<div id="wpb-gqb-settings" class="wpb-plugin-settings-wrap wrap">';
 
         settings_errors();
         

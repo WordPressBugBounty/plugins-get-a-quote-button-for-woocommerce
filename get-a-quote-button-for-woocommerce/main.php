@@ -3,7 +3,7 @@
  * Plugin Name:       Get a Quote Button for WooCommerce
  * Plugin URI:        https://wpbean.com/plugins/
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
- * Version:           1.3.8
+ * Version:           1.3.9
  * Author:            wpbean
  * Author URI:        https://wpbean.com
  * Text Domain:       wpb-get-a-quote-button
@@ -47,7 +47,7 @@ if ( defined( 'WPB_GQB_PREMIUM' ) ) {
 class WPB_Get_Quote_Button {
 
 	//  Plugin version
-	public $version = '1.3.8';
+	public $version = '1.3.9';
 
 	// The plugin url
 	public $plugin_url;
@@ -88,7 +88,7 @@ class WPB_Get_Quote_Button {
 
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 
-		add_action( 'admin_notices', array( $this, 'wpb_gqb_pro_discount_admin_notice' ) );
+		//add_action( 'admin_notices', array( $this, 'wpb_gqb_pro_discount_admin_notice' ) );
 
 		add_action( 'admin_init', array( $this, 'wpb_gqb_pro_discount_admin_notice_dismissed' ) );
 
@@ -157,12 +157,12 @@ class WPB_Get_Quote_Button {
 	// The plugin activation redirect
 	function activation_redirect( $plugin ) {
 	    if( $plugin == plugin_basename( __FILE__ ) ) {
-	        exit( wp_redirect( admin_url( 'options-general.php?page=get-a-quote-button' ) ) );
+	        exit( wp_redirect( admin_url( 'admin.php?page=get-a-quote-button' ) ) );
 	    }
 	}
 
 	function plugin_action_links( $links ) {
-		$links[] = '<a href="'. admin_url( 'options-general.php?page=get-a-quote-button' ) .'">'. esc_html__('Settings', 'wpb-get-a-quote-button') .'</a>';
+		$links[] = '<a href="'. admin_url( 'admin.php?page=get-a-quote-button' ) .'">'. esc_html__('Settings', 'wpb-get-a-quote-button') .'</a>';
 		return $links;
 	 }
 
@@ -174,6 +174,8 @@ class WPB_Get_Quote_Button {
 		if ( is_admin() ) {
 			include_once dirname( __FILE__ ) . '/includes/admin/class.settings-api.php';
 			include_once dirname( __FILE__ ) . '/includes/admin/class.settings-config.php';
+
+			include_once dirname( __FILE__ ) . '/includes/DiscountPage/DiscountPage.php';
 		}
 
 		if ( class_exists( 'woocommerce' ) ) {
@@ -192,6 +194,8 @@ class WPB_Get_Quote_Button {
 
 		if ( is_admin() ) {
             new WPB_GQB_Plugin_Settings();
+
+			new WPBean_Get_Quote_Button_DiscountPage();
         }
 
 		if ( class_exists( 'woocommerce' ) ) {
@@ -275,7 +279,7 @@ class WPB_Get_Quote_Button {
 		if ( ! $cf7_form_id ) {
 			?>
 			<div class="notice notice-error is-dismissible">
-				<p><?php esc_html_e('The Get a Quote Button needs a form to show. Please select a form', 'wpb-get-a-quote-button'); ?> <a href="<?php echo esc_url( admin_url('options-general.php?page=get-a-quote-button') ); ?>"><?php esc_html_e('here', 'wpb-get-a-quote-button'); ?></a>.</p>
+				<p><?php esc_html_e('The Get a Quote Button needs a form to show. Please select a form', 'wpb-get-a-quote-button'); ?> <a href="<?php echo esc_url( admin_url('admin.php?page=get-a-quote-button') ); ?>"><?php esc_html_e('here', 'wpb-get-a-quote-button'); ?></a>.</p>
 			</div>
 			<?php
 		}

@@ -1,0 +1,147 @@
+.wpb-accordions_page_wpbean-discount #wpcontent {
+    padding: 0;
+}
+.wpb-accordions_page_wpbean-discount {
+    background: #f1f4fb;
+}
+.wpb-plugin-discount-page {
+    padding: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4em;
+}
+.wpb-plugin-discount-page-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(196 205 224 / 20%);
+    border-radius: 13px;
+    background: #fff;
+    padding: 4em 2em;
+    width: 100%;
+}
+.wpb-plugin-discount-page-header.notice,
+.wp-core-ui .notice.is-dismissible.wpb-plugin-discount-page-header {
+    width: auto;
+    border: 0;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(196 205 224 / 20%);
+    background: #fff;
+    padding: 3em 2em;
+}
+.wpb-plugin-discount-page-header .notice-dismiss {
+    text-decoration: none;
+}
+.wpb-plugin-discount-page-header img {
+    max-width: 120px;
+    height: auto;
+}
+.wpb-plugin-discount-page-header h2 {
+    font-size: 2.5em;
+    line-height: 1;
+    margin: 0 0 1em;
+    -webkit-font-smoothing: antialiased;
+}
+.wpb-plugin-discount-page-header p {
+    font-size: 1.3em;
+}
+.toplevel_page_wpb_wmca_shortcodes-items div.updated.wpb-plugin-discount-page-header,
+.toplevel_page_wpb_wmca_shortcodes-items div.updated.wpb-plugin-discount-page-header p {
+    color: unset;
+}
+.wpb-plugin-discount-page-header .button {
+    margin-top: 1em;
+}
+.wpb-plugin-discount-page-header .button,
+.wpb-plugin-discount-item-content .button,
+.toplevel_page_wpb_wmca_shortcodes-items.wp-core-ui .wpb-plugin-discount-page-header .button {
+    background: #FFAB66;
+    border: #FFAB66;
+    color: #fff;
+    transition: all .2s linear;
+    padding: 15px 20px;
+    height: unset;
+    font-size: 1.2em;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+    border-radius: 10px;
+}
+.wpb-plugin-discount-page-header .button:hover, .wpb-plugin-discount-page-header .button:focus, .wpb-plugin-discount-page-header .button:active,
+.wpb-plugin-discount-item-content .button:hover, .wpb-plugin-discount-item-content .button:focus, .wpb-plugin-discount-item-content .button:active {
+    background: #C78657;
+    border: #C78657;
+    color: #fff;
+    outline: 0;
+    box-shadow: unset;
+}
+.wpb-plugin-discount-items {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2em;
+}
+
+@media (max-width: 1800px) {
+    .wpb-plugin-discount-items {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 1400px) {
+    .wpb-plugin-discount-items {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1100px) {
+    .wpb-plugin-discount-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .wpb-plugin-discount-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 490px) {
+    .wpb-plugin-discount-items {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.wpb-plugin-discount-item {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(196 205 224 / 20%);
+    border-radius: 13px;
+    background: #fff;
+    overflow: hidden;
+}
+.wpb-plugin-discount-item-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2em;
+}
+.wpb-plugin-discount-item-content h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+.wpb-plugin-discount-item-content p {
+    margin-top: 0;
+    margin-bottom: 2em;
+}
+.wpb-plugin-discount-item img {
+    max-width: 100%;
+    display: flex;
+}
+.wpb-plugin-discount-item-content .button {
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 7px;
+}
+.wpb-plugin-discount-item-content a {
+    text-decoration: none;
+}
+.wpb-plugin-discount-page-body {
+    display: grid;
+}

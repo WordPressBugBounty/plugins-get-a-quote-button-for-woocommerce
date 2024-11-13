@@ -13,11 +13,11 @@
 .wpb-plugin-discount-page-header {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 3em;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(196 205 224 / 20%);
     border-radius: 13px;
     background: #fff;
-    padding: 4em 2em;
+    padding: 3em 3em;
     width: 100%;
 }
 .wpb-plugin-discount-page-header.notice,
@@ -26,23 +26,29 @@
     border: 0;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(196 205 224 / 20%);
     background: #fff;
-    padding: 3em 2em;
+    padding: 1em 2em;
 }
 .wpb-plugin-discount-page-header .notice-dismiss {
     text-decoration: none;
 }
 .wpb-plugin-discount-page-header img {
-    max-width: 120px;
+    max-width: 100px;
     height: auto;
 }
+.wpb-plugin-discount-page-header.notice img {
+    max-width: 80px;
+}
 .wpb-plugin-discount-page-header h2 {
-    font-size: 2.5em;
+    font-size: 2em;
     line-height: 1;
     margin: 0 0 1em;
     -webkit-font-smoothing: antialiased;
 }
 .wpb-plugin-discount-page-header p {
-    font-size: 1.3em;
+    font-size: 1.1em;
+}
+.wpb-plugin-discount-page-header.notice p {
+    font-size: inherit;
 }
 .toplevel_page_wpb_wmca_shortcodes-items div.updated.wpb-plugin-discount-page-header,
 .toplevel_page_wpb_wmca_shortcodes-items div.updated.wpb-plugin-discount-page-header p {
@@ -54,8 +60,8 @@
 .wpb-plugin-discount-page-header .button,
 .wpb-plugin-discount-item-content .button,
 .toplevel_page_wpb_wmca_shortcodes-items.wp-core-ui .wpb-plugin-discount-page-header .button {
-    background: #FFAB66;
-    border: #FFAB66;
+    background: #E54728;
+    border: #E54728;
     color: #fff;
     transition: all .2s linear;
     padding: 15px 20px;
@@ -68,8 +74,8 @@
 }
 .wpb-plugin-discount-page-header .button:hover, .wpb-plugin-discount-page-header .button:focus, .wpb-plugin-discount-page-header .button:active,
 .wpb-plugin-discount-item-content .button:hover, .wpb-plugin-discount-item-content .button:focus, .wpb-plugin-discount-item-content .button:active {
-    background: #C78657;
-    border: #C78657;
+    background: #323232;
+    border: #323232;
     color: #fff;
     outline: 0;
     box-shadow: unset;

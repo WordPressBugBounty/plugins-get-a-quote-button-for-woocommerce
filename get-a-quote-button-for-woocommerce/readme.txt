@@ -4,8 +4,8 @@ Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 6.6.2
-Stable tag: 1.3.9
+Tested up to: 6.4
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -247,6 +247,9 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.3.9 =
 * Discount page added.
+
+= Version 1.4 =
+* Tested with WordPress 6.7.
 
 
 == Upgrade notice ==

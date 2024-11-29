@@ -4,8 +4,8 @@ Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 6.7
-Stable tag: 1.5
+Tested up to: 6.7.1
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -253,6 +253,10 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.5 =
 * Ajax do_shortcode security issue fixed.
+
+= Version 1.6 =
+* Added recaptcha v3 support to the popup.
+* Added CF7 hash to id option.
 
 
 == Upgrade notice ==

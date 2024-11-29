@@ -56,6 +56,24 @@
                     });
                 }
 
+                // Reinitialize reCAPTCHA v3
+                if (typeof grecaptcha !== "undefined" && wpcf7_recaptcha) {
+
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute(wpcf7_recaptcha.sitekey, {
+                            action: wpcf7_recaptcha.actions.contactform
+                        }).then(function (token) {
+                            const event = new CustomEvent("wpcf7grecaptchaexecuted", {
+                                detail: { action: wpcf7_recaptcha.actions.contactform, token: token }
+                            });
+                            document.dispatchEvent(event);
+
+                            // Update the hidden input in the dynamically loaded form
+                            $('.wpcf7-form').find('input[name="_wpcf7_recaptcha_response"]').val(token);
+                        });
+                    });
+                }
+
                 // Add support for - Simple Cloudflare Turnstile – CAPTCHA Alternative
                 if( typeof turnstile  !== "undefined" ){
 

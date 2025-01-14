@@ -5,7 +5,7 @@ Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
 Tested up to: 6.7.1
-Stable tag: 1.6
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ It is also possible to add Get a Quote/Request a Quote button anywhere on your s
 
 For the form, it's using the most popular <strong>Contact Form 7</strong> plugin. The contact form will be shown on a nice popup on click the quote button.
 
-The quote button text, color, size, and placement can be changed from the plugin settings. It also has options for WooCommerce, the quote button can be shown only for out of stock products/ featured products.
+The plugin options allow you to alter the quotation button's text, color, size, and location. Additionally, it offers WooCommerce choices; the quote button is only visible for featured or out-of-stock items.
 
 
 == Quick Links ==
@@ -89,8 +89,26 @@ We have another <a href="https://wordpress.org/plugins/wpb-form-popup/"><b>popup
 
 == Frequently asked questions ==
 
-= Does it work with the theme that I am using? =
+= Is this plugin compatible with multilingual setups like WPML or Polylang? =
+Yes, the plugin supports multilingual compatibility with WPML and Polylang for seamless translation of quote forms and other features.
 
+= Can I customize the design of the quote popup? =
+Absolutely! The plugin comes with advanced settings, allowing you to style the popup and quote button to match your website's design.
+
+= Does the plugin support variable products in WooCommerce? =
+Yes, the plugin fully supports variable products, enabling users to request quotes for specific variations. The pro version allows to get the customer selected variations in the email.
+
+= How can I collect additional information in the quote form? =
+You can use the Contact Form 7 integration to add custom fields to your form, allowing you to gather more specific details from your customers.
+
+= Does the plugin provide an option to disable specific WooCommerce functionalities? =
+Yes, the plugin allows you to hide the "Add to Cart" button and prices, replacing them with the quote request button for a more streamlined customer interaction.
+
+= How does this plugin handle mobile responsiveness? =
+
+The plugin is fully responsive, ensuring that the quote button and popup work smoothly on all devices, including tablets and smartphones.
+
+= Does it work with the theme that I am using? =
 We test this plugin with so many free and premium themes. It should work with any standard WordPress themes. If you are having any issue with your theme, please open a support ticket on our forum. We will fix the issue and release an update for this plugin.
 
 = Can I use any other form plugin for WooCommerce quote form? =
@@ -258,5 +276,7 @@ It integrates seamlessly with all FSE themes.
 * Added recaptcha v3 support to the popup.
 * Added CF7 hash to id option.
 
+= Version 1.6.1 =
+* Removed the discount page.
 
 == Upgrade notice ==

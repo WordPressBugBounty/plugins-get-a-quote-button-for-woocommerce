@@ -6,7 +6,7 @@
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Version:           1.6.1
+ * Version:           1.6.2
  * Author:            WPBean
  * Author URI:        https://wpbean.com/
  * License:           GPL-2.0-or-later
@@ -54,7 +54,7 @@ if ( defined( 'WPB_GQB_PREMIUM' ) ) {
 class WPB_Get_Quote_Button {
 
 	//  Plugin version
-	public $version = '1.6.1';
+	public $version = '1.6.2';
 
 	// The plugin url
 	public $plugin_url;

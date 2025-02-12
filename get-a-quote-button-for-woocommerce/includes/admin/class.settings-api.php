@@ -107,8 +107,8 @@ class WPB_GQB_WeDevs_Settings_API {
             if ( isset($section['desc']) && !empty($section['desc']) ) {
                 $section['desc'] = '<div class="inside">' . $section['desc'] . '</div>';
                 $callback = function() use ( $section ) {
-		    echo str_replace( '"', '\"', $section['desc'] );
-		};
+		          echo str_replace( '"', '\"', $section['desc'] );
+		        };
             } else if ( isset( $section['callback'] ) ) {
                 $callback = $section['callback'];
             } else {

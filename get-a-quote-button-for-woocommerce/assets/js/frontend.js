@@ -103,6 +103,16 @@
                 // Add post ID to the popup form
                 $("[name='_wpcf7_container_post']").val( post_id );
 
+                // WP Armour – Honeypot Anti Spam By Dnesscarkey.
+                if (typeof wpa_add_honeypot_field == 'function') {
+                    wpa_add_honeypot_field(); 
+                }
+
+                // WP Armour PRO – Honeypot Anti Spam By Dnesscarkey.
+                if (typeof wpae_add_honeypot_field == 'function') { // IF EXTENDED version exists.
+                    wpae_add_honeypot_field(); 
+                }
+
                 // Adding any custom JS code on form init
                 if( typeof wpb_gqf_on_cf7_form_init === "function" ){
                     wpb_gqf_on_cf7_form_init();

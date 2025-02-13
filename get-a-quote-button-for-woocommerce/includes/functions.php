@@ -37,14 +37,16 @@ if ( ! function_exists( 'wpb_gqb_wpcf7_get_contact_form_id_by_hash' ) ) {
 
         $like = $wpdb->esc_like( $hash ) . '%';
 
-        $q = "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_hash'"
-            . $wpdb->prepare( " AND meta_value LIKE %s", $like );
-
-        if ( $post_id = $wpdb->get_var( $q ) ) {
-            return $post_id;
-        }
+        // Properly prepared SQL query, ignoring PHPCS false positive
+        return $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $wpdb->prepare(
+                "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_hash' AND meta_value LIKE %s",
+                $like
+            )
+        );
     }
 }
+
 
 /**
  * Show or hide the product info in the form

@@ -5,7 +5,7 @@ Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
 Tested up to: 6.7.2
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -281,5 +281,8 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.6.2 =
 * Added WP Armour - Honeypot Anti Spam plugin support.
+
+= Version 1.6.3 =
+* Removed the nonce verification from the Ajax popup.
 
 == Upgrade notice ==

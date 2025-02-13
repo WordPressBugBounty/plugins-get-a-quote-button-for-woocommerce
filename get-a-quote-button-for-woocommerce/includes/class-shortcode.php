@@ -81,7 +81,7 @@ class WPB_GQB_Shortcode_Handler {
             'id'                    => wpb_gqb_get_option( 'wpb_gqb_cf7_form_id', 'form_settings' ),
             'post_id'               => ( $post ? $post->ID : '' ),
             'class'                 => '',
-            'text'                  => wpb_gqb_get_option( 'wpb_gqb_btn_text', 'btn_settings', esc_html__( 'Get a Quote', 'wpb-get-a-quote-button' ) ),
+            'text'                  => wpb_gqb_get_option( 'wpb_gqb_btn_text', 'btn_settings', esc_html__( 'Get a Quote', 'get-a-quote-button-for-woocommerce' ) ),
             'btn_size'              => wpb_gqb_get_option( 'wpb_gqb_btn_size', 'btn_settings', 'large' ),
             'form_style'            => ( wpb_gqb_get_option( 'wpb_gqb_form_style', 'popup_settings', 'on' ) == 'on' ? true : false ),
             'allow_outside_click'   => ( wpb_gqb_get_option( 'wpb_gqb_allow_outside_click', 'popup_settings' ) == 'on' ? true : false ),
@@ -91,13 +91,42 @@ class WPB_GQB_Shortcode_Handler {
         $args = wp_parse_args( $args, $defaults );
         
         if ( defined( 'WPCF7_PLUGIN' ) ) {
-            if( $args['id'] ){
-                echo apply_filters('wpb_gqb_button_html', sprintf( '<button data-id="%s" data-post_id="%s" data-form_style="%s" data-allow_outside_click="%s" data-width="%s" class="wpb-get-a-quote-button-form-fire wpb-get-a-quote-button-btn-%s wpb-get-a-quote-button-btn wpb-get-a-quote-button-btn-default%s">%s</button>', esc_attr($args['id']), esc_attr($args['post_id']), esc_attr($args['form_style']), esc_attr($args['allow_outside_click']), esc_attr($args['width']), esc_attr($args['btn_size']) ,( $args['class'] ? esc_attr( ' ' . $args['class']) : '' ), esc_html( $args['text'] ) ), $args);
-            }else{
-                printf( '<div class="wpb-get-a-quote-button-alert wpb-get-a-quote-button-alert-inline wpb-get-a-quote-button-alert-error">%s</div>', esc_html__( 'Form id required.', 'wpb-get-a-quote-button' ) );
+            if ( ! empty( $args['id'] ) ) {
+                $button_html = sprintf(
+                    '<button data-id="%s" data-post_id="%s" data-form_style="%s" data-allow_outside_click="%s" data-width="%s" class="wpb-get-a-quote-button-form-fire wpb-get-a-quote-button-btn-%s wpb-get-a-quote-button-btn wpb-get-a-quote-button-btn-default%s">%s</button>',
+                    esc_attr( $args['id'] ),
+                    esc_attr( $args['post_id'] ),
+                    esc_attr( $args['form_style'] ),
+                    esc_attr( $args['allow_outside_click'] ),
+                    esc_attr( $args['width'] ),
+                    esc_attr( $args['btn_size'] ),
+                    ! empty( $args['class'] ) ? ' ' . esc_attr( $args['class'] ) : '',
+                    esc_html( $args['text'] )
+                );
+
+                $allowed_html = array(
+                    'button' => array(
+                        'data-id'                => array(),
+                        'data-post_id'           => array(),
+                        'data-form_style'        => array(),
+                        'data-allow_outside_click' => array(),
+                        'data-width'             => array(),
+                        'class'                  => array(),
+                    ),
+                );
+
+                echo wp_kses( apply_filters( 'wpb_gqb_button_html', $button_html, $args ), $allowed_html );
+            } else {
+                printf(
+                    '<div class="wpb-get-a-quote-button-alert wpb-get-a-quote-button-alert-inline wpb-get-a-quote-button-alert-error">%s</div>',
+                    esc_html__( 'Form ID is required.', 'get-a-quote-button-for-woocommerce' )
+                );
             }
-        }else{
-            printf( '<div class="wpb-get-a-quote-button-alert wpb-get-a-quote-button-alert-inline wpb-get-a-quote-button-alert-error">%s</div>', esc_html__( 'Get a Quote Button required the Contact Form 7 plugin to work with.', 'wpb-get-a-quote-button' ) );
+        } else {
+            printf(
+                '<div class="wpb-get-a-quote-button-alert wpb-get-a-quote-button-alert-inline wpb-get-a-quote-button-alert-error">%s</div>',
+                esc_html__( 'Get a Quote Button requires the Contact Form 7 plugin to work.', 'get-a-quote-button-for-woocommerce' )
+            );
         }
     }
 }

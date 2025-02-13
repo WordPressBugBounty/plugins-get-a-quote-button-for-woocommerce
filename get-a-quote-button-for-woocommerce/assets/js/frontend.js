@@ -22,8 +22,7 @@
             data: {
                 action: 'fire_contact_form',
                 contact_form_id: id,
-                wpb_post_id: post_id,
-                _wpnonce: WPB_GQB_Vars.nonce
+                wpb_post_id: post_id
             },
             beforeSend : function ( xhr ) {
                 button.addClass('wpb-gqf-btn-loading');

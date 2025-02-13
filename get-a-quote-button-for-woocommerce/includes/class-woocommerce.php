@@ -23,7 +23,7 @@ class WPB_GQB_WooCommerce_Handler {
             add_action( apply_filters( 'wpb_gqb_woo_loop_position', 'woocommerce_after_shop_loop_item' ), array( $this, 'woo_add_contact_form_button' ), apply_filters( 'wpb_gqb_woo_loop_priority', $loop_position ) );
         }
 
-        add_action( 'wpb_gqb_custom_wc_hook', [ $this, 'woo_add_contact_form_button' ] );
+        add_action( 'wpb_gqb_custom_wc_hook', array($this, 'woo_add_contact_form_button') );
 
         add_action( 'woocommerce_product_options_general_product_data', array( $this, 'woo_add_meta_fields' ) );
         add_action( 'woocommerce_process_product_meta', array( $this, 'woo_save_product_meta' ), 10, 2 );
@@ -80,8 +80,8 @@ class WPB_GQB_WooCommerce_Handler {
                         array(
                             'id'            => '_wpb_gqb_disable',
                             'wrapper_class' => 'show_if_simple show_if_variable WPB_GQB_disable',
-                            'label'         => esc_html__( 'Disable Quote Button?', 'wpb-get-a-quote-button' ),
-                            'description'   => esc_html__( 'Disable quote button for this product', 'wpb-get-a-quote-button' ),
+                            'label'         => esc_html__( 'Disable Quote Button?', 'get-a-quote-button-for-woocommerce' ),
+                            'description'   => esc_html__( 'Disable quote button for this product', 'get-a-quote-button-for-woocommerce' ),
                         )
                     );
                 ?>

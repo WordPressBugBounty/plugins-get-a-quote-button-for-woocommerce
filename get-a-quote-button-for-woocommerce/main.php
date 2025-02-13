@@ -6,12 +6,12 @@
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Version:           1.6.2
+ * Version:           1.6.3
  * Author:            WPBean
  * Author URI:        https://wpbean.com/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wpb-get-a-quote-button
+ * Text Domain:       get-a-quote-button-for-woocommerce
  * Domain Path:       /languages
  *
  * @package Get a Quote Button for WooCommerce
@@ -36,7 +36,7 @@ if ( defined( 'WPB_GQB_PREMIUM' ) ) {
     function wpb_gqb_install_free_admin_notice() {
         ?>
 	        <div class="error">
-	            <p><?php esc_html_e( 'You can\'t activate the free version of Get a Quote Button while you are using the premium one.', 'wpb-get-a-quote-button' ); ?></p>
+	            <p><?php esc_html_e( 'You can\'t activate the free version of Get a Quote Button while you are using the premium one.', 'get-a-quote-button-for-woocommerce' ); ?></p>
 	        </div>
     	<?php
     }
@@ -54,7 +54,7 @@ if ( defined( 'WPB_GQB_PREMIUM' ) ) {
 class WPB_Get_Quote_Button {
 
 	//  Plugin version
-	public $version = '1.6.2';
+	public $version = '1.6.3';
 
 	// The plugin url
 	public $plugin_url;
@@ -126,7 +126,7 @@ class WPB_Get_Quote_Button {
 	function wpb_gqb_pro_discount_admin_notice() {
 	    $user_id = get_current_user_id();
 	    if ( !get_user_meta( $user_id, 'wpb_gqb_pro_discount_dismissed' ) ){
-	        printf('<div class="wpb-gqb-discount-notice updated" style="padding: 30px 20px;border-left-color: #27ae60;border-left-width: 5px;margin-top: 20px;"><p style="font-size: 18px;line-height: 32px">%s <a target="_blank" href="%s">%s</a>! %s <b>%s</b></p><a href="%s">%s</a></div>', esc_html__( 'Get a 10% exclusive discount on the premium version of the', 'wpb-get-a-quote-button' ), 'https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/', esc_html__( 'Get a Quote Button for WooCommerce', 'wpb-get-a-quote-button' ), esc_html__( 'Use discount code - ', 'wpb-get-a-quote-button' ), '10PERCENTOFF', esc_url( add_query_arg( 'wpb-gqb-pro-discount-admin-notice-dismissed', 'true' ) ), esc_html__( 'Dismiss', 'wpb-get-a-quote-button' ));
+	        printf('<div class="wpb-gqb-discount-notice updated" style="padding: 30px 20px;border-left-color: #27ae60;border-left-width: 5px;margin-top: 20px;"><p style="font-size: 18px;line-height: 32px">%s <a target="_blank" href="%s">%s</a>! %s <b>%s</b></p><a href="%s">%s</a></div>', esc_html__( 'Get a 10% exclusive discount on the premium version of the', 'get-a-quote-button-for-woocommerce' ), 'https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/', esc_html__( 'Get a Quote Button for WooCommerce', 'get-a-quote-button-for-woocommerce' ), esc_html__( 'Use discount code - ', 'get-a-quote-button-for-woocommerce' ), '10PERCENTOFF', esc_url( add_query_arg( 'wpb-gqb-pro-discount-admin-notice-dismissed', 'true' ) ), esc_html__( 'Dismiss', 'get-a-quote-button-for-woocommerce' ));
 	    }
 	}
 
@@ -163,13 +163,14 @@ class WPB_Get_Quote_Button {
 
 	// The plugin activation redirect
 	function activation_redirect( $plugin ) {
-	    if( $plugin == plugin_basename( __FILE__ ) ) {
-	        exit( wp_redirect( admin_url( 'admin.php?page=get-a-quote-button' ) ) );
+	    if ( $plugin === plugin_basename( __FILE__ ) ) {
+	        wp_safe_redirect( admin_url( 'admin.php?page=get-a-quote-button' ) );
+	        exit; // Ensure script execution stops after redirection
 	    }
 	}
 
 	function plugin_action_links( $links ) {
-		$links[] = '<a href="'. admin_url( 'admin.php?page=get-a-quote-button' ) .'">'. esc_html__('Settings', 'wpb-get-a-quote-button') .'</a>';
+		$links[] = '<a href="'. admin_url( 'admin.php?page=get-a-quote-button' ) .'">'. esc_html__('Settings', 'get-a-quote-button-for-woocommerce') .'</a>';
 		return $links;
 	 }
 
@@ -216,7 +217,7 @@ class WPB_Get_Quote_Button {
 
 	// Initialize plugin for localization
     public function localization_setup() {
-        load_plugin_textdomain( 'wpb-get-a-quote-button', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        load_plugin_textdomain( 'get-a-quote-button-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	
 	// Loads frontend scripts and styles
@@ -238,9 +239,6 @@ class WPB_Get_Quote_Button {
 		// All scripts goes here
         wp_enqueue_script( 'wpb-get-a-quote-button-sweetalert2', plugins_url( 'assets/js/sweetalert2.all.min.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( 'wpb-get-a-quote-button-scripts', plugins_url( 'assets/js/frontend.js', __FILE__ ), array( 'jquery', 'wp-util' ), $this->version, true );
-		wp_localize_script( 'wpb-get-a-quote-button-scripts', 'WPB_GQB_Vars', array(
-            'nonce'   		=> wp_create_nonce( 'wpb-get-a-quote-button-ajax' ),
-		) );
 		
 
 		$btn_color       		= wpb_gqb_get_option( 'wpb_gqb_btn_color', 'btn_settings', '#ffffff' );
@@ -278,7 +276,7 @@ class WPB_Get_Quote_Button {
 		if ( ! defined( 'WPCF7_PLUGIN' ) ) {
 			?>
 			<div class="notice notice-error is-dismissible">
-				<p><b><?php esc_html_e( 'Get a Quote Button', 'wpb-get-a-quote-button' ); ?></b><?php esc_html_e( ' required ', 'wpb-get-a-quote-button' ); ?><b><a href="https://wordpress.org/plugins/contact-form-7" target="_blank"><?php esc_html_e( 'Contact Form 7', 'wpb-get-a-quote-button' ); ?></a></b><?php esc_html_e( ' plugin to work with.', 'wpb-get-a-quote-button' ); ?></p>
+				<p><b><?php esc_html_e( 'Get a Quote Button', 'get-a-quote-button-for-woocommerce' ); ?></b><?php esc_html_e( ' required ', 'get-a-quote-button-for-woocommerce' ); ?><b><a href="https://wordpress.org/plugins/contact-form-7" target="_blank"><?php esc_html_e( 'Contact Form 7', 'get-a-quote-button-for-woocommerce' ); ?></a></b><?php esc_html_e( ' plugin to work with.', 'get-a-quote-button-for-woocommerce' ); ?></p>
 			</div>
 			<?php
 		}
@@ -286,7 +284,7 @@ class WPB_Get_Quote_Button {
 		if ( ! $cf7_form_id ) {
 			?>
 			<div class="notice notice-error is-dismissible">
-				<p><?php esc_html_e('The Get a Quote Button needs a form to show. Please select a form', 'wpb-get-a-quote-button'); ?> <a href="<?php echo esc_url( admin_url('admin.php?page=get-a-quote-button') ); ?>"><?php esc_html_e('here', 'wpb-get-a-quote-button'); ?></a>.</p>
+				<p><?php esc_html_e('The Get a Quote Button needs a form to show. Please select a form', 'get-a-quote-button-for-woocommerce'); ?> <a href="<?php echo esc_url( admin_url('admin.php?page=get-a-quote-button') ); ?>"><?php esc_html_e('here', 'get-a-quote-button-for-woocommerce'); ?></a>.</p>
 			</div>
 			<?php
 		}

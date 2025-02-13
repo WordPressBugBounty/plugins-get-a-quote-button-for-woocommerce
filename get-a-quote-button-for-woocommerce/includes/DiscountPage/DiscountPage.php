@@ -88,7 +88,7 @@ class WPBean_Get_Quote_Button_DiscountPage
 		?>
 		<div class="wpb-plugin-discount-page">
 			<div class="wpb-plugin-discount-page-header">
-				<img src="<?php echo plugins_url( 'assets/icons/black-friday.svg', __FILE__ ); ?>">
+				<img src="<?php echo esc_url(plugins_url( 'assets/icons/black-friday.svg', __FILE__ )); ?>">
 				<div>
 					<h2>Top Black Friday WordPress Offers on WPBean Premium Plugins.</h2>
 					<p>This Black Friday, treat yourself to a hauntingly good deal with an exclusive 35% discount on our top-rated plugins! For a limited time, you can enhance your projects with powerful features at an unbeatable price. Don't miss out on this special offer to elevate your work and add some magic to your creative toolkit.</p>
@@ -145,7 +145,7 @@ class WPBean_Get_Quote_Button_DiscountPage
 		if ( ! get_user_meta( $user_id, 'wpbean_get_quote_button_pro_discount_dismissed' ) && 'quote-button_page_wpbean-discount' !== $screen->base ) {
 			?>
 			<div class="wpb-plugin-discount-page-header notice updated is-dismissible">
-				<img src="<?php echo plugins_url( 'assets/icons/black-friday.svg', __FILE__ ); ?>">
+				<img src="<?php echo esc_url(plugins_url( 'assets/icons/black-friday.svg', __FILE__ )); ?>">
 				<div>
 					<h3>Top Black Friday WordPress Offers on WPBean Premium Plugins.</h3>
 					<p>This Black Friday, treat yourself to a hauntingly good deal with an exclusive 35% discount on our top-rated plugins! For a limited time, you can enhance your projects with powerful features at an unbeatable price. Don't miss out on this special offer to elevate your work and add some magic to your creative toolkit. Use this discount code: <b>BF2024</b>. <a href="<?php echo esc_url( $discount_url ); ?>">More Details</a></p>

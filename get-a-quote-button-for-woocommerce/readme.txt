@@ -4,12 +4,12 @@ Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 6.7.2
+Tested up to: 6.8.1
 Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The WPB Request a Quote for WooCommerce plugin shows a Contact Form 7 popup on button click. Get a Quote for WooCommerce, price on request, Enquiry.
+WPB Request a Quote for WooCommerce plugin shows a Contact Form 7 popup on button click. Get a Quote for WooCommerce, price on request, Enquiry.
 
 == Description ==
 
@@ -28,10 +28,7 @@ The plugin options allow you to alter the quotation button's text, color, size, 
 
 == Quick Links ==
 
-👉 Get a Quote Button Pro: [Explore all Features of Get a Quote Button](https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/)
-👉 Try Demo: [Try Get a Quote Button Demo](https://demo5.wpbean.com/product/ship-your-idea-2/)
-👉 Support: [Support](https://wpbean.com/support/)
-👉 Documentation: [Documentation](https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/)
+[__Live Demo__](https://demo5.wpbean.com/product/ship-your-idea-2/) | [__Documentation__](https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/) | [__Upgrade to Pro!__](https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/)
 
 
 https://youtu.be/_0gT9mKoVHI

@@ -1,0 +1,56 @@
+.wpb-plugin-available-hire-header.notice,
+.wp-core-ui .notice.is-dismissible.wpb-plugin-available-hire-header {
+    width: auto;
+    border: 0;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(196 205 224 / 20%);
+    background: #fff;
+    padding: 15px 15px;
+    border-radius: 4px;
+}
+.wpb-plugin-available-hire-header .notice-dismiss {
+    text-decoration: none;
+}
+.wpb-plugin-available-hire-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wpb-plugin-available-hire-header h3 {
+    font-size: 1.3em;
+    line-height: 1;
+    margin: 3px 0 5px;
+    -webkit-font-smoothing: antialiased;
+}
+.wpb-plugin-available-hire-header p {
+    font-size: 1.1em;
+}
+.wpb-plugin-available-hire-header.notice p {
+    font-size: inherit;
+    margin-bottom: 0;
+}
+.wpb-plugin-available-hire-header .button {
+    margin-top: 1em;
+}
+.wpb-plugin-available-hire-header .button {
+    background: #E54728;
+    border: #E54728;
+    color: #fff;
+    transition: all .2s linear;
+    padding: 12px 20px;
+    height: unset;
+    font-size: 1em;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+.wpb-plugin-available-hire-header .button:hover, .wpb-plugin-available-hire-header .button:focus, .wpb-plugin-available-hire-header .button:active {
+    background: #323232;
+    border: #323232;
+    color: #fff;
+    outline: 0;
+    box-shadow: unset;
+}

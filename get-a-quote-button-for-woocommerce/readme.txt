@@ -5,11 +5,11 @@ Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
 Tested up to: 6.8.1
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WPB Request a Quote for WooCommerce plugin shows a Contact Form 7 popup on button click. Get a Quote for WooCommerce, price on request, Enquiry.
+Request a Quote for WooCommerce and Elementor plugin shows a Contact Form 7 popup on button click. Quote for WooCommerce, price on request, Enquiry
 
 == Description ==
 
@@ -30,6 +30,10 @@ The plugin options allow you to alter the quotation button's text, color, size, 
 
 [__Live Demo__](https://demo5.wpbean.com/product/ship-your-idea-2/) | [__Documentation__](https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/) | [__Upgrade to Pro!__](https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/)
 
+### 👋 Need expert WordPress & WooCommerce development help?
+I’m currently available for hire — WordPress and WooCommerce development, custom features, bug fixing, speed optimization, performance tuning, SEO improvements, and more.
+With over 10 years of experience building high-quality WordPress solutions, I can help you take your website to the next level. 
+[__Contact me here →__](https://wpbean.com/web-development-services/?utm_source=WordPress&utm_medium=desc-link&utm_campaign=available-for-hire&utm_content=Get+A+Quote)
 
 https://youtu.be/_0gT9mKoVHI
 
@@ -281,5 +285,8 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.6.3 =
 * Removed the nonce verification from the Ajax popup.
+
+= Version 1.6.4 =
+* code improvement.
 
 == Upgrade notice ==

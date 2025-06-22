@@ -1,11 +1,19 @@
 +(function($) {
 
     "use strict";
+
+    /**
+     * Reinit the WPForms in the Popup
+     */
+    function reinitWPForms() {
+        if (window.wpforms && typeof window.wpforms.ready === 'function') {
+            window.wpforms.ready();
+        }
+    }
     
     /**
      * Fire The Popup
      */
-
     $(document).on("click", ".wpb-get-a-quote-button-form-fire", function(e) {
 
         e.preventDefault();
@@ -33,7 +41,7 @@
                     html: res,
                     showConfirmButton: false,
                     customClass: {
-                        container: 'wpb-gqf-form-style-' + form_style,
+                        container: 'wpb-gqf-popup wpb-gqf-form-style-' + form_style,
                     },
                     padding: '30px',
                     width: width,
@@ -42,14 +50,16 @@
                     allowOutsideClick: allow_outside_click,
                 });
 
+                // reInit WPForms
+                reinitWPForms();
                 
                 // For CF7 5.3.1 and before
-                if( typeof wpcf7.initForm === "function" ){
+                if( typeof wpcf7 !== "undefined" && typeof wpcf7.initForm === "function" ){
                     wpcf7.initForm( $('.wpcf7-form') );
                 }
 
                 // For CF7 5.4 and after
-                if( typeof wpcf7.init === "function" ){
+                if( typeof wpcf7 !== "undefined" && typeof wpcf7.init === "function" ){
                     document.querySelectorAll(".wpcf7 > form").forEach(function (e) {
                         return wpcf7.init(e);
                     });

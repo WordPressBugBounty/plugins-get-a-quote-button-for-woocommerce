@@ -5,23 +5,23 @@ Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
 Tested up to: 6.8.1
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Request a Quote for WooCommerce and Elementor plugin shows a Contact Form 7 popup on button click. Quote for WooCommerce, price on request, Enquiry
+Request a Quote for WooCommerce and Elementor plugin shows a Contact Form 7 or WPForms popup on button click. Quote for WooCommerce, price on request.
 
 == Description ==
 
-<strong>WooCommerce Contact Form 7</strong>: These two plugins can be integrated very easily using this plugin.
+<strong>WooCommerce Contact Form 7</strong> or <strong>WooCommerce WPForms</strong> These two plugins can be integrated very easily using this plugin.
 
-The <strong>WooCommerce request a quote plugin</strong> could be quite helpful, For your store. It enables customers to get the price on request. You can set up the best <strong>WooCommerce product enquiry</strong> and <strong>quotation</strong> system with its seamless integration of Contact Form 7 and WooCommerce. Customers may obtain bulk prices, details about particular variations, shipping information, further suggestions for specific products, and more by using this plugin.
+The <strong>WooCommerce request a quote plugin</strong> could be quite helpful, For your store. It enables customers to get the price on request. You can set up the best <strong>WooCommerce product enquiry</strong> and <strong>quotation</strong> system with its seamless integration of Contact Form 7 or WPForms with WooCommerce. Customers may obtain bulk prices, details about particular variations, shipping information, further suggestions for specific products, and more by using this plugin.
 
-<strong>Get a Quote/Request a Quote</strong> button can be added to a <strong>WooCommerce</strong> single product page or bellow the product grid using this plugin. A <strong>Contact Form 7</strong> popup form will show up on the quote button click.
+<strong>Get a Quote/Request a Quote</strong> button can be added to a <strong>WooCommerce</strong> single product page or bellow the product grid using this plugin. A <strong>Contact Form 7</strong> or <strong>WPForms</strong> popup form will show up on the quote button click.
 
 It is also possible to add Get a Quote/Request a Quote button anywhere on your site using it's <strong>Custom ShortCode</strong>. No matter you using WooCommerce or not.
 
-For the form, it's using the most popular <strong>Contact Form 7</strong> plugin. The contact form will be shown on a nice popup on click the quote button.
+For the form, it's supports two most popular form plugins. This quotation popup can be used with any form plugin, such as <strong>Contact Form 7</strong> or <strong>WPForms</strong>. The contact form will be shown on a nice popup on click the quote button.
 
 The plugin options allow you to alter the quotation button's text, color, size, and location. Additionally, it offers WooCommerce choices; the quote button is only visible for featured or out-of-stock items.
 
@@ -83,7 +83,7 @@ We have another <a href="https://wordpress.org/plugins/wpb-form-popup/"><b>popup
 == Installation ==
 
 * Install it as a regular WordPress plugin.
-* The Contact Form 7 plugin is required for this plugin. So if you don't have the Contact Form 7 plugin installed, make sure you install this plugin as well.
+* The Contact Form 7 or WPForms is required for this plugin. So make sure you install one of this plugin.
 * After installing the plugin, activate it. Then go to Dashboard > Quote Button. Configure the plugin settings and save settings.
 * After installing the plugin follow our step by step <a href="http://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/">online documentation</a>.
 
@@ -113,10 +113,10 @@ The plugin is fully responsive, ensuring that the quote button and popup work sm
 We test this plugin with so many free and premium themes. It should work with any standard WordPress themes. If you are having any issue with your theme, please open a support ticket on our forum. We will fix the issue and release an update for this plugin.
 
 = Can I use any other form plugin for WooCommerce quote form? =
-Only Contact Form 7 can be used with this plugin. Try our <a href="https://wordpress.org/plugins/wpb-form-popup/" target="_blank">WPB Form Popup</a> if you prefer to use any other plugin.
+Only Contact Form 7 or WPForms can be used with this plugin. Try our <a href="https://wordpress.org/plugins/wpb-form-popup/" target="_blank">WPB Form Popup</a> if you prefer to use any other plugin.
 
 = Why should I pick this plugin above others for WooCommerce quote plugin? =
-The popup in this plugin is based on the widely used Contact Form 7. You can effortlessly collect product details such as title, quantity, variations, SKU, and more thanks to its seamless interaction.
+You can effortlessly collect product details such as title, quantity, variations, SKU, and more thanks to its seamless interaction.Try our <a href="https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/pro-version/getting-product-information-with-the-email/" target="_blank">More details!</a>
 
 = Can I setup a WooCommerce price on request using this plugin? =
 With this plugin, you can hide the cart button and product price. Additionally, enable the user to get price on request by using the Product Enquiry Form Popup.
@@ -287,6 +287,9 @@ It integrates seamlessly with all FSE themes.
 * Removed the nonce verification from the Ajax popup.
 
 = Version 1.6.4 =
-* code improvement.
+* Code improvement.
+
+= Version 1.6.5 =
+* Added WPForms support for the Quote form.
 
 == Upgrade notice ==

@@ -163,4 +163,27 @@
 
     $('.wpb-select-buttons').togglebutton();
 
+    // Condition
+    $(document).ready(function($) {
+        function toggleFormFields() {
+            var selected = $('#form_settings\\[wpb_gqb_form_plugin\\]').val();
+
+            if (selected === 'wpcf7') {
+                $('.wpb_gqb_cf7_form_id, .wpb_gqb_cf7_form_name_attr, .wpb_gqb_force_cf7_scripts').show();
+                $('.wpb_gqb_wpforms_form_id').hide();
+            } else if (selected === 'wpforms') {
+                $('.wpb_gqb_cf7_form_id, .wpb_gqb_cf7_form_name_attr, .wpb_gqb_force_cf7_scripts').hide();
+                $('.wpb_gqb_wpforms_form_id').show();
+            } else {
+                $('.wpb_gqb_cf7_form_id, .wpb_gqb_wpforms_form_id').hide();
+            }
+        }
+
+        // Initial toggle
+        toggleFormFields();
+
+        // Bind change event
+        $('#form_settings\\[wpb_gqb_form_plugin\\]').on('change', toggleFormFields);
+    });
+
 })( jQuery );

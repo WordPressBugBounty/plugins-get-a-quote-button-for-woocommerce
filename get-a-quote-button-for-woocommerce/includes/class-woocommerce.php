@@ -7,8 +7,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class WPB_GQB_WooCommerce_Handler {
 
+    /**
+     * The form plugin being used
+     *
+     * @var string
+     */
+    private $form_plugin;
+
+    /**
+     * Constructor
+     */
     public function __construct() {
-        
+        $this->form_plugin = wpb_gqb_get_option( 'wpb_gqb_form_plugin', 'form_settings', 'wpcf7' );
+
+		if('wpcf7' === $this->form_plugin){
+			$this->form_plugin = 'wpcf7_contact_form';	
+		}
         $single_show        = wpb_gqb_get_option( 'woo_single_show_quote_form', 'woo_settings', 'on' );
         $loop_show          = wpb_gqb_get_option( 'woo_loop_show_quote_form', 'woo_settings' );
         $btn_position       = wpb_gqb_get_option( 'wpb_gqb_btn_position', 'woo_settings', 'after_cart' );
@@ -35,11 +49,11 @@ class WPB_GQB_WooCommerce_Handler {
 
     public function woo_add_contact_form_button() {
         global $product;
-        $woo_show_only      = wpb_gqb_get_option( 'wpb_gqb_woo_show_only_for', 'woo_settings', 'all_products' );
-        $woo_btn_guest      = wpb_gqb_get_option( 'wpb_gqb_woo_btn_guest', 'woo_settings', 'on' );
-        $woo_form           = apply_filters( 'wpb_gqb_woo_product_contact_form_id', wpb_gqb_get_option( 'wpb_gqb_cf7_form_id', 'form_settings' ) );
-        $wpb_gqb_disable    = get_post_meta( $product->get_id(), '_wpb_gqb_disable', true );
-        $Shortcode_Handler  = new WPB_GQB_Shortcode_Handler();
+        $woo_show_only     = wpb_gqb_get_option( 'wpb_gqb_woo_show_only_for', 'woo_settings', 'all_products' );
+        $woo_btn_guest     = wpb_gqb_get_option( 'wpb_gqb_woo_btn_guest', 'woo_settings', 'on' );
+        $woo_form          = apply_filters( 'wpb_gqb_woo_product_contact_form_id', 'wpcf7_contact_form' === $this->form_plugin ? wpb_gqb_get_option( 'wpb_gqb_cf7_form_id', 'form_settings' ) : wpb_gqb_get_option( 'wpb_gqb_wpforms_form_id', 'form_settings' ) );
+        $wpb_gqb_disable   = get_post_meta( $product->get_id(), '_wpb_gqb_disable', true );
+        $Shortcode_Handler = new WPB_GQB_Shortcode_Handler();
 
         if( $woo_btn_guest != 'on' && !is_user_logged_in() ){
             return false;

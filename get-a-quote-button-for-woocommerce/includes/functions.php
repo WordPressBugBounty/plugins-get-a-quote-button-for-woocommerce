@@ -103,12 +103,14 @@ add_action( 'wpb_gqb_after_settings_page', function(){
     <div class="wpb_gqb_pro_features wrap">
         <h3>Premium Version Features:</h3>
         <ul>
-            <li>Advenced custom shortcode builder for multiple quote buttons.</li>
-            <li>Different quote button for different products.</li>
+            <li>Get user selected product informations like <strong>title</strong>, <strong>price</strong>, <strong>quantity</strong>, and <strong>variations</strong> etc.</li>
+            <li>Contact Form 7 and WPForms custom mail/smart tags for <strong>title</strong>, <strong>price</strong>, <strong>quantity</strong>, and <strong>variations</strong> etc.</li>
+            <li>Hide the price and cart button if has a quote button for <strong>selected products</strong>.</li>
+            <li>Advanced custom shortcode builder for multiple quote buttons.</li>
+            <li>Different quote buttons for different products.</li>
             <li>Different contact forms for different quote buttons.</li>
-            <li>Adding the custom quote buttons to the WooCommerce hooks directly from the shortcode generator.</li>
-            <li>Products, Products categories, Products tags, Featured Products, Products type, Products stock status, User status, User role, etc filter can be added to the quote button.</li>
-            <li>Different text and size for each quote buttons.</li>
+            <li>Selected products, categories, tags, types, stock status, User status, role, etc filter can be added to apply the quote buttons.</li>
+            <li>Button and popup spacing and typography customization.</li>
             <li>Elementor support, adding custom quote button directly from the Elementor editor. </li>
         </ul>
         <div class="wpb-submit-button">

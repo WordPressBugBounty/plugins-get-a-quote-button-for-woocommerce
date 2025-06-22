@@ -6,7 +6,7 @@
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Version:           1.6.4
+ * Version:           1.6.5
  * Author:            WPBean
  * Author URI:        https://wpbean.com/
  * License:           GPL-2.0-or-later
@@ -54,7 +54,7 @@ if ( defined( 'WPB_GQB_PREMIUM' ) ) {
 class WPB_Get_Quote_Button {
 
 	//  Plugin version
-	public $version = '1.6.4';
+	public $version = '1.6.5';
 
 	// The plugin url
 	public $plugin_url;
@@ -170,8 +170,54 @@ class WPB_Get_Quote_Button {
 	}
 
 	function plugin_action_links( $links ) {
-		$links[] = '<a href="'. admin_url( 'admin.php?page=get-a-quote-button' ) .'">'. esc_html__('Settings', 'get-a-quote-button-for-woocommerce') .'</a>';
-		return $links;
+
+
+		$custom['wpb-gqb-pro'] = sprintf(
+			'<a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener noreferrer"
+				style="color: #00a32a; font-weight: 700;"
+				onmouseover="this.style.color=\'#008a20\';"
+				onmouseout="this.style.color=\'#00a32a\';"
+				>%3$s</a>',
+			esc_url(
+				add_query_arg(
+					[
+						'utm_content'  => 'Get+A+Quote+Pro',
+						'utm_campaign' => 'adminlink',
+						'utm_medium'   => 'plugin-actionlink',
+						'utm_source'   => 'FreeVersion',
+					],
+					'https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/'
+				)
+			),
+			esc_attr__( 'Upgrade to Get a Quote Pro', 'get-a-quote-button-for-woocommerce' ),
+			esc_html__( 'Get the Pro', 'get-a-quote-button-for-woocommerce' )
+		);
+
+		$custom['wpb-gqb-settings'] = sprintf(
+			'<a href="%s" aria-label="%s">%s</a>',
+			esc_url(
+				add_query_arg(
+					[ 'page' => 'get-a-quote-button' ],
+					admin_url( 'admin.php' )
+				)
+			),
+			esc_attr__( 'Go to Get a Quote Settings page', 'get-a-quote-button-for-woocommerce' ),
+			esc_html__( 'Settings', 'get-a-quote-button-for-woocommerce' )
+		);
+
+		$custom['wpb-gqb-docs'] = sprintf(
+			'<a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener noreferrer">%3$s</a>',
+			esc_url('https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/'),
+			esc_attr__( 'Read the documentation', 'get-a-quote-button-for-woocommerce' ),
+			esc_html__( 'Docs', 'get-a-quote-button-for-woocommerce' )
+		);
+
+		return array_merge( $custom, (array) $links );
+
+
+		// $links[] = '<a href="'. esc_url( 'https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/?utm_content=Get+A+Quote+Pro&utm_campaign=adminlink&utm_medium=plugin-actionlink&utm_source=FreeVersion' ) .'">'. esc_html__('Get the Pro', 'get-a-quote-button-for-woocommerce') .'</a>';
+		// $links[] = '<a href="'. esc_url( admin_url( 'admin.php?page=get-a-quote-button' ) ) .'">'. esc_html__('Settings', 'get-a-quote-button-for-woocommerce') .'</a>';
+		// return $links;
 	 }
 
 	// Load the required files
@@ -273,23 +319,49 @@ class WPB_Get_Quote_Button {
 	// plugin admin notices
     public function admin_notices() {
 
-		$cf7_form_id = wpb_gqb_get_option( 'wpb_gqb_cf7_form_id', 'form_settings' );
+		$form_plugin = wpb_gqb_get_option( 'wpb_gqb_form_plugin', 'form_settings', 'wpcf7' );
 
-		if ( ! defined( 'WPCF7_PLUGIN' ) ) {
-			?>
-			<div class="notice notice-error is-dismissible">
-				<p><b><?php esc_html_e( 'Get a Quote Button', 'get-a-quote-button-for-woocommerce' ); ?></b><?php esc_html_e( ' required ', 'get-a-quote-button-for-woocommerce' ); ?><b><a href="https://wordpress.org/plugins/contact-form-7" target="_blank"><?php esc_html_e( 'Contact Form 7', 'get-a-quote-button-for-woocommerce' ); ?></a></b><?php esc_html_e( ' plugin to work with.', 'get-a-quote-button-for-woocommerce' ); ?></p>
-			</div>
-			<?php
-		}
+		if (! defined('WPCF7_PLUGIN') || ! defined('WPFORMS_VERSION')) {
+			// If Contact Form 7 is not installed or activated
+			if ($form_plugin == 'wpcf7' && ! defined('WPCF7_PLUGIN')) {
+				$this->show_cf7_notice();
+			}
 
-		if ( ! $cf7_form_id ) {
-			?>
-			<div class="notice notice-error is-dismissible">
-				<p><?php esc_html_e('The Get a Quote Button needs a form to show. Please select a form', 'get-a-quote-button-for-woocommerce'); ?> <a href="<?php echo esc_url( admin_url('admin.php?page=get-a-quote-button') ); ?>"><?php esc_html_e('here', 'get-a-quote-button-for-woocommerce'); ?></a>.</p>
-			</div>
-			<?php
+			// If WPForms is not installed or activated
+			if ($form_plugin == 'wpforms' && ! defined('WPFORMS_VERSION')) {
+				$this->show_wpforms_notice();
+			}
 		}
+	}
+
+	/**
+	 * Show notice if Contact Form 7 is not installed or activated
+	 */
+	public function show_cf7_notice()
+	{
+		?>
+		<div class="notice notice-error is-dismissible">
+			<p>
+				<b><?php esc_html_e('Get a Quote Button', 'get-a-quote-button-for-woocommerce'); ?></b> <?php esc_html_e('requires', 'get-a-quote-button-for-woocommerce'); ?> <b><?php esc_html_e('Contact Form 7', 'get-a-quote-button-for-woocommerce'); ?></b> <?php esc_html_e('to work with.', 'get-a-quote-button-for-woocommerce'); ?>
+				<a href="https://wordpress.org/plugins/contact-form-7" target="_blank"><?php esc_html_e('Install Contact Form 7', 'get-a-quote-button-for-woocommerce'); ?></a>
+			</p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Show notice if WPForms is not installed or activated
+	 */
+	public function show_wpforms_notice()
+	{
+		?>
+		<div class="notice notice-error is-dismissible">
+			<p>
+				<b><?php esc_html_e('Get a Quote Button', 'get-a-quote-button-for-woocommerce'); ?></b> <?php esc_html_e('requires', 'get-a-quote-button-for-woocommerce'); ?> <b><?php esc_html_e('WPForms', 'get-a-quote-button-for-woocommerce'); ?></b> <?php esc_html_e('to work with.', 'get-a-quote-button-for-woocommerce'); ?>
+				<a href="https://wordpress.org/plugins/wpforms-lite" target="_blank"><?php esc_html_e('Install WPForms', 'get-a-quote-button-for-woocommerce'); ?></a>
+			</p>
+		</div>
+		<?php
 	}
 }
 

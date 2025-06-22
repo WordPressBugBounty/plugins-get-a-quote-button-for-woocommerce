@@ -88,8 +88,9 @@ Contact Form Style
 .wpb_gqb_form_product_info_show .gqb_hidden_field {
     display: block!important;
 }
-.wpb-gqf-form-style-true .swal2-content,
-.wpb-gqf-form-style-true .swal2-modal {
+.wpb-gqf-popup .swal2-content,
+.wpb-gqf-popup .swal2-modal,
+.wpb-gqf-popup .swal2-html-container {
     text-align: unset!important;
 }
 .rtl .wpb-gqf-form-style-true .swal2-content,
@@ -100,7 +101,7 @@ Contact Form Style
     direction: rtl;
 }
 .wpb-gqf-form-style-true .swal2-popup {
-    background: #f4f7f8;
+    background: #ffffff;
 }
 .wpb-gqf-form-style-true fieldset{
 	border: none;
@@ -286,4 +287,38 @@ Contact Form Style
 }
 .wpb-gqb-product-type-variable.wpb-gqb-product-type-variable-show {
     display: flex;
+}
+
+/* Sweetalert2 Style */
+.wpb-gqf-popup .swal2-html-container {
+    overflow: visible;
+    margin: 0;
+}
+
+.wpb-gqf-popup .swal2-close {
+    border: 1px solid rgba(23, 23, 23, .1);
+    color: rgb(23, 23, 23);
+    transition: all 0.2s linear;
+    border-radius: 30px;
+    font-size: 1.6em;
+    width: 40px;
+    height: 40px;
+    font-weight: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.wpb-gqf-popup .swal2-close:hover {
+    background: rgb(23, 23, 23);
+    color: #fff;
+}
+
+.wpb-gqf-popup .swal2-close:focus {
+    box-shadow: none;
+    border-color: rgb(23, 23, 23);
+}
+
+/* WPforms Style */
+.wpb-gqf-popup .wpforms-container {
+    margin: 0!important;
 }

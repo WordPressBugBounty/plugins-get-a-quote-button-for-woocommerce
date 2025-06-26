@@ -5,7 +5,7 @@ Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
 Tested up to: 6.8.1
-Stable tag: 1.6.5
+Stable tag: 1.6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -291,5 +291,8 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.6.5 =
 * Added WPForms support for the Quote form.
+
+= Version 1.6.6 =
+* Fixed WPForms honeypot anti spam issue in the popup.
 
 == Upgrade notice ==

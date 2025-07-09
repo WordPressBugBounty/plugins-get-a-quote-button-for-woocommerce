@@ -89,7 +89,10 @@
                 }
 
                 // Reinitialize reCAPTCHA v3
-                if (typeof grecaptcha !== "undefined" && wpcf7_recaptcha) {
+                if (
+                    typeof grecaptcha !== "undefined" &&
+                    typeof wpcf7_recaptcha !== "undefined"
+                ) {
                     grecaptcha.ready(function () {
                         grecaptcha
                             .execute(wpcf7_recaptcha.sitekey, {

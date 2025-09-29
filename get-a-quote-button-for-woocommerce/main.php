@@ -6,7 +6,7 @@
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Version:           1.6.7
+ * Version:           1.6.8
  * Author:            WPBean
  * Author URI:        https://wpbean.com/
  * License:           GPL-2.0-or-later
@@ -56,7 +56,7 @@ class WPB_Get_Quote_Button
 {
 
 	//  Plugin version
-	public $version = '1.6.7';
+	public $version = '1.6.8';
 
 	// The plugin url
 	public $plugin_url;
@@ -132,7 +132,7 @@ class WPB_Get_Quote_Button
 	{
 		$user_id = get_current_user_id();
 		if (!get_user_meta($user_id, 'wpb_gqb_pro_discount_dismissed')) {
-			printf('<div class="wpb-gqb-discount-notice updated" style="padding: 30px 20px;border-left-color: #27ae60;border-left-width: 5px;margin-top: 20px;"><p style="font-size: 18px;line-height: 32px">%s <a target="_blank" href="%s">%s</a>! %s <b>%s</b></p><a href="%s">%s</a></div>', esc_html__('Get a 10% exclusive discount on the premium version of the', 'get-a-quote-button-for-woocommerce'), 'https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/', esc_html__('Get a Quote Button for WooCommerce', 'get-a-quote-button-for-woocommerce'), esc_html__('Use discount code - ', 'get-a-quote-button-for-woocommerce'), '10PERCENTOFF', esc_url(add_query_arg('wpb-gqb-pro-discount-admin-notice-dismissed', 'true')), esc_html__('Dismiss', 'get-a-quote-button-for-woocommerce'));
+			printf('<div class="wpb-gqb-discount-notice updated" style="padding: 30px 20px;border-left-color: #27ae60;border-left-width: 5px;margin-top: 20px;"><p style="font-size: 18px;line-height: 32px">%s <a target="_blank" href="%s">%s</a>! %s <b>%s</b></p><a href="%s">%s</a></div>', esc_html__('Get a 10% exclusive discount on the premium version of the', 'get-a-quote-button-for-woocommerce'), 'https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/', esc_html__('Get a Quote Button for WooCommerce', 'get-a-quote-button-for-woocommerce'), esc_html__('Use discount code - ', 'get-a-quote-button-for-woocommerce'), 'NewCustomer', esc_url(add_query_arg('wpb-gqb-pro-discount-admin-notice-dismissed', 'true')), esc_html__('Dismiss', 'get-a-quote-button-for-woocommerce'));
 		}
 	}
 

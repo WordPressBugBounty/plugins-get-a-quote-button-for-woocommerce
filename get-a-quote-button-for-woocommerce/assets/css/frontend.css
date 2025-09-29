@@ -165,7 +165,7 @@ Contact Form Style
 }
 .wpb-gqf-form-style-true select {
     -webkit-appearance: menulist-button;
-    height: 35px;
+    padding: 9px 10px;
 }
 .wpb-gqf-form-style-true .number {
     background: #1abc9c;
@@ -236,6 +236,17 @@ Contact Form Style
 .wpb-gqf-form-style-true .wpcf7 form > p,
 .wpb-gqf-form-style-true .wpcf7 form > div {
     margin-bottom: 20px;
+}
+.wpb-gqf-form-style-true .wpcf7 form > p span.wpcf7-spinner {
+    margin: 10px 0 0;
+    display: none;
+}
+.wpb-gqf-form-style-true .wpcf7 form.submitting .wpcf7-spinner {
+    display: block;
+}
+.wpb-gqf-form-style-true .wpcf7 form > div.wpcf7-response-output {
+    margin: 20px 0 10px;
+    padding: 10px 15px;
 }
 .wpb-gqf-form-style-true .wpcf7-form {
     margin-bottom: -10px;

@@ -41,6 +41,9 @@ class WPB_GQB_Ajax {
 			return;
 		}
 
+        // For WPForms Pro, not displaying for non login users.
+        add_filter('wpforms_current_user_can', '__return_true');
+
         $contact_form_id = isset( $_POST['contact_form_id'] ) ? sanitize_key( $_POST['contact_form_id'] ) : 0;
         $shortcode_tag   = 'wpcf7_contact_form' === $this->form_plugin? 'contact-form-7' : 'wpforms';
 
@@ -54,7 +57,7 @@ class WPB_GQB_Ajax {
             $response = do_shortcode( '['.esc_attr( $shortcode_tag ).' id="'.esc_attr($contact_form_id).'"]' );
             wp_send_json_success($response);
         } else {
-            wp_send_json_error( esc_html__( 'Invalid CF7 Form ID', 'get-a-quote-button-for-woocommerce' ) );
+            wp_send_json_error( esc_html__( 'Invalid Form ID', 'get-a-quote-button-for-woocommerce' ) );
         }
     }
 

@@ -1,11 +1,11 @@
-=== Request a Quote for WooCommerce and Elementor - Get a Quote Button - Product Enquiry Form Popup - Product Quotation ===
+=== Request a Quote for WooCommerce - Get a Quote Button - Product Enquiry Form Popup - Product Quotation ===
 Author URI: https://wpbean.com/
 Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 6.8.1
-Stable tag: 1.6.7
+Tested up to: 6.8.2
+Stable tag: 1.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,11 +29,6 @@ The plugin options allow you to alter the quotation button's text, color, size, 
 == Quick Links ==
 
 [__Live Demo__](https://demo5.wpbean.com/product/ship-your-idea-2/) | [__Documentation__](https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/) | [__Upgrade to Pro!__](https://wpbean.com/downloads/get-a-quote-button-pro-for-woocommerce-and-elementor/)
-
-### 👋 Need expert WordPress & WooCommerce development help?
-I’m currently available for hire — WordPress and WooCommerce development, custom features, bug fixing, speed optimization, performance tuning, full site development, and more.
-With over 10 years of experience building high-quality WordPress solutions, I can help you take your website to the next level. 
-[__Contact me here →__](https://wpbean.com/web-development-services/?utm_source=WordPress&utm_medium=desc-link&utm_campaign=available-for-hire&utm_content=Get+A+Quote)
 
 https://youtu.be/_0gT9mKoVHI
 
@@ -297,5 +292,8 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.6.7 =
 * Fixed init issue for the ReCaptcha v2 for Contact Form 7 - By IQComputing.
+
+= Version 1.6.8 =
+* Fixed WPForms pro form not showing if not login issue.
 
 == Upgrade notice ==

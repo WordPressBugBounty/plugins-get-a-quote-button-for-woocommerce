@@ -22,6 +22,45 @@
         }
     }
 
+
+    /**
+     * WPCF7 & WPForms Cloudflare Turnstile Support
+     */
+    function gqbTurnstileSupport(popupEl) {
+        // Wait a short moment for the DOM to render
+        setTimeout(function () {
+            const formPlugin = $(popupEl).find("form.wpforms-form").length ? 'wpforms' : 
+                   $(popupEl).find("form.wpcf7-form").length ? 'cf7' : 'unknown';
+
+            if(formPlugin === 'wpforms') {
+                // Init CAPTCHA for WPForms
+                if ( 'undefined' !== typeof wpformsRecaptchaLoad ) {
+                    wpformsRecaptchaLoad();
+                }
+            }else {
+                // Check if Cloudflare Turnstile is loaded
+                if (typeof turnstile !== "undefined") {
+                    // === Contact Form 7 Support ===
+                    $(popupEl)
+                        .find(".wpcf7-turnstile, .cf-turnstile")
+                        .each(function () {
+                            var el = this;
+                            // Skip if already has an iframe (already rendered)
+                            if ($(el).find("iframe").length) return;
+                            
+                            var siteKey = $(el).data("sitekey");
+                            
+                            // Render the Turnstile widget
+                            turnstile.render(el, {
+                                sitekey: siteKey,
+                                theme: "auto",
+                            });
+                        });
+                }
+            }
+        }, 200); // slight delay to ensure form HTML is ready
+    }
+
     /**
      * Fire The Popup
      */
@@ -61,6 +100,9 @@
                     showCloseButton: true,
                     backdrop: true,
                     allowOutsideClick: allow_outside_click,
+                    didOpen: function (popupEl) {
+                        gqbTurnstileSupport(popupEl);
+                    }
                 });
 
                 // reInit WPForms

@@ -4,8 +4,8 @@ Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.7
+Tested up to: 6.9.1
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -304,5 +304,8 @@ It integrates seamlessly with all FSE themes.
 
 = Version 1.7 =
 * Added Cloudflare Turnstile Support for WPForms.
+
+= Version 1.7.1 =
+* Hire notice removed.
 
 == Upgrade notice ==

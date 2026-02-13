@@ -6,7 +6,7 @@
  * Description:       Get a Quote Button for WooCommerce using Contact Form 7. It can be used for requesting a quote, pre-sale questions or query.
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Version:           1.7
+ * Version:           1.7.1
  * Author:            WPBean
  * Author URI:        https://wpbean.com/
  * License:           GPL-2.0-or-later
@@ -240,10 +240,6 @@ class WPB_Get_Quote_Button
 		if (is_admin()) {
 			include_once dirname(__FILE__) . '/includes/admin/class.settings-api.php';
 			include_once dirname(__FILE__) . '/includes/admin/class.settings-config.php';
-
-			if (!class_exists('WpBean_AccordionMenu_AvailableHire')) {
-				include_once __DIR__ . '/includes/AvailableHire/AvailableHire.php';
-			}
 		}
 
 		if (class_exists('woocommerce')) {
@@ -263,8 +259,6 @@ class WPB_Get_Quote_Button
 
 		if (is_admin()) {
 			new WPB_GQB_Plugin_Settings();
-
-			new WpBean_AccordionMenu_AvailableHire();
 		}
 
 		if (class_exists('woocommerce')) {

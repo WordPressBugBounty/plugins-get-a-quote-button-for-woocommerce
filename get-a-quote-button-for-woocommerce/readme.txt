@@ -1,10 +1,10 @@
-=== Request a Quote for WooCommerce - Get a Quote Button - Product Enquiry Form Popup - Product Quotation ===
+=== Request a Quote for WooCommerce - Get a Quote Button ===
 Author URI: https://wpbean.com/
 Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 6.9.1
+Tested up to: 6.9.4
 Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,8 +25,11 @@ For the form, it's supports two most popular form plugins. This quotation popup 
 
 The plugin options allow you to alter the quotation button's text, color, size, and location. Additionally, it offers WooCommerce choices; the quote button is only visible for featured or out-of-stock items.
 
-== ⭐⭐⭐⭐⭐ Rated 5.0 by 20 Users ==
-Request a Quote for WooCommerce is proudly rated 5 out of 5 stars by our users.
+== ⭐⭐⭐⭐⭐ Rated 5.0 by 23 Users ==
+Request a Quote for WooCommerce proudly holds a perfect 5.0-star rating based on feedback from 23 satisfied users.
+
+== 🚀 6,000+ Active Installations ==
+Trusted by over 6,000 active websites, this plugin delivers a reliable and efficient quote request solution for WooCommerce stores.
 
 == Quick Links ==
 
@@ -71,8 +74,7 @@ https://youtu.be/_0gT9mKoVHI
 
 
 ### Support and Documentation:
-
-Using this plugin is super easy as we have details <a href="http://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/">online documentation</a> for this.  If you are having any issue with this plugin our expert support team always ready for you. Just open a support ticket on our <a href="https://wpbean.freshdesk.com/" rel="nofollow">support forum</a>.
+Getting started is simple with our comprehensive <a href="http://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/">online documentation</a>. If you encounter any issues, our expert support team is always ready to help—just open a ticket in our <a href="https://wpbean.com/support">support forum</a>.
 
 ### Do you use other form plugins?
 We have another <a href="https://wordpress.org/plugins/wpb-form-popup/"><b>popup form</b></a> plugin that is compatible with all of the other popular form plugins. Examples include WPForms, Mailchimp, Forminator, Ninja Forms, Formidable, Form Maker by 10Web, weForms, Fluent Forms, HappyForms, WS Form, WPEverest User Registration, Bookly, Everest Forms, Kali Forms, and Bit Form. More integrations are in the works.
@@ -119,8 +121,6 @@ You can effortlessly collect product details such as title, quantity, variations
 = Can I setup a WooCommerce price on request using this plugin? =
 With this plugin, you can hide the cart button and product price. Additionally, enable the user to get price on request by using the Product Enquiry Form Popup.
 
-= Can I use this plugin with WordPress FSE themes? =
-It integrates seamlessly with all FSE themes.
 
 == Screenshots ==
 

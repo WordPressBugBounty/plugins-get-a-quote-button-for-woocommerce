@@ -241,7 +241,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder );
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -270,7 +270,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html .= '</div>';
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -303,7 +303,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html .= '</div>';
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -332,7 +332,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html  = sprintf( '<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder, $min, $max, $step );
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -357,7 +357,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html .= sprintf( '<p class="description">%1$s</p>', $args['desc'] );
 			$html .= '</div>';
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -380,7 +380,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 			$html .= '</fieldset>';
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -402,7 +402,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 			$html .= '</fieldset>';
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -417,13 +417,14 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
 
 			foreach ( $args['options'] as $key => $label ) {
-				$html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
+				//$html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
+				$html .= sprintf('<option value="%s"%s>%s</option>', $key, selected((string)$value, (string)$key, false), $label);
 			}
 
 			$html .= sprintf( '</select>' );
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -440,7 +441,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html  = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]"%4$s>%5$s</textarea>', $size, $args['section'], $args['id'], $placeholder, $value );
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -498,7 +499,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -514,7 +515,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**
@@ -530,7 +531,7 @@ if ( ! class_exists( 'WPB_GQB_WeDevs_Settings_API' ) ) :
 			$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );
 			$html .= wp_kses_post( $this->get_field_description( $args ) );
 
-			echo wp_kses( $html, $this->kses_allowed_html() );
+			echo $html;
 		}
 
 		/**

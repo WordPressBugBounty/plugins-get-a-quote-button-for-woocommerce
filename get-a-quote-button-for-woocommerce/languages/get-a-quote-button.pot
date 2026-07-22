@@ -1,0 +1,1694 @@
+# Copyright (C) 2025 WPBean
+# This file is distributed under the same license as the Get a Quote Button for WooCommerce and Elementor plugin.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Get a Quote Button for WooCommerce and Elementor 6.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/get-a-quote-button\n"
+"POT-Creation-Date: 2025-11-10 08:00+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: imran@wpbean.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+"X-Domain: get-a-quote-button\n"
+
+#. Plugin Name of the plugin
+#: main.php
+msgid "Get a Quote Button for WooCommerce and Elementor"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: main.php
+msgid "https://wpbean.com/plugins/"
+msgstr ""
+
+#. Description of the plugin
+#: main.php
+msgid "Get a Quote Button for WooCommerce and Elementor using Contact Form 7 or WPForms. It can be used for requesting a quote, pre-sale questions or query."
+msgstr ""
+
+#. Author of the plugin
+#: main.php
+msgid "WPBean"
+msgstr ""
+
+#. Author URI of the plugin
+#: main.php
+msgid "https://wpbean.com"
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:226
+msgid "Is Divi used to create your product page?"
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:227
+msgid "To learn how to add the Get a Quote button to Divi, please refer to the following documentation."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:233
+msgid "Is Elementor used to create your product page?"
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:234
+msgid "To learn how to add the Get a Quote button to Elementor, please refer to the following documentation."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:240
+msgid "The Get a Quote Button plugin requires WooCommerce."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:241
+msgid "For the Get a Quote Plugin to work, please install and activate the WooCommerce plugin."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:252
+msgid "The Get a Quote Button plugin requires Contact Form 7."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:253
+msgid "For the Get a Quote Plugin to work, please install and activate the Contact Form 7 plugin."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:267
+msgid "The Get a Quote Button plugin requires WPForms."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:268
+msgid "For the Get a Quote Plugin to work, please install and activate the WPForms plugin."
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:350
+msgid "Activate Plugin"
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:356
+msgid "Install Plugin"
+msgstr ""
+
+#: includes/admin/class.admin-notices.php:363
+msgid "View Documentation"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:24
+#: includes/admin/class.admin-pages.php:38
+msgid "Get a Quote Buttons"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:25 includes/class-shortcode.php:275
+#: includes/elementor/widgets/quote-button.php:73
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:362
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:387
+msgid "Get a Quote"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:39
+#: src/apps/shortcodes-page/page/Header.jsx:12
+msgid "Quote Buttons"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:46
+msgid "Get a Quote Settings"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:47 main.php:171
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:57
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/class.admin-pages.php:58
+msgid "Docs"
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:72
+msgid "If the quote shortcode database table isn't there, create it."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:73
+msgid "Adding a new no_price_products column to the quote shortcodes table."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:74
+msgid "Add WPML columns in the quote shortcodes database for multilingual support."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:75
+msgid "Adding a new shortcode_status column to the quote shortcodes table."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:76
+msgid "Update data types for products, product_tags, product_cats, btn_text, show_btn, and btn_size columns in the quote shortcode table."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:121
+msgid "Security check failed."
+msgstr ""
+
+#. translators: %s completed successfully.
+#: includes/admin/class.db-migrate.php:145
+#, php-format
+msgid "%s completed successfully."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:209
+msgid "The Get a Quote Button Plugin requires a database update."
+msgstr ""
+
+#: includes/admin/class.db-migrate.php:212
+msgid "Run Update"
+msgstr ""
+
+#: includes/admin/rest-api/Class.Settings-Rest-API.php:78
+msgid "Invalid data format."
+msgstr ""
+
+#: includes/admin/rest-api/Class.Settings-Rest-API.php:97
+msgid "No valid section found to update."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:170
+msgid "Downloadable"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:171
+msgid "Virtual"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:198
+msgid "Contact Form 7 is not active"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:221
+msgid "WPForms is not active"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:366
+msgid "Name is a required field."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:375
+msgid "A shortcode with this name already exists."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:390
+msgid "Failed to save shortcode to database."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:428
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:471
+msgid "Shortcode not found"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:438
+msgid "Failed to update shortcode"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:478
+msgid "Failed to delete shortcode"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:504
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:549
+msgid "Shortcode not found."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:517
+msgid "Failed to move shortcode to trash."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:528
+msgid "Shortcode moved to trash successfully."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:584
+msgid "Failed to duplicate shortcode."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:605
+msgid "Shortcode duplicated successfully!"
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:624
+msgid "Invalid bulk action."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:628
+msgid "No shortcodes selected."
+msgstr ""
+
+#: includes/admin/rest-api/Class.ShortCodes-Rest-API.php:685
+msgid "Failed to perform bulk action."
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:44
+#: includes/cf7/class.cf7-data-tag-generator.php:54
+msgid "Quote Product Data"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:55
+msgid "Get a quote button WooCommerce product data form-tag generator"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:56
+msgid "Choose a product data that you want to send with this contact form."
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:75
+msgid "Data type"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:79
+msgid "Product ID"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:80
+msgid "Product URL"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:81
+msgid "Product Title"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:82
+msgid "Product Description"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:83
+msgid "Product Short Description"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:84
+msgid "Product SKU"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:85
+msgid "Product Price"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:86
+msgid "Total Price"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:87
+msgid "Product Quantity"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:88
+msgid "Product Status"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:89
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:17
+msgid "Product Type"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:90
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:36
+msgid "Product Stock Status"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:91
+msgid "Product Stock Quantity"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:92
+msgid "Selected Product Variations"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:93
+msgid "Selected Product Variations Value Only"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:94
+msgid "Product Variation SKU"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:95
+msgid "Product Image URL"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:96
+msgid "Cart Content (For cart page quote)"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tag-generator.php:98
+msgid "Product Fields by Studio Wombat"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:143
+#: includes/wpforms/class.smart-tags.php:67
+msgid "Cart Items:"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:148
+#: includes/wpforms/class.smart-tags.php:72
+msgid "N/A"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:154
+#: includes/wpforms/class.smart-tags.php:78
+msgid "SKU"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:155
+#: includes/wpforms/class.smart-tags.php:79
+msgid "Price"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:156
+#: includes/wpforms/class.smart-tags.php:80
+msgid "Quantity"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:157
+#: includes/cf7/class.cf7-data-tags.php:165
+#: includes/wpforms/class.smart-tags.php:81
+#: includes/wpforms/class.smart-tags.php:89
+msgid "Subtotal"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:164
+#: includes/wpforms/class.smart-tags.php:88
+msgid "Cart Totals:"
+msgstr ""
+
+#. translators: %s Coupon.
+#. translators: %s: Coupon code.
+#: includes/cf7/class.cf7-data-tags.php:171
+#: includes/wpforms/class.smart-tags.php:95
+#, php-format
+msgid "Coupon (%s)"
+msgstr ""
+
+#: includes/cf7/class.cf7-data-tags.php:177
+#: includes/wpforms/class.smart-tags.php:101
+msgid "Total"
+msgstr ""
+
+#: includes/class-ajax.php:37
+msgid "Invalid request"
+msgstr ""
+
+#: includes/class-ajax.php:67
+msgid "Invalid Form ID"
+msgstr ""
+
+#: includes/class-shortcode.php:383
+msgid "Form id required."
+msgstr ""
+
+#: includes/class-shortcode.php:389
+msgid "Get a Quote Button required the Contact Form 7 or WPForms plugin to work with."
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:17
+msgid "WPB Quote Button"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:46
+msgid "Quote Button Settings"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:53
+#: src/apps/settings-page/page/tabs/General.jsx:117
+msgid "Select a CF7 Form"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:71
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:28
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:378
+msgid "Button Text"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:80
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:45
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:400
+msgid "Button Size"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:84
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:416
+msgid "Small"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:85
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:420
+msgid "Medium"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:86
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:424
+msgid "Large"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:94
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:60
+msgid "Enable Form Style"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:96
+msgid "Yes"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:97
+msgid "No"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:106
+msgid "Form Width (px)"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:116
+#: includes/elementor/widgets/quote-hook.php:53
+msgid "Alignment"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:120
+#: includes/elementor/widgets/quote-hook.php:57
+msgid "Left"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:124
+#: includes/elementor/widgets/quote-hook.php:61
+msgid "Center"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:128
+#: includes/elementor/widgets/quote-hook.php:65
+msgid "Right"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:132
+#: includes/elementor/widgets/quote-hook.php:69
+msgid "Justified"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:146
+msgid "Style Settings"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:172
+#: includes/elementor/widgets/quote-hook.php:99
+msgid "Normal"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:179
+#: includes/elementor/widgets/quote-button.php:211
+#: includes/elementor/widgets/quote-hook.php:106
+#: includes/elementor/widgets/quote-hook.php:138
+msgid "Text Color"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:191
+#: includes/elementor/widgets/quote-button.php:223
+#: includes/elementor/widgets/quote-hook.php:118
+#: includes/elementor/widgets/quote-hook.php:150
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:152
+msgid "Background Color"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:204
+#: includes/elementor/widgets/quote-hook.php:131
+msgid "Hover"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:234
+#: includes/elementor/widgets/quote-hook.php:161
+msgid "Border Color"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:261
+#: includes/elementor/widgets/quote-hook.php:188
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:269
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:186
+msgid "Border Radius"
+msgstr ""
+
+#: includes/elementor/widgets/quote-button.php:281
+#: includes/elementor/widgets/quote-hook.php:208
+msgid "Padding"
+msgstr ""
+
+#: includes/elementor/widgets/quote-hook.php:17
+msgid "WPB Quote Hook"
+msgstr ""
+
+#: includes/elementor/widgets/quote-hook.php:46
+msgid "Quote Hook Settings"
+msgstr ""
+
+#: includes/woocommerce/class.product-meta.php:34
+msgid "Disable Quote Button?"
+msgstr ""
+
+#: includes/woocommerce/class.product-meta.php:35
+msgid "Disable quote button for this product"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:26
+msgid "WC Product ID"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:27
+msgid "WC Product Title"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:28
+msgid "WC Product URL"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:29
+msgid "WC Product Description"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:30
+msgid "WC Product Short Description"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:31
+msgid "WC Product SKU"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:32
+msgid "WC Product Price"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:33
+msgid "WC Product Total Price"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:34
+msgid "WC Product Status"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:35
+msgid "WC Product Type"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:36
+msgid "WC Product Stock Status"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:37
+msgid "WC Product Stock Quantity"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:38
+msgid "WC Product Variations"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:39
+msgid "WC Product Variations Value Only"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:40
+msgid "WC Product Variation SKU"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:41
+msgid "WC Product Quantity"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:42
+msgid "WC Product Image URL"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:43
+msgid "WC Cart Content"
+msgstr ""
+
+#: includes/wpforms/class.smart-tags.php:61
+msgid "Cart is empty."
+msgstr ""
+
+#: src/apps/settings-page/page/SettingsPage.jsx:55
+msgid "Open settings navigation"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:20
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:343
+msgid "Button Settings"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:21
+msgid "Customize button appearance and behavior."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:29
+msgid "Set your custom quote button text."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:46
+msgid "To override the size, set to the custom."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:69
+msgid "Background Options"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:70
+msgid "Quote button background color settings."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:77
+msgid "Background"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:78
+msgid "Choose the background color for the quote button."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:99
+msgid "Hover Background"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:100
+msgid "Choose quote button hover background color."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:123
+msgid "Text Color Options"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:124
+msgid "Quote button text color settings."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:131
+msgid "Color"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:132
+msgid "Choose the text color for the quote button."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:151
+msgid "Hover Color"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:152
+msgid "Choose quote button text color on mouse hover."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:175
+msgid "Typography Options"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:176
+msgid "You can adjust the quote button typography here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:183
+msgid "Button Font Size"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:184
+msgid "Button font size, Can be in any CSS unit."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:206
+msgid "Font Weight"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:207
+msgid "Quote button font weight."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:216
+msgid "Select an option"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:228
+msgid "100"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:232
+msgid "200"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:236
+msgid "300"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:240
+msgid "400"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:244
+msgid "500"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:248
+msgid "600"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:252
+msgid "700"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:256
+msgid "800"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:260
+msgid "900"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:270
+msgid "Quote button border radius can be adjusted here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:286
+msgid "Button Padding"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:287
+msgid "You can adjust the quote button padding here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:310
+msgid "Button Margin"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/ButtonSettings.jsx:311
+msgid "You can adjust the quote button margin here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:28
+msgid "General Settings"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:29
+msgid "Configure the basic settings for quote button."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:36
+msgid "Form Plugin for the Quote"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:40
+msgid "Select a form plugin that you like to use for the quote popup. Please install the selected plugin."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:57
+msgid "Contact Form 7"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:64
+msgid "WPForms"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:74
+msgid "Select a WPForms Form"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:78
+#: src/apps/settings-page/page/tabs/General.jsx:121
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:56
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:113
+msgid "The form to show in the quote popup"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:87
+#: src/apps/settings-page/page/tabs/General.jsx:130
+msgid "Select a form"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:102
+msgid "WPForms Plugin Not Installed!"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:106
+msgid "Please install and activate the WPForms plugin and then return to select the form here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:145
+msgid "Contact Form 7 Plugin Not Installed!"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:149
+msgid "Please install and activate the Contact Form 7 plugin and then return to select the form here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:159
+msgid "Redirecting After Submission"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:163
+msgid "Redirect to a thank you page after the popup form submission."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:174
+msgid "Start typing to search pages..."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:191
+msgid "Enable Multilanguage Support"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:195
+msgid "If you different form and button text for different languages, check this."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:216
+msgid "Contact Form 7 Options"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:223
+msgid "Name Attribute Support"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:227
+msgid "Enable if you are using any 3rd party system for storing the form data. Example: make.com. If you enable this, a second parameter will be required in the form shortcode. Example: [gqb_product_id gqb_product_id]"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:244
+msgid "Force Adding CF7's Scripts"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/General.jsx:248
+msgid "If you're experiencing trouble submitting the popup form, check this."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:13
+msgid "Hide Cart Button"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:14
+msgid "Control cart button visibility for your products."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:20
+msgid "Cart Hide Method"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:21
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:21
+msgid "It may be necessary to modify the CSS code for specific themes.  Contact us if necessary."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:36
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:36
+msgid "Programmatically"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:43
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:43
+msgid "Using CSS"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:49
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:49
+msgid "Hide for All the Products"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:53
+msgid "Hide cart button for all the products."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:72
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:72
+msgid "Hide for Selected Products"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:76
+msgid "Hide cart button if the quote button is enabled for a product (based on the selected products, categories and tags on shortcode generator)."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:95
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:97
+msgid "Hide for Featured Products"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HideCart.jsx:99
+msgid "Hide cart button only for the featured products."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:13
+msgid "Hide Price"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:14
+msgid "Control price visibility for products."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:20
+msgid "Price Hide Method"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:53
+msgid "Hide price for all the products."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:76
+msgid "Hide price if the quote button is enabled for a product (based on the selected products, categories and tags on shortcode generator)."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/HidePrice.jsx:101
+msgid "Hide price only for the featured products."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:24
+msgid "Popup Settings"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:25
+msgid "Configure popup display settings."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:31
+msgid "Popup Interaction & Appearance"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:38
+msgid "Show Product Title"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:42
+msgid "Check this to show the product title on top of the popup."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:64
+msgid "Check this to enable our custom style for the quote form."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:82
+msgid "Close on Overlay Click"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:86
+msgid "If checked, the user can dismiss the popup by clicking the it's overlay."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:106
+msgid "Close with Esc key"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:110
+msgid "If checked, the user can dismiss the popup by pressing the Esc key."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:128
+msgid "Close on Form Submit"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:132
+msgid "If checked, the popup will be closed on successfully submitting the form."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:153
+msgid "Choose popup window background color."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:171
+msgid "Popup Width"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:172
+msgid "The popup width can be adjusted here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:187
+msgid "The popup border radius can be adjusted here."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:207
+msgid "Popup Padding"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/PopupSettings.jsx:208
+msgid "Popup window padding. Can be in any CSS unit (px, em/rem, %)."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:17
+msgid "WooCommerce Settings"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:18
+msgid "Configure WooCommerce integration options."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:24
+msgid "Quote Button Visibility"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:29
+msgid "Single Product"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:30
+msgid "Show the quote button on the single product page"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:47
+msgid "Products Loop"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:48
+msgid "Show the quote button on the products loop"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:61
+msgid "Related Products"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:62
+msgid "Show the quote button on the related, upsell, and cross-sell products loop"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:83
+msgid "Button Location"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:84
+msgid "Select button display location. Default: After Cart Button."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:101
+msgid "Before Cart"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:105
+msgid "After Cart"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:113
+msgid "Show Button for"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:114
+msgid "You can show the button for all the products or any specific product type."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:131
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:115
+msgid "All Products"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:135
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:56
+msgid "Out of Stock"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:139
+msgid "Featured"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:147
+msgid "Show for Guest Users"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:148
+msgid "Uncheck this if you need it to display the button for logged-in users only."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:164
+msgid "Gray Out the Quote Button for Variable Products"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:168
+msgid "The quote button can be grayed out(disabled) for the variable products until the variation is selected."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:183
+msgid "Options for Product Data Fields in Form"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:187
+msgid "For getting the product's information, we have a few special fields, such as product title, id, URL, variants, SKU, etc."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:195
+msgid "Products Data Fields Visibility"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:199
+msgid "The product data collection fields like title, variation, SKU, etc can be shown or hide in the quote form."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:219
+msgid "Editable Data Fields"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:223
+msgid "The custom product data fields can be editable or not in the quote form."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:245
+msgid "Get Product Variations on"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:249
+msgid "The product variations can be collected when selecting a variation or after selecting all the variations and found any variation."
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:266
+msgid "Found Variation"
+msgstr ""
+
+#: src/apps/settings-page/page/tabs/WooCommerce.jsx:273
+msgid "Select a Variation"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:67
+msgid "Are you sure you want to move this shortcode to trash?"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:72
+msgid "Move to Trash?"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:74
+msgid "Yes, Trash It"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:87
+msgid "Are you sure you want to delete this shortcode? This action cannot be undone."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:92
+msgid "Delete ShortCode?"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:94
+msgid "Yes, Delete It"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:142
+msgid "Edit"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:149
+msgid "Copy Shortcode"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:157
+msgid "Duplicate"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:167
+#: src/apps/shortcodes-page/page/controls/BulkActions.jsx:20
+msgid "Move to Trash"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ActionDropdown.jsx:177
+#: src/hook/useConfirm.js:52
+msgid "Delete"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeFooter.jsx:16
+msgid "* Required fields"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeFooter.jsx:24
+#: src/hook/useConfirm.js:155
+msgid "Cancel"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeFooter.jsx:34
+msgid "Saving..."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeFooter.jsx:40
+msgid "Update"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeFooter.jsx:41
+msgid "Create"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:18
+msgid "Only the selected type of products will display this quote button."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:37
+msgid "Only the selected stock type products will display this quote button."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:52
+msgid "In Stock"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/AdvancedSettings.jsx:60
+msgid "On Backorder"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:21
+msgid "Cart Page Hooks"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:25
+msgid "Custom Hooks for New Block Based Cart Page"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:52
+msgid "WC Loop Hooks"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:77
+msgid "WC Product Page Hooks"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:102
+msgid "Custom Hooks"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:119
+msgid "Selected Products"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:123
+msgid "ShortCode Use"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:127
+msgid "Cart Page"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:131
+msgid "Custom Hook"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:140
+msgid "Shortcode Name *"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:141
+msgid "This will be used to identify your shortcode"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:157
+msgid "Show Button For"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:158
+msgid "Choose the products you would want to set this quote button for."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:182
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:213
+msgid "Display Location (hook)"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:186
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:217
+msgid "The hook where to display the quote button"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:195
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:226
+msgid "Select a hook"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:238
+msgid "Priority"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:239
+msgid "Display order"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:268
+msgid "ShortCode for your cart page."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:277
+msgid "Add this shortcode on your cart page after saving to show the quote button."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:293
+msgid "Generated ShortCode"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:300
+msgid "You can use this shortcode anywhere in your content after saving."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:311
+msgid "Shortcode Status"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:312
+msgid "Only active shortcodes will be shown."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:326
+#: src/apps/shortcodes-page/page/controls/StatusFilter.jsx:19
+msgid "Active"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:330
+#: src/apps/shortcodes-page/page/controls/StatusFilter.jsx:22
+msgid "Inactive"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:334
+#: src/apps/shortcodes-page/page/controls/StatusFilter.jsx:25
+msgid "Trash"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:350
+msgid "Button Text for"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:354
+msgid "Quote button Text for"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:379
+msgid "Quote button text"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:401
+msgid "To override the size from the settings, set to custom."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/BasicSettings.jsx:428
+msgid "Custom"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:25
+msgid "CF7 Form for"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:29
+msgid "Select a Contact Form 7 form for"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:32
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:90
+msgid "language."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:40
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:64
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:98
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:121
+msgid "Select a contact form"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:55
+msgid "CF7 Form *"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:83
+msgid "WPForms Form for"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:87
+msgid "Select a WPForms form for"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/FormSelector.jsx:112
+msgid "WPForms Form *"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:21
+msgid "Product Categories"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:22
+msgid "Select categories where the quote button will appear."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:38
+msgid "Product Tags"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:39
+msgid "Select tags where the quote button will appear."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:55
+msgid "Specific Products"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:56
+msgid "Select individual products to show the quote button"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:72
+msgid "Product Options"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:77
+msgid "Featured Products Only"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:81
+msgid "Set this quote button only for the featured products."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:95
+msgid "No Price Products Only"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/ProductsSettings.jsx:99
+msgid "Set this quote button only for the without pice products."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:13
+msgid "User Login Status"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:14
+msgid "Control who can see the quote button"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:28
+msgid "All"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:32
+msgid "Logged In"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:36
+msgid "Not Logged In"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:46
+msgid "User Roles"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:47
+msgid "Restrict to specific user roles"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:59
+msgid "All Roles"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:63
+msgid "Administrator"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:70
+msgid "Editor"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:74
+msgid "Author"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:78
+msgid "Contributor"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:82
+msgid "Subscriber"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortcodeFormTabs/UsersSettings.jsx:86
+msgid "Customer"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeHeader.jsx:14
+msgid "Edit Quote Button"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeHeader.jsx:15
+msgid "Add New Quote Button"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeHeader.jsx:24
+msgid "Configure your quote button settings and display rules."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeTabNavigation.jsx:16
+msgid "Basic Settings"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeTabNavigation.jsx:23
+msgid "Product Rules"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeTabNavigation.jsx:28
+msgid "User Rules"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/AddShortcode/ShortCodeTabNavigation.jsx:33
+msgid "Advanced"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/Controls.jsx:15
+msgid "Are you sure you want to empty the trash? This action cannot be undone."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/Controls.jsx:20
+msgid "Empty Trash?"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/Controls.jsx:59
+msgid "Delete permanently"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/controls/BulkActions.jsx:17
+msgid "Bulk Actions"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/controls/BulkActions.jsx:23
+msgid "Mark as Active"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/controls/BulkActions.jsx:26
+msgid "Mark as Inactive"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/controls/BulkActions.jsx:35
+msgid "Apply"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/controls/StatusFilter.jsx:16
+msgid "All Status"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/EmptyState.jsx:19
+msgid "No Quote Buttons Found in Trash!"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/EmptyState.jsx:23
+msgid "No Inactive Quote Buttons Found!"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/EmptyState.jsx:28
+msgid "No Quote Buttons Found!"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/EmptyState.jsx:32
+msgid "Try adjusting your search terms."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/EmptyState.jsx:36
+msgid "Get started by creating your first quote shortcode."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/EmptyState.jsx:47
+#: src/apps/shortcodes-page/page/Header.jsx:27
+msgid "Add New"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/Header.jsx:15
+msgid "Manage your quote buttons and their display settings."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/Others/FormsInfo.jsx:152
+msgid "No form selected"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ResultsInfo.jsx:11
+msgid "item"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ResultsInfo.jsx:17
+msgid "selected"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ShortCodesPage.jsx:19
+msgid "No form plugin found!"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/ShortCodesPage.jsx:23
+msgid "The Get a Quote Button plugin requires a form plugin. Make sure you have either the Contact Form 7 or the WPForms plugin installed and active on your site."
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableBody.jsx:56
+msgid "Hook"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableFooter.jsx:18
+msgid "Showing"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableFooter.jsx:20
+msgid "of"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableFooter.jsx:22
+msgid "buttons"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableFooter.jsx:31
+msgid "Previous"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableFooter.jsx:53
+msgid "Next"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:40
+msgid "ID"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:46
+msgid "Title"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:52
+msgid "Form"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:55
+msgid "ShortCode"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:58
+msgid "Show"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:64
+msgid "Status"
+msgstr ""
+
+#: src/apps/shortcodes-page/page/TableHeader.jsx:73
+msgid "Date"
+msgstr ""
+
+#: src/components/LoadingSpinner.jsx:9
+msgid "Loading..."
+msgstr ""
+
+#: src/components/UI/ColorPicker.jsx:226
+msgid "Reset to default color"
+msgstr ""
+
+#: src/hook/useConfirm.js:11 src/hook/useConfirm.js:19
+msgid "Confirm Action"
+msgstr ""
+
+#: src/hook/useConfirm.js:75
+msgid "Continue"
+msgstr ""
+
+#: src/hook/useConfirm.js:98
+msgid "Confirm"
+msgstr ""
+
+#: src/hook/useConfirm.js:124
+msgid "Close dialog"
+msgstr ""

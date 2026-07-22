@@ -4,8 +4,8 @@ Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 1.7.2
+Tested up to: 7.0.2
+Stable tag: 6.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,7 @@ For the form, it supports the two most popular form plugins. This quotation pop-
 
 The plugin options allow you to alter the quotation button's text, color, size, and location. Additionally, it offers WooCommerce choices; the quote button is only visible for featured or out-of-stock items.
 
-== ⭐⭐⭐⭐⭐ Rated 5.0 by 23 Users ==
+== ⭐⭐⭐⭐⭐ Rated 5.0 by 24 Users ==
 Request a Quote for WooCommerce proudly holds a perfect 5.0-star rating based on feedback from 23 satisfied users.
 
 == 🚀 6,000+ Active Installations ==
@@ -309,6 +309,12 @@ With this plugin, you can hide the cart button and product price. Additionally, 
 * Hire notice removed.
 
 = Version 1.7.2 =
-* Improved the settings layout. 
+* Improved the settings layout.
+
+= Version 6.6.2 =
+* Merge free and premium to a single development version.
+* Improved settings UI and Quote Shortcodes UI.
+* Added multi-products quote system for the pro version.
+* Added hide cart and price settings for each quote shortcodes.
 
 == Upgrade notice ==

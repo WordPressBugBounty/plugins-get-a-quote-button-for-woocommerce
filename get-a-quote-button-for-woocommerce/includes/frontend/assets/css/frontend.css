@@ -1,0 +1,1533 @@
+.wpb-get-a-quote-button-alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+.wpb-get-a-quote-button-alert.wpb-get-a-quote-button-alert-inline {
+    display: inline-block;
+}
+.wpb-get-a-quote-button-alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.wpb-get-a-quote-button-btn {
+    display: flex;
+    cursor: pointer;
+    text-transform: inherit;
+    letter-spacing: inherit;
+    text-decoration: none;
+    font-weight: var(--wpb-gqb-btn-font-weight, 600) !important;
+    font-size: var(--wpb-gqb-btn-font-size, 15px) !important;
+    color: var(--wpb-gqb-btn-color, #212529);
+    text-align: center;
+    align-items: center;
+    align-self: flex-start;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: var(--wpb-gqb-btn-bg, transparent);
+    line-height: var(--wpb-gqb-btn-line-height, normal);
+    border: var(--wpb-gqb-btn-border-width, 0)
+        var(--wpb-gqb-btn-border-style, solid)
+        var(--wpb-gqb-btn-border-color, transparent);
+    border-radius: var(--wpb-gqb-btn-radius, 3px) !important;
+    box-shadow: var(--wpb-gqb-btn-shadow, none);
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    -webkit-font-smoothing: antialiased;
+}
+.elementor-widget-wpb_gqb_button .wpb-get-a-quote-button-btn,
+.elementor-widget-wpb_gqb_hook .wpb-get-a-quote-button-btn {
+    display: inline-flex;
+}
+.elementor-align-justify .wpb-get-a-quote-button-btn {
+    width: 100%;
+}
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-large {
+    padding: 10px 20px 12px;
+    font-size: 15px;
+}
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-medium {
+    padding: 8px 15px 10px;
+    font-size: 15px;
+}
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-small {
+    padding: 6px 10px 7px;
+    font-size: 13px;
+}
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-fullwidth {
+    width: 100%;
+    justify-content: center;
+}
+.wpb-get-a-quote-button-btn.wpb-gqb-cart-page-button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 1em;
+    font-size: 1.25em !important;
+    line-height: 1;
+}
+.wpb-get-a-quote-button-btn-default {
+    color: var(--wpb-gqb-btn-color, #fff);
+    background-color: var(--wpb-gqb-btn-bg, #17a2b8);
+}
+.wpb-get-a-quote-button-btn:hover,
+.wpb-get-a-quote-button-btn:focus,
+.wpb-get-a-quote-button-btn:active {
+    color: var(--wpb-gqb-btn-hover-color, #fff);
+    background-color: var(--wpb-gqb-btn-hover-bg, #138496);
+    border: var(--wpb-gqb-btn-hover-border-width, 0)
+        var(--wpb-gqb-btn-hover-border-style, solid)
+        var(--wpb-gqb-btn-hover-border-color, transparent);
+    box-shadow: var(--wpb-gqb-btn-hover-shadow, none);
+}
+.wpb-get-a-quote-button-btn-default:hover,
+.wpb-get-a-quote-button-btn-default:focus,
+.wpb-get-a-quote-button-btn-default:active,
+.wpb-get-a-quote-button-btn:hover,
+.wpb-get-a-quote-button-btn:focus,
+.wpb-get-a-quote-button-btn:active {
+    background-image: inherit;
+    outline: 0;
+    text-decoration: none;
+}
+.woocommerce ul.products .wpb-get-a-quote-button-btn,
+.woocommerce-page ul.products .wpb-get-a-quote-button-btn {
+    padding: 0.618em 1em;
+    font-weight: 700;
+    font-size: 100%;
+    margin-top: 10px;
+    border: 0;
+}
+.summary .wpb-get-a-quote-button-btn {
+    margin-bottom: 20px;
+}
+.admin-bar .swal2-container {
+    padding-top: 56px;
+}
+
+/*
+Contact Form 7 Style
+*/
+
+.wpb-gqf-popup .swal2-content,
+.wpb-gqf-popup .swal2-modal,
+.wpb-gqf-popup .swal2-html-container {
+    text-align: unset !important;
+}
+.rtl .wpb-gqf-form-style-true * {
+    direction: rtl;
+}
+.wpb-gqf-form-style-true .swal2-popup {
+    background: #ffffff;
+}
+.wpb-gqf-popup.swal2-container .swal2-popup {
+    background: var(--wpb-gqb-popup-bg, #ffffff);
+    border-radius: var(--wpb-gqb-popup-radius, 5px);
+}
+.wpb-gqf-form-style-true fieldset {
+    border: none;
+}
+.wpb-gqf-form-style-true legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.wpb-gqf-form-style-true label {
+    display: block;
+    font-size: 16px;
+    line-height: normal;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+}
+.wpb-gqf-form-style-true input[type="text"],
+.wpb-gqf-form-style-true input[type="date"],
+.wpb-gqf-form-style-true input[type="datetime"],
+.wpb-gqf-form-style-true input[type="email"],
+.wpb-gqf-form-style-true input[type="number"],
+.wpb-gqf-form-style-true input[type="search"],
+.wpb-gqf-form-style-true input[type="time"],
+.wpb-gqf-form-style-true input[type="url"],
+.wpb-gqf-form-style-true input[type="tel"],
+.wpb-gqf-form-style-true textarea,
+.wpb-gqf-form-style-true select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+.wpb-gqf-form-style-true input[type="text"]:focus,
+.wpb-gqf-form-style-true input[type="date"]:focus,
+.wpb-gqf-form-style-true input[type="datetime"]:focus,
+.wpb-gqf-form-style-true input[type="email"]:focus,
+.wpb-gqf-form-style-true input[type="number"]:focus,
+.wpb-gqf-form-style-true input[type="search"]:focus,
+.wpb-gqf-form-style-true input[type="time"]:focus,
+.wpb-gqf-form-style-true input[type="url"]:focus,
+.wpb-gqf-form-style-true input[type="tel"]:focus,
+.wpb-gqf-form-style-true textarea:focus,
+.wpb-gqf-form-style-true select:focus {
+    background: #d2d9dd;
+}
+.wpb-gqf-form-style-true select {
+    -webkit-appearance: menulist-button;
+    padding: 9px 10px;
+}
+.wpb-gqf-form-style-true .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.wpb-gqf-form-style-true input[type="submit"],
+.wpb-gqf-form-style-true input[type="button"] {
+    position: relative;
+    display: block;
+    padding: 12px 35px !important;
+    color: var(--wpb-gqb-btn-color, #fff);
+    margin: 0 auto;
+    background: var(--wpb-gqb-btn-bg, #1abc9c);
+    font-size: 18px;
+    line-height: normal !important;
+    text-align: center;
+    font-style: inherit;
+    width: 100%;
+    border: 0 !important;
+    text-shadow: unset !important;
+    box-shadow: unset !important;
+    height: unset !important;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+.wpb-gqf-form-style-true input[type="submit"]:hover,
+.wpb-gqf-form-style-true input[type="button"]:hover,
+.wpb-gqf-form-style-true input[type="submit"]:focus,
+.wpb-gqf-form-style-true input[type="button"]:focus {
+    color: var(--wpb-gqb-btn-hover-color, #fff);
+    background: var(--wpb-gqb-btn-hover-bg, #109177);
+}
+.wpb-gqf-form-style-true input[type="submit"]:focus,
+.wpb-gqf-form-style-true input[type="button"]:focus {
+    outline: 0;
+}
+.wpb-gqf-form-style-true input[type="submit"].wpcf7-submit,
+.wpb-gqf-form-style-true input[type="button"].wpcf7-submit {
+    margin-bottom: 0;
+}
+.wpb-gqf-form-style-true form.wpcf7-form .ajax-loader {
+    display: none;
+}
+.wpb-gqf-form-style-true form.wpcf7-form.submitting .ajax-loader {
+    display: block;
+    margin-top: 15px;
+}
+.wpb-gqf-form-style-true .wpcf7 form > p,
+.wpb-gqf-form-style-true .wpcf7 form > div {
+    margin-bottom: 20px;
+}
+.wpb-gqf-form-style-true .wpcf7 form > p span.wpcf7-spinner {
+    margin: 10px 0 0;
+    display: none;
+}
+.wpb-gqf-form-style-true .wpcf7 form.submitting .wpcf7-spinner {
+    display: block;
+}
+.wpb-gqf-form-style-true .wpcf7 form > div.wpcf7-response-output {
+    margin: 20px 0 20px;
+    padding: 10px 15px;
+}
+.wpb-gqf-form-style-true .wpcf7-form {
+    margin-bottom: -20px;
+}
+.wpb-gqf-form-style-true .wpcf7 form > p span,
+.wpb-gqf-form-style-true .wpcf7 form > div span {
+    display: block;
+    margin-top: 10px;
+}
+.wpb-gqf-form-style-true .wpcf7 form > p span.wpcf7-list-item,
+.wpb-gqf-form-style-true .wpcf7 form > div span {
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+}
+.wpb-gqf-form-style-true .wpcf7 form > p span.wpcf7-list-item-label,
+.wpb-gqf-form-style-true .wpcf7 form > div span.wpcf7-list-item-label {
+    margin-top: 0;
+}
+h3.wpb-gqb-product-title {
+    font-size: 2.2rem;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.wpb-gqf-btn-loading:before {
+    content: "";
+    display: inline-flex;
+    box-sizing: border-box;
+    min-width: 15px;
+    min-height: 15px;
+    margin-right: 7px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    animation: spinner 0.6s linear infinite;
+}
+.rtl .wpb-gqf-btn-loading:before {
+    margin-left: 7px;
+    margin-right: 0;
+}
+.theme-hestia li.product .wpb-get-a-quote-button-btn {
+    margin: 10px auto 20px;
+}
+.theme-oceanwp li.product.owp-content-center .wpb-get-a-quote-button-btn {
+    margin: 10px auto 20px;
+}
+.theme-oceanwp.single-product .wpb-get-a-quote-button-btn {
+    margin-top: 20px;
+}
+.theme-storefront .wpb-gqf-form-style-true form {
+    margin-bottom: 0;
+}
+.theme-storefront li.product .wpb-get-a-quote-button-btn,
+.theme-sydney li.product .wpb-get-a-quote-button-btn,
+.theme-dt-the7 .dt-products.woo-hover .wpb-get-a-quote-button-btn {
+    margin: 10px auto 0;
+}
+
+.wpb-gqb-variable-show-only-for-outofstock {
+    display: none !important;
+}
+.wpb-gqb-variable-show-only-for-outofstock.wpb-gqb-product-type-variable-show {
+    display: flex !important;
+}
+.wpb-gqb-btn-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.wpb_gqb_form_product_info_hide .gqb_hidden_field {
+    display: none !important;
+}
+.wpb_gqb_form_product_info_show .gqb_hidden_field {
+    display: block !important;
+}
+.gqb_product_variations {
+    text-transform: capitalize;
+}
+
+/* Hide cart and Price using CSS  */
+.wpb-gqb-hide-the-price.wpb-gqb-hide-the-price-type-using_css .product .price {
+    display: none !important;
+}
+.wpb-gqb-hide-the-cart.wpb-gqb-hide-the-cart-type-using_css .product .cart,
+.wpb-gqb-hide-the-cart.wpb-gqb-hide-the-cart-type-using_css
+    .product
+    .add_to_cart_button,
+.wpb-gqb-hide-the-cart.wpb-gqb-hide-the-cart-type-using_css
+    .product
+    .add-to-cart-loop,
+.wpb-gqb-hide-the-cart.wpb-gqb-hide-the-cart-type-using_css
+    .product
+    .ajax_add_to_cart {
+    display: none !important;
+}
+
+/* Sweetalert2 Style */
+.wpb-gqf-popup .swal2-html-container {
+    overflow: visible;
+    margin: 0;
+}
+
+.wpb-gqf-popup .swal2-close {
+    border: 1px solid rgba(23, 23, 23, 0.1);
+    color: rgb(23, 23, 23);
+    background: transparent;
+    transition: all 0.2s linear;
+    border-radius: 30px;
+    font-size: 1.6em;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-weight: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.wpb-gqf-popup .swal2-close:hover {
+    background: rgb(23, 23, 23);
+    color: #fff;
+}
+
+.wpb-gqf-popup .swal2-close:focus {
+    box-shadow: none;
+    border-color: rgb(23, 23, 23);
+}
+
+/* WPforms Style */
+.wpb-gqf-popup .wpforms-container {
+    margin: 0 !important;
+}
+
+/* ==========================================================================
+   Multi-Product Quote List page
+   Scoped + defensively reset so it holds up inside any theme's page content.
+   ========================================================================== */
+
+.wpb-gqb-quote-list,
+.wpb-gqb-quote-list *,
+.wpb-gqb-quote-list *::before,
+.wpb-gqb-quote-list *::after {
+    box-sizing: border-box;
+}
+
+.wpb-gqb-quote-list {
+    max-width: var(--wpb-gqb-quote-list-max-width, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--wpb-gqb-quote-list-padding-top, 0)
+        var(--wpb-gqb-quote-list-padding-right, 0)
+        var(--wpb-gqb-quote-list-padding-bottom, 0)
+        var(--wpb-gqb-quote-list-padding-left, 0);
+    border-radius: var(--wpb-gqb-quote-list-radius, 0);
+    background: var(--wpb-gqb-quote-list-bg, transparent);
+    border: var(--wpb-gqb-quote-list-border-width, 0)
+        var(--wpb-gqb-quote-list-border-style, solid)
+        var(--wpb-gqb-quote-list-border-color, transparent);
+    font-size: var(--wpb-gqb-quote-list-font-size, 15px);
+    font-weight: var(--wpb-gqb-quote-list-font-weight, 400);
+    line-height: var(--wpb-gqb-quote-list-line-height, 1.5);
+    color: var(--wpb-gqb-quote-list-text-color, #1a1a1a);
+}
+
+.wpb-gqb-quote-list-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.wpb-gqb-quote-list-main {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.wpb-gqb-quote-list-heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-color: var(--wpb-gqb-quote-list-item-border, rgba(0, 0, 0, 0.07));
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.wpb-gqb-quote-list-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.wpb-gqb-quote-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    border-color: var(--wpb-gqb-quote-list-item-border, rgba(0, 0, 0, 0.07));
+    transition: opacity 0.15s ease;
+}
+
+.wpb-gqb-quote-list-items .wpb-gqb-quote-list-item:last-child {
+    border-bottom: none;
+}
+
+.wpb-gqb-quote-list-item-thumb {
+    flex: 0 0 auto;
+}
+
+.wpb-gqb-quote-list-item-thumb a {
+    display: block;
+    width: 72px;
+    height: 72px;
+    border-radius: var(--wpb-gqb-quote-list-item-radius, 8px);
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    line-height: 0;
+}
+
+.wpb-gqb-quote-list-item-thumb img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.wpb-gqb-quote-list-item-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.wpb-gqb-quote-list-item-name {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--wpb-gqb-quote-list-item-name-color, #1a1a1a);
+}
+
+.wpb-gqb-quote-list-item-name:hover,
+.wpb-gqb-quote-list-item-name:focus {
+    color: var(--wpb-gqb-quote-list-accent, #17a2b8);
+    text-decoration: underline;
+}
+
+.wpb-gqb-quote-list-item-price {
+    margin-top: 4px;
+    font-size: 13.5px;
+    color: var(--wpb-gqb-quote-list-item-price-color, rgba(0, 0, 0, 0.65));
+}
+
+.wpb-gqb-quote-list-item-price-on-request {
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.wpb-gqb-quote-list-item-price del {
+    color: rgba(0, 0, 0, 0.4);
+    text-decoration: line-through;
+    margin-right: 6px;
+}
+
+.wpb-gqb-quote-list-item-price ins {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.wpb-gqb-quote-list-item-meta {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: rgba(0, 0, 0, 0.55);
+    line-height: 1.6;
+}
+
+.wpb-gqb-quote-list-item-meta-row {
+    display: block;
+}
+
+.wpb-gqb-quote-list-item-footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.wpb-gqb-quote-list-qty-stepper {
+    display: inline-flex !important;
+    align-items: stretch !important;
+    width: 104px !important;
+    max-width: 100% !important;
+    height: 36px !important;
+    flex: 0 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.wpb-gqb-quote-list-qty-stepper:focus-within {
+    border-color: var(--wpb-gqb-quote-list-accent, #17a2b8) !important;
+    box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.15) !important;
+}
+
+.wpb-gqb-quote-list-qty-btn {
+    flex: 0 0 28px !important;
+    width: 28px !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    background: rgba(0, 0, 0, 0.03) !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+.wpb-gqb-quote-list-qty-btn:hover,
+.wpb-gqb-quote-list-qty-btn:focus {
+    background: rgba(23, 162, 184, 0.12) !important;
+    color: var(--wpb-gqb-quote-list-accent, #17a2b8) !important;
+    outline: none !important;
+}
+
+.wpb-gqb-quote-list-item-qty {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 4px !important;
+    border: 0 !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 0 !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    color: inherit !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    appearance: textfield !important;
+    -moz-appearance: textfield !important;
+}
+
+.wpb-gqb-quote-list-item-qty::-webkit-outer-spin-button,
+.wpb-gqb-quote-list-item-qty::-webkit-inner-spin-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.wpb-gqb-quote-list-item-qty:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.wpb-gqb-quote-list-item-remove {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(0, 0, 0, 0.45);
+    text-decoration: none;
+    line-height: 1;
+    font-size: 13px;
+    transition: color 0.15s ease;
+}
+
+.wpb-gqb-quote-list-item-remove svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.wpb-gqb-quote-list-item-remove span {
+    display: none;
+}
+
+.wpb-gqb-quote-list-item-remove:hover,
+.wpb-gqb-quote-list-item-remove:focus {
+    color: #dc3545;
+    outline: none;
+}
+
+.wpb-gqb-quote-list-item-total {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    padding-top: 2px;
+    font-weight: 600;
+    font-size: 15px;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.wpb-gqb-quote-list-save-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: rgba(23, 162, 184, 0.1);
+    color: var(--wpb-gqb-quote-list-accent, #128293);
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.wpb-gqb-quote-list-item.wpb-gqb-quote-list-item-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Summary sidebar */
+.wpb-gqb-quote-list-summary {
+    flex: 0 0 300px;
+    width: 300px;
+    max-width: 100%;
+    padding: var(--wpb-gqb-quote-list-summary-padding-top, 24px)
+        var(--wpb-gqb-quote-list-summary-padding-right, 24px)
+        var(--wpb-gqb-quote-list-summary-padding-bottom, 24px)
+        var(--wpb-gqb-quote-list-summary-padding-left, 24px);
+    background: var(--wpb-gqb-quote-list-summary-bg, #fafafa);
+    border: var(--wpb-gqb-quote-list-summary-border-width, 1px)
+        var(--wpb-gqb-quote-list-summary-border-style, solid)
+        var(--wpb-gqb-quote-list-summary-border-color, rgba(0, 0, 0, 0.08));
+    border-radius: var(--wpb-gqb-quote-list-summary-radius, 10px);
+    position: sticky;
+    top: 24px;
+}
+
+.wpb-gqb-quote-list-summary-title {
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.wpb-gqb-quote-list-summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.wpb-gqb-quote-list-summary-row-total {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.wpb-gqb-quote-list-summary-row-total .wpb-gqb-quote-list-total {
+    color: var(--wpb-gqb-quote-list-accent, #17a2b8);
+}
+
+.wpb-gqb-quote-list-actions {
+    margin-top: 18px;
+}
+
+.wpb-gqb-quote-list-actions .wpb-gqb-send-quote-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+    font-size: 15px;
+    border-radius: 6px;
+}
+
+.wpb-gqb-quote-list-actions .wpb-get-a-quote-button-alert {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.wpb-gqb-quote-list-inline-form {
+    margin-top: 18px;
+    min-height: 60px;
+}
+
+.wpb-gqb-quote-list-inline-form:empty::before {
+    content: "";
+    display: block;
+    height: 60px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.04);
+    animation: wpb-gqb-inline-form-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes wpb-gqb-inline-form-pulse {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.wpb-gqb-quote-list-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 20px;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.015);
+    border: 1px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.wpb-gqb-quote-list-empty-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    fill: none;
+    stroke: rgba(0, 0, 0, 0.3);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.wpb-gqb-quote-list-empty-text {
+    margin: 0;
+    font-size: 14.5px;
+}
+
+/* Stacked layout (admin-configured): same treatment as the tablet
+   breakpoint below, but forced at every viewport width. */
+.wpb-gqb-quote-list-layout-stacked .wpb-gqb-quote-list-layout {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.wpb-gqb-quote-list-layout-stacked .wpb-gqb-quote-list-main {
+    width: 100%;
+}
+
+.wpb-gqb-quote-list-layout-stacked .wpb-gqb-quote-list-summary {
+    flex: 1 1 auto;
+    width: 100%;
+    position: static;
+}
+
+/* Desktop sidebar layout: table/sidebar width split is admin-configurable
+   via --wpb-gqb-quote-list-table-width / --wpb-gqb-quote-list-sidebar-width. */
+@media (min-width: 901px) {
+    .wpb-gqb-quote-list:not(.wpb-gqb-quote-list-layout-stacked)
+        .wpb-gqb-quote-list-main {
+        flex: 0 0 calc(var(--wpb-gqb-quote-list-table-width, 70%) - 16px);
+        width: calc(var(--wpb-gqb-quote-list-table-width, 70%) - 16px);
+    }
+
+    .wpb-gqb-quote-list:not(.wpb-gqb-quote-list-layout-stacked)
+        .wpb-gqb-quote-list-summary {
+        flex: 0 0 calc(var(--wpb-gqb-quote-list-sidebar-width, 30%) - 16px);
+        width: calc(var(--wpb-gqb-quote-list-sidebar-width, 30%) - 16px);
+        max-width: calc(var(--wpb-gqb-quote-list-sidebar-width, 30%) - 16px);
+    }
+}
+
+/* Tablet: stack summary below the item list */
+@media (max-width: 900px) {
+    .wpb-gqb-quote-list-layout {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .wpb-gqb-quote-list-main {
+        width: 100%;
+    }
+
+    .wpb-gqb-quote-list-summary {
+        flex: 1 1 auto;
+        width: 100%;
+        position: static;
+    }
+}
+
+/* Mobile: compact card rows */
+@media (max-width: 600px) {
+    .wpb-gqb-quote-list-heading-row {
+        display: none;
+    }
+
+    .wpb-gqb-quote-list-item {
+        flex-wrap: wrap;
+        padding: 16px 4px;
+    }
+
+    .wpb-gqb-quote-list-item-thumb a {
+        width: 56px;
+        height: 56px;
+    }
+
+    .wpb-gqb-quote-list-item-body {
+        flex: 1 1 calc(100% - 72px);
+    }
+
+    .wpb-gqb-quote-list-item-total {
+        flex: 0 0 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ==========================================================================
+   "Added to Quote" toast
+   ========================================================================== */
+
+/*
+ * SweetAlert2's toast container is sized to exactly match the popup's own
+ * width and clips horizontal overflow (overflow-x: hidden), which cuts off
+ * the popup's box-shadow at the container edge. Toasts are the only thing
+ * this container ever holds, so it's safe to let it overflow freely.
+ */
+.wpb-gqb-quote-toast-container.swal2-container {
+    overflow: visible !important;
+    padding-top: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 20px !important;
+}
+
+.admin-bar .wpb-gqb-quote-toast-container.swal2-container {
+    padding-top: 56px !important;
+}
+
+.wpb-gqb-quote-toast.swal2-popup {
+    display: flex !important;
+    align-items: center !important;
+    max-width: 360px !important;
+    border: none !important;
+    border-radius: 14px !important;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    padding: 11px 14px !important;
+}
+
+.wpb-gqb-quote-toast-success.swal2-popup {
+    background: var(--wpb-gqb-quote-alert-success-bg, #eafaf1) !important;
+}
+
+.wpb-gqb-quote-toast-error.swal2-popup {
+    background: var(--wpb-gqb-quote-alert-error-bg, #fdeceb) !important;
+}
+
+.wpb-gqb-quote-toast .swal2-html-container {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+}
+
+.wpb-gqb-quote-toast-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wpb-gqb-quote-toast-icon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.wpb-gqb-quote-toast-success .wpb-gqb-quote-toast-icon {
+    background: var(--wpb-gqb-quote-alert-success-color, #2fb866) !important;
+}
+
+.wpb-gqb-quote-toast-error .wpb-gqb-quote-toast-icon {
+    background: var(--wpb-gqb-quote-alert-error-color, #ea5455) !important;
+}
+
+.wpb-gqb-quote-toast-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 3px 8px;
+    min-width: 0;
+}
+
+.wpb-gqb-quote-toast-title {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.wpb-gqb-quote-toast-link {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--wpb-gqb-quote-alert-link-color, #17a2b8);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.wpb-gqb-quote-toast-link:hover,
+.wpb-gqb-quote-toast-link:focus {
+    color: #138496;
+    text-decoration: underline;
+}
+
+.wpb-gqb-quote-toast .swal2-close {
+    order: 3;
+    display: flex !important;
+    flex: 0 0 auto;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 24px !important;
+    height: 24px !important;
+    margin: 0 0 0 8px !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+    color: rgba(0, 0, 0, 0.4) !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.wpb-gqb-quote-toast .swal2-close:hover,
+.wpb-gqb-quote-toast .swal2-close:focus {
+    background: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.75) !important;
+    box-shadow: none !important;
+}
+
+.wpb-gqb-quote-toast .swal2-timer-progress-bar-container {
+    border-radius: 0 0 14px 14px !important;
+    overflow: hidden;
+}
+
+.wpb-gqb-quote-toast .swal2-timer-progress-bar {
+    height: 3px !important;
+    background: rgba(0, 0, 0, 0.12) !important;
+}
+
+.wpb-gqb-quote-toast-success .swal2-timer-progress-bar {
+    background: var(--wpb-gqb-quote-alert-success-color, #2fb866) !important;
+}
+
+.wpb-gqb-quote-toast-error .swal2-timer-progress-bar {
+    background: var(--wpb-gqb-quote-alert-error-color, #ea5455) !important;
+}
+
+/* ==========================================================================
+   "Added to Quote" alert - bottom text variant (slim, text-only, no card)
+   ========================================================================== */
+
+.wpb-gqb-quote-toast-text-container.swal2-container {
+    overflow: visible !important;
+    padding-bottom: 28px !important;
+}
+
+.wpb-gqb-quote-toast-text.swal2-popup {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    max-width: 90vw !important;
+    border: none !important;
+    border-radius: 999px !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18) !important;
+    padding: 8px 18px !important;
+    background: rgba(28, 28, 28, 0.92) !important;
+}
+
+.wpb-gqb-quote-toast-text-error.swal2-popup {
+    background: var(
+        --wpb-gqb-quote-alert-error-color,
+        rgba(178, 42, 42, 0.94)
+    ) !important;
+}
+
+.wpb-gqb-quote-toast-text .swal2-html-container {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+.wpb-gqb-quote-toast-text-body {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 3px 8px;
+}
+
+.wpb-gqb-quote-toast-text-title {
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #fff;
+}
+
+.wpb-gqb-quote-toast-text-link {
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #7fd8ea;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.wpb-gqb-quote-toast-text-link:hover,
+.wpb-gqb-quote-toast-text-link:focus {
+    color: #a3e6f2;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   "Added to Quote" alert - inline variant (replaces the clicked button)
+   ========================================================================== */
+
+.wpb-gqb-quote-replace-alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    animation: wpb-gqb-quote-replace-alert-in 0.2s ease;
+}
+
+.wpb-gqb-quote-replace-text {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.wpb-gqb-quote-replace-alert-error .wpb-gqb-quote-replace-text {
+    color: var(--wpb-gqb-quote-alert-error-color, #ea5455);
+}
+
+.wpb-gqb-quote-replace-link {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--wpb-gqb-quote-alert-link-color, #17a2b8);
+    text-decoration: none;
+}
+
+.wpb-gqb-quote-replace-link:hover,
+.wpb-gqb-quote-replace-link:focus {
+    color: #138496;
+    text-decoration: underline;
+}
+
+@keyframes wpb-gqb-quote-replace-alert-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Multi-Product Quote System: quote count badge
+   ========================================================================== */
+
+.wpb-gqb-quote-count {
+    position: relative;
+}
+
+.wpb-gqb-quote-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    padding: 0 5px;
+    border-radius: var(--wpb-gqb-quote-count-radius, 999px);
+    background: var(--wpb-gqb-quote-count-bg, #e0e0e0);
+    color: var(--wpb-gqb-quote-count-color, #1a1a1a);
+    font-size: var(--wpb-gqb-quote-count-font-size, 11px);
+    font-weight: var(--wpb-gqb-quote-count-font-weight, 600);
+    line-height: var(--wpb-gqb-quote-count-line-height, 16px);
+    vertical-align: middle;
+}
+
+.wpb-gqb-quote-count[data-count="0"] .wpb-gqb-quote-count-badge {
+    display: none;
+}
+
+/* "Show Quote List on Badge Hover" - reveals the [wpb-quote-widget] dropdown
+   on hover of any .wpb-gqb-quote-count element, appended as a direct child
+   by frontend.js. Mirrors the .wpb-gqb-quote-widget dead-zone padding trick
+   below (see its comment) so the cursor can move from the host element down
+   into the panel without mouseleave firing first; scoped to a JS-added
+   modifier class so it never affects sites that only use the plain count
+   badge (the majority of .wpb-gqb-quote-count usage). */
+.wpb-gqb-quote-count-hover-enabled {
+    padding-bottom: 12px;
+    margin-bottom: -12px;
+}
+
+.wpb-gqb-quote-count-hover-open .wpb-gqb-quote-widget-panel,
+.wpb-gqb-quote-count-hover-enabled .wpb-gqb-quote-widget-panel:hover,
+.wpb-gqb-quote-count-hover-enabled .wpb-gqb-quote-widget-panel:focus-within {
+    display: block;
+}
+
+/* Same defensive theme-bleed reset as the .wpb-gqb-quote-widget block below,
+   duplicated here (rather than widened to a shared selector) because the
+   panel can be mounted directly under a generic .wpb-gqb-quote-count host
+   above, outside of any .wpb-gqb-quote-widget wrapper. */
+.wpb-gqb-quote-widget-panel,
+.wpb-gqb-quote-widget-panel *,
+.wpb-gqb-quote-widget-panel *::before,
+.wpb-gqb-quote-widget-panel *::after {
+    box-sizing: border-box;
+}
+
+.wpb-gqb-quote-widget-panel a,
+.wpb-gqb-quote-widget-panel button {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    border: none;
+    outline: none;
+}
+
+.wpb-gqb-quote-widget-panel a:focus-visible,
+.wpb-gqb-quote-widget-panel button:focus-visible {
+    outline: 2px solid var(--wpb-gqb-quote-widget-btn-bg, #17a2b8);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Multi-Product Quote System: [wpb-quote-widget] hover dropdown
+   Scoped + defensively reset so it holds up inside any theme's styling
+   (e.g. Astra applies its own underline/box-shadow/background rules to
+   generic <a>/<button> elements, often with !important or later source
+   order, which otherwise wins over this widget's own declarations).
+   ========================================================================== */
+
+.wpb-gqb-quote-widget,
+.wpb-gqb-quote-widget *,
+.wpb-gqb-quote-widget *::before,
+.wpb-gqb-quote-widget *::after {
+    box-sizing: border-box;
+}
+
+.wpb-gqb-quote-widget a,
+.wpb-gqb-quote-widget button {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    border: none;
+    outline: none;
+}
+
+.wpb-gqb-quote-widget a:hover,
+.wpb-gqb-quote-widget a:focus,
+.wpb-gqb-quote-widget a:active,
+.wpb-gqb-quote-widget button:hover,
+.wpb-gqb-quote-widget button:focus,
+.wpb-gqb-quote-widget button:active {
+    text-decoration: none !important;
+    box-shadow: none !important;
+}
+
+/* Custom, visible keyboard-focus indicator - replaces (rather than just
+   removes) the theme/browser default outline stripped above, so removing
+   theme bleed doesn't also remove accessible focus states. */
+.wpb-gqb-quote-widget a:focus-visible,
+.wpb-gqb-quote-widget button:focus-visible {
+    outline: 2px solid var(--wpb-gqb-quote-widget-btn-bg, #17a2b8);
+    outline-offset: 2px;
+}
+
+.wpb-gqb-quote-widget {
+    position: relative;
+    display: inline-block;
+    /* Extends this element's own hoverable box down to meet the dropdown
+       panel below it (see the panel's `top: 100%` + zero margin), so the
+       cursor never crosses a "dead zone" that isn't part of either element
+       - which is what was causing mouseleave to fire, and the panel to
+       close, while moving the cursor down toward it. The equal negative
+       margin-bottom cancels this padding back out of the box's margin-box
+       size, so it doesn't grow the item's cross-axis size in flex/grid
+       header layouts (e.g. Astra's header widget area) - otherwise
+       align-items: center would center the padded 36px box instead of the
+       visible 24px icon, throwing it out of line with the menu. */
+    padding-bottom: 12px;
+    margin-bottom: -12px;
+}
+
+.wpb-gqb-quote-widget-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--wpb-gqb-quote-widget-icon-color, #1a1a1a);
+    line-height: 1;
+}
+
+/* Themes commonly style plain <button> elements with their own hover/focus/
+   active background (e.g. Astra's global Buttons Customizer settings) -
+   without an explicit override here, that rule has nothing of ours to
+   compete with on those states and wins by default. */
+.wpb-gqb-quote-widget-toggle:hover,
+.wpb-gqb-quote-widget-toggle:focus,
+.wpb-gqb-quote-widget-toggle:active {
+    background: none !important;
+    color: var(--wpb-gqb-quote-widget-icon-color, #1a1a1a) !important;
+}
+
+.wpb-gqb-quote-widget-icon {
+    width: var(--wpb-gqb-quote-widget-icon-size, 24px);
+    height: var(--wpb-gqb-quote-widget-icon-size, 24px);
+    /* Only affects the built-in <svg> glyph - no-ops for a custom uploaded <img> icon. */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* Only affects a custom uploaded <img> icon - no-ops for the <svg> glyph. */
+    object-fit: contain;
+}
+
+/* Applied (alongside .wpb-gqb-quote-widget-icon) only to an inlined custom
+   SVG icon upload - the PHP renderer strips any hardcoded fill/stroke color
+   values from the uploaded file and replaces them with currentColor, this
+   makes sure a shape with no fill/stroke attribute at all (defaults to
+   black per the SVG spec) also picks up the Icon Color setting. Overrides
+   the shared rule's `fill: none` above via source order, not specificity. */
+.wpb-gqb-quote-widget-icon-custom-svg {
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+.wpb-gqb-quote-widget-panel {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    right: 0;
+    margin-top: 0;
+    width: var(--wpb-gqb-quote-widget-panel-max-width, 300px);
+    max-width: calc(100vw - 20px);
+    padding: 18px;
+    box-sizing: border-box;
+    text-align: left;
+    background: var(--wpb-gqb-quote-widget-panel-bg, #ffffff);
+    border: 1px solid var(--wpb-gqb-quote-widget-panel-border, rgba(0, 0, 0, 0.08));
+    border-radius: var(--wpb-gqb-quote-widget-panel-radius, 10px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+/* JS-applied when the default right-aligned position would overflow past
+   the left edge of the viewport (e.g. narrow sidebars/columns) - flips the
+   panel to anchor from the left instead. See
+   wpb_gqb_position_quote_widget_panel() in frontend.js. */
+.wpb-gqb-quote-widget-panel.wpb-gqb-quote-widget-panel-align-left {
+    right: auto;
+    left: 0;
+}
+
+.wpb-gqb-quote-widget-open .wpb-gqb-quote-widget-panel,
+.wpb-gqb-quote-widget-panel:hover,
+.wpb-gqb-quote-widget-panel:focus-within {
+    display: block;
+}
+
+.wpb-gqb-quote-widget-empty-text,
+.wpb-gqb-quote-widget-title {
+    margin: 0;
+    font-size: var(--wpb-gqb-quote-widget-heading-font-size, 15px);
+    color: var(--wpb-gqb-quote-widget-item-name-color, #1a1a1a);
+}
+
+.wpb-gqb-quote-widget-title {
+    margin-bottom: var(--wpb-gqb-quote-widget-heading-spacing, 14px);
+    font-weight: var(--wpb-gqb-quote-widget-heading-font-weight, 600);
+}
+
+.wpb-gqb-quote-widget-empty-text {
+    font-weight: 400;
+}
+
+.wpb-gqb-quote-widget-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wpb-gqb-quote-widget-item-spacing, 14px);
+    max-height: 320px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+.wpb-gqb-quote-widget-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 20px;
+}
+
+.wpb-gqb-quote-widget-item.wpb-gqb-quote-widget-item-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.wpb-gqb-quote-widget-item-thumb {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+}
+
+.wpb-gqb-quote-widget-item-thumb a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.wpb-gqb-quote-widget-item-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wpb-gqb-quote-widget-item-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.wpb-gqb-quote-widget-item-name {
+    display: block;
+    font-size: var(--wpb-gqb-quote-widget-item-name-font-size, 13px);
+    font-weight: 600;
+    text-decoration: none;
+    /* !important: overrides theme-level global link-color rules (see the
+       button's own comment above for why). */
+    color: var(--wpb-gqb-quote-widget-item-name-color, #1a1a1a) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wpb-gqb-quote-widget-item-name:hover,
+.wpb-gqb-quote-widget-item-name:focus {
+    color: var(--wpb-gqb-quote-widget-btn-bg, #17a2b8) !important;
+}
+
+.wpb-gqb-quote-widget-item-price {
+    margin-top: 2px;
+    font-size: var(--wpb-gqb-quote-widget-item-price-font-size, 13px);
+    color: var(--wpb-gqb-quote-widget-item-price-color, rgba(0, 0, 0, 0.65));
+}
+
+.wpb-gqb-quote-widget-item-price-on-request {
+    font-style: italic;
+}
+
+.wpb-gqb-quote-widget-item-remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.wpb-gqb-quote-widget-item-remove:hover,
+.wpb-gqb-quote-widget-item-remove:focus {
+    color: #dc3545 !important;
+    outline: none;
+}
+
+.wpb-gqb-quote-widget-view-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--wpb-gqb-quote-widget-btn-padding, 11px 16px);
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: var(--wpb-gqb-quote-widget-btn-font-size, 13px);
+    font-weight: 600;
+    border-radius: var(--wpb-gqb-quote-widget-btn-radius, 999px);
+    /* !important: themes like Astra output global "Link Color"/typography
+       rules (often !important, via the Customizer) targeting plain <a>
+       elements - without this, the button can inherit the theme's link
+       color/background instead of its own intended style. */
+    background: var(--wpb-gqb-quote-widget-btn-bg, #17a2b8) !important;
+    color: var(--wpb-gqb-quote-widget-btn-color, #ffffff) !important;
+    transition: background-color 0.15s ease;
+}
+
+.wpb-gqb-quote-widget-view-btn:hover,
+.wpb-gqb-quote-widget-view-btn:focus {
+    background: var(--wpb-gqb-quote-widget-btn-hover-bg, #128293) !important;
+    color: var(--wpb-gqb-quote-widget-btn-color, #ffffff) !important;
+}

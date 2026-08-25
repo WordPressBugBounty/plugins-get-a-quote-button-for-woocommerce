@@ -28,6 +28,14 @@ class WPB_GQB_Shortcode_Handler {
 
 		if ( 'wpcf7' === $this->form_plugin ) {
 			$this->form_plugin = 'wpcf7_contact_form';
+		} else {
+			// Must run before `wp_enqueue_scripts` (WPForms decides there whether
+			// to enqueue its CSS/JS) - the popup form only exists via AJAX, so
+			// WPForms never sees a `[wpforms]` shortcode in the page content to
+			// trigger that on its own. Adding this filter from inside the
+			// shortcode callback itself is too late, since `the_content()` runs
+			// after `wp_enqueue_scripts`.
+			add_filter( 'wpforms_global_assets', '__return_true' );
 		}
 	}
 
@@ -127,6 +135,27 @@ class WPB_GQB_Shortcode_Handler {
 	public function contact_form_button_shortcode( $atts, $content = '' ) {
 		global $product;
 
+		$matched_variation_ids = array();
+
+		if ( is_array( $atts ) && array_key_exists( 'sid', $atts ) && $atts['sid'] ) {
+			$pre_item = WPB_GQB_Quote_Buttons::get_quote_button( $atts['sid'] );
+
+			if ( is_object( $pre_item ) && isset( $pre_item->show_btn ) && 'selected_variations' === $pre_item->show_btn && ! empty( $pre_item->product_variations ) ) {
+				$rules = maybe_unserialize( $pre_item->product_variations );
+
+				foreach ( (array) $rules as $rule ) {
+					if ( isset( $rule['productId'] ) && (int) $rule['productId'] === (int) get_the_id() ) {
+						$matched_variation_ids = isset( $rule['variationIds'] ) ? array_map( 'absint', (array) $rule['variationIds'] ) : array();
+						break;
+					}
+				}
+
+				if ( ! empty( $matched_variation_ids ) ) {
+					$atts['variation_match_ids'] = implode( ',', $matched_variation_ids );
+				}
+			}
+		}
+
 		ob_start();
 		self::contact_form_button( $atts );
 		$content .= ob_get_clean();
@@ -144,6 +173,12 @@ class WPB_GQB_Shortcode_Handler {
 			// Check shortcode status before output.
 			if ( isset( $item->shortcode_status ) && $item->shortcode_status !== 'active' ) {
 				return;
+			}
+
+			if ( isset( $item->show_btn ) && $item->show_btn === 'selected_variations' ) {
+				// Button only renders (hidden) for the product(s) this rule targets; JS
+				// reveals it once the shopper picks one of the matched variation ids.
+				return empty( $matched_variation_ids ) ? '' : $content;
 			}
 
 			if ( isset( $item->show_btn ) && $item->show_btn == 'selected_products' ) {
@@ -295,8 +330,6 @@ class WPB_GQB_Shortcode_Handler {
 			wpcf7_enqueue_styles();
 		}
 
-		add_filter( 'wpforms_global_assets', '__return_true' );
-
 		$is_multi_quote = 'multi' === wpb_gqb_get_option( 'wpb_gqb_quote_system_type', 'quote_settings', 'single' );
 
 		$defaults = array(
@@ -397,6 +430,10 @@ class WPB_GQB_Shortcode_Handler {
 			}
 		}
 
+		if ( ! empty( $args['variation_match_ids'] ) ) {
+			$classes[] = 'wpb-gqb-selected-variation';
+		}
+
 		$classes = apply_filters( 'wpb_gqb_button_classes', $classes );
 
 		// Output conditional logic for WPForms Pro
@@ -408,7 +445,7 @@ class WPB_GQB_Shortcode_Handler {
 					apply_filters(
 						'wpb_gqb_button_html',
 						sprintf(
-							'<button data-id="%s" data-post_id="%s" data-form="%s" data-form_style="%s" data-cart-page="%s" data-allow_outside_click="%s" data-allow_esc_key="%s" data-width="%s" class="%s">%s</button>',
+							'<button data-id="%s" data-post_id="%s" data-form="%s" data-form_style="%s" data-cart-page="%s" data-allow_outside_click="%s" data-allow_esc_key="%s" data-width="%s" data-selected-variations="%s" class="%s">%s</button>',
 							esc_attr( $args['id'] ),
 							isset( $args['post_id'] ) ? esc_attr( $args['post_id'] ) : '',
 							esc_attr( $this->form_plugin ),
@@ -417,6 +454,7 @@ class WPB_GQB_Shortcode_Handler {
 							esc_attr( $args['allow_outside_click'] ),
 							esc_attr( $args['allow_esc_key'] ),
 							esc_attr( $args['width'] ),
+							esc_attr( $args['variation_match_ids'] ?? '' ),
 							implode( ' ', $classes ),
 							esc_html( $args['text'] )
 						),

@@ -132,31 +132,31 @@ Contact Form 7 Style
     background: var(--wpb-gqb-popup-bg, #ffffff);
     border-radius: var(--wpb-gqb-popup-radius, 5px);
 }
-.wpb-gqf-form-style-true fieldset {
+.wpb-gqf-form-style-true .wpcf7-form fieldset {
     border: none;
 }
-.wpb-gqf-form-style-true legend {
+.wpb-gqf-form-style-true .wpcf7-form legend {
     font-size: 1.4em;
     margin-bottom: 10px;
 }
-.wpb-gqf-form-style-true label {
+.wpb-gqf-form-style-true .wpcf7-form label {
     display: block;
     font-size: 16px;
     line-height: normal;
     font-weight: 600;
     -webkit-font-smoothing: antialiased;
 }
-.wpb-gqf-form-style-true input[type="text"],
-.wpb-gqf-form-style-true input[type="date"],
-.wpb-gqf-form-style-true input[type="datetime"],
-.wpb-gqf-form-style-true input[type="email"],
-.wpb-gqf-form-style-true input[type="number"],
-.wpb-gqf-form-style-true input[type="search"],
-.wpb-gqf-form-style-true input[type="time"],
-.wpb-gqf-form-style-true input[type="url"],
-.wpb-gqf-form-style-true input[type="tel"],
-.wpb-gqf-form-style-true textarea,
-.wpb-gqf-form-style-true select {
+.wpb-gqf-form-style-true .wpcf7-form input[type="text"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="date"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="datetime"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="email"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="number"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="search"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="time"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="url"],
+.wpb-gqf-form-style-true .wpcf7-form input[type="tel"],
+.wpb-gqf-form-style-true .wpcf7-form textarea,
+.wpb-gqf-form-style-true .wpcf7-form select {
     background: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 4px;
@@ -178,24 +178,24 @@ Contact Form 7 Style
     -o-transition: all 0.3s linear;
     transition: all 0.3s linear;
 }
-.wpb-gqf-form-style-true input[type="text"]:focus,
-.wpb-gqf-form-style-true input[type="date"]:focus,
-.wpb-gqf-form-style-true input[type="datetime"]:focus,
-.wpb-gqf-form-style-true input[type="email"]:focus,
-.wpb-gqf-form-style-true input[type="number"]:focus,
-.wpb-gqf-form-style-true input[type="search"]:focus,
-.wpb-gqf-form-style-true input[type="time"]:focus,
-.wpb-gqf-form-style-true input[type="url"]:focus,
-.wpb-gqf-form-style-true input[type="tel"]:focus,
-.wpb-gqf-form-style-true textarea:focus,
-.wpb-gqf-form-style-true select:focus {
+.wpb-gqf-form-style-true .wpcf7-form input[type="text"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="date"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="datetime"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="email"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="number"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="search"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="time"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="url"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form input[type="tel"]:focus,
+.wpb-gqf-form-style-true .wpcf7-form textarea:focus,
+.wpb-gqf-form-style-true .wpcf7-form select:focus {
     background: #d2d9dd;
 }
-.wpb-gqf-form-style-true select {
+.wpb-gqf-form-style-true .wpcf7-form select {
     -webkit-appearance: menulist-button;
     padding: 9px 10px;
 }
-.wpb-gqf-form-style-true .number {
+.wpb-gqf-form-style-true .wpcf7-form .number {
     background: #1abc9c;
     color: #fff;
     height: 30px;
@@ -343,6 +343,20 @@ h3.wpb-gqb-product-title {
 }
 .wpb-gqb-variable-show-only-for-outofstock.wpb-gqb-product-type-variable-show {
     display: flex !important;
+}
+.wpb-gqb-selected-variation {
+    display: none !important;
+}
+.wpb-gqb-selected-variation.wpb-gqb-selected-variation-show {
+    display: flex !important;
+}
+form.variations_form.wpb-gqb-hide-variation-cart .single_add_to_cart_button,
+form.variations_form.wpb-gqb-hide-variation-cart .quantity,
+form.variations_form.wpb-gqb-hide-variation-cart .woocommerce-variation-add-to-cart {
+    display: none !important;
+}
+form.variations_form.wpb-gqb-hide-variation-price .woocommerce-variation-price {
+    display: none !important;
 }
 .wpb-gqb-btn-disabled {
     cursor: not-allowed;

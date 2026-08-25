@@ -4,8 +4,8 @@ Plugin URI: https://wpbean.com/
 Contributors: wpbean
 Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
 Requires at least: 5.0
-Tested up to: 7.0.2
-Stable tag: 6.6.2
+Tested up to: 7.1
+Stable tag: 6.6.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,7 @@ https://youtu.be/_0gT9mKoVHI
 ### WooCommerce Request a Quote Key Features
 
 * WooCommerce request a quote button on the product details page.
+* Multi-product quote system with basic settings.
 * WooCommerce Product Quotation button on the WooCommerce products grid.
 * Quote button shortcode to show any contact from anywhere on the site.
 * Option for showing WooCommerce product title on the email body and the popup form.
@@ -52,19 +53,20 @@ https://youtu.be/_0gT9mKoVHI
 
 ### Pro Features
 
-* <strong>WooCommerce Price on request</strong>: Hide the price if the quote button is enabled.
-* Get the <strong><a href="https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/pro-version/getting-product-information-with-the-email/" target="_blank">product information</a></strong> like the product <strong>title, price, SKU, ID, URL, stock status, variations</strong> ETC with the email.
-* Any custom product metadata can be sent through the product enquiry form popup.
-* Send the quote emails to the product vendor/author email address.
-* WooCommerce cart to quote, hide the add to cart button if the quote button is enabled.
-* Advanced custom shortcode builder for multiple quote buttons.
-* Different quote buttons for different products.
-* Different contact forms for different quote buttons.
-* Adding the WooCommerce product quote button to any WordPress hooks directly from the shortcode generator.
-* Add WooCommerce quote request button for specific products.
-* Products, product categories, product tags, Featured Products, product type, product stock status, User status, User role, ETC filter, can be added to the quote button.
-* Different text and size for each quote button.
-* Elementor support, adding a custom quote button directly from the Elementor editor.
+* Add quote buttons to specific products.
+* Add the quote button to specific products, product categories, product tags, product variations, featured products, product types, stock statuses, user statuses, user roles, and more.
+* <strong>WooCommerce Price on request</strong>: Option to hide the Add to Cart button and product price when the quote button is enabled.
+* Multi-product quote system with full settings. Full control over page layouts and mini-quote widgets.
+* Send the quote emails to the WooCommerce product vendor/author email address.
+* Include comprehensive <strong><a href="https://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/pro-version/getting-product-information-with-the-email/" target="_blank">product informations</a></strong> in quote emails, including title, price, SKU, ID, URL, stock status, variations, and much more.
+* Create multiple quote buttons with different contact forms, each assigned to specific groups of products.
+* Add custom quote buttons directly to WooCommerce hooks using the built-in quote button generator.
+* Add custom Get a Quote buttons directly from the Elementor editor.
+* Add a quote button to the cart page and collect detailed information about all cart items.
+* Customize the typography, text, size, spacing, and appearance of each quote button.
+* Redirect to a thank you page after form submission.
+* Settings for closing the pop-up after successfully submitting the form.
+* Button and pop-up style settings for changing the background, spacing, and typography.
 
 
 ### CF7 Addons Support
@@ -127,15 +129,23 @@ With this plugin, you can hide the cart button and product price. Additionally, 
 1. WooCommerce request a quote button in action.
 2. WooCommerce quote button on the product page.
 3. Quote, form popup.
-4. Form settings.
+4. General settings.
 5. WooCommerce settings.
-6. Button settings.
-7. Popup settings.
-8. Quote button ShortCode.
-9. The quote button on the WooCommerce shop page.
-10. The quote button on a page.
-11. The quote button on a post.
-12. The quote button on a sidebar widget.
+6. Hide cart button settings.
+7. Hide price settings.
+8. Button settings.
+9. Popup Settings.
+10. Multi-products quote settings.
+11. Multi-products quote style settings.
+12. Quote widget style settings.
+13. Quote Count Badge Style settings.
+14. Added to Quote Alert Style settings.
+15. Labels & Messages settings.
+16. Quote button ShortCode.
+17. The quote button on the WooCommerce shop page.
+18. The quote button on a page.
+19. The quote button on a post.
+20. The quote button on a sidebar widget.
 
 
 == Changelog ==
@@ -316,5 +326,30 @@ With this plugin, you can hide the cart button and product price. Additionally, 
 * Improved settings UI and Quote Shortcodes UI.
 * Added multi-products quote system for the pro version.
 * Added hide cart and price settings for each quote shortcodes.
+
+= Version 6.6.3 =
+* Fixed WPForms multi-steps form issues.
+
+= Version 6.6.4 =
+* Fixed async select display issues.
+
+= Version 6.6.5 =
+* Fixed quote list page caching issue for guest users.
+
+= Version 6.6.6 =
+* Added product variation quote rule feature.
+* Fixed spelling mistake.
+
+= Version 6.6.7 =
+* Added option for adding custom hook for displaying the quote button.
+
+= Version 6.6.8 =
+* Added hide cart and price support for the selected variations quote button.
+
+= Version 6.6.8 =
+* Added hide cart and price support for the selected variations quote button.
+
+= Version 6.6.9 =
+* Fixed quote button custom hook shortcode display issue. 
 
 == Upgrade notice ==

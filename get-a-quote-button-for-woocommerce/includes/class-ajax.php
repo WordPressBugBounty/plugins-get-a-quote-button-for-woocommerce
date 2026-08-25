@@ -31,6 +31,9 @@ class WPB_GQB_Ajax {
 		add_action( 'wp_ajax_wpb_gqb_refresh_quote_data_field', array( $this, 'refresh_quote_data_field' ) );
 		add_action( 'wp_ajax_nopriv_wpb_gqb_refresh_quote_data_field', array( $this, 'refresh_quote_data_field' ) );
 
+		add_action( 'wp_ajax_wpb_gqb_refresh_quote_widget', array( $this, 'refresh_quote_widget' ) );
+		add_action( 'wp_ajax_nopriv_wpb_gqb_refresh_quote_widget', array( $this, 'refresh_quote_widget' ) );
+
 		$this->form_plugin = wpb_gqb_get_option( 'wpb_gqb_form_plugin', 'form_settings', 'wpcf7' );
 
 		if ( 'wpcf7' === $this->form_plugin ) {
@@ -278,6 +281,42 @@ class WPB_GQB_Ajax {
 			array(
 				// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- transports the plain-text quote-list summary through JSON, not code obfuscation.
 				'value' => $block ? base64_encode( $block ) : '',
+			)
+		);
+	}
+
+	/**
+	 * Return the current guest/user's real quote widget markup + count.
+	 *
+	 * Fired once client-side on every page load (see frontend.js). The widget
+	 * (`[wpb-quote-widget]`) can be placed on any page - including ones served
+	 * from a full-page cache (WP Rocket, LiteSpeed, etc.) for logged-out
+	 * visitors - so its server-rendered HTML can be stale/wrong for anyone
+	 * other than whoever's visit first generated that cached page. This mirrors
+	 * how WooCommerce keeps its own mini-cart accurate under page caching: the
+	 * cached markup is a placeholder, and JS always swaps in a fresh AJAX
+	 * response after load.
+	 */
+	public function refresh_quote_widget() {
+		if ( ! wp_doing_ajax() ) {
+			wp_send_json_error( esc_html__( 'Invalid request', 'get-a-quote-button' ) );
+		}
+
+		if ( ! class_exists( 'WPB_GQB_Quote_List' ) ) {
+			wp_send_json_error( esc_html__( 'The quote list is unavailable.', 'get-a-quote-button' ) );
+		}
+
+		$widget_html = class_exists( 'WPB_GQB_Quote_Widget_Shortcode' ) ? WPB_GQB_Quote_Widget_Shortcode::render() : '';
+
+		$hover_dropdown_enabled = wpb_gqb_get_option( 'wpb_gqb_quote_system_type', 'quote_settings', 'single' ) === 'multi'
+			&& wpb_gqb_get_option( 'wpb_gqb_show_quote_count_badge', 'quote_settings', 'on' ) === 'on'
+			&& wpb_gqb_get_option( 'wpb_gqb_show_quote_count_hover_dropdown', 'quote_settings', 'off' ) === 'on';
+
+		wp_send_json_success(
+			array(
+				'count'                        => WPB_GQB_Quote_List::get_items_count(),
+				'widget_html'                  => $widget_html,
+				'quote_count_hover_panel_html' => $hover_dropdown_enabled ? $widget_html : '',
 			)
 		);
 	}

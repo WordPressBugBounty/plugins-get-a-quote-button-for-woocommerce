@@ -537,6 +537,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   }
 }.wpb-get-quote-admin-app .pointer-events-none {
   pointer-events: none;
+}.wpb-get-quote-admin-app .\!visible {
+  visibility: visible !important;
 }.wpb-get-quote-admin-app .visible {
   visibility: visible;
 }.wpb-get-quote-admin-app .invisible {
@@ -651,6 +653,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   margin-inline-start: auto;
 }.wpb-get-quote-admin-app .mt-0\.5 {
   margin-top: 0.125rem;
+}.wpb-get-quote-admin-app .mt-1\.5 {
+  margin-top: 0.375rem;
 }.wpb-get-quote-admin-app .mt-2 {
   margin-top: 0.5rem;
 }.wpb-get-quote-admin-app .mt-3 {
@@ -768,8 +772,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   width: 2rem;
 }.wpb-get-quote-admin-app .w-9 {
   width: 2.25rem;
-}.wpb-get-quote-admin-app .w-96 {
-  width: 24rem;
 }.wpb-get-quote-admin-app .w-\[34px\] {
   width: 34px;
 }.wpb-get-quote-admin-app .w-full {
@@ -921,6 +923,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}.wpb-get-quote-admin-app .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }.wpb-get-quote-admin-app .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1556,7 +1562,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   transition-duration: 300ms;
 }.wpb-get-quote-admin-app .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}body.get-a-quote_page_wpb-get-a-quote-buttons{background-color:rgb(249, 250, 251, var(--tw-bg-opacity, 1))}body.get-a-quote_page_wpb-get-a-quote-buttons ul#adminmenu a.wp-has-current-submenu:after{border-right-color:#f9fafb}body.get-a-quote_page_wpb-get-a-quote-buttons #wpcontent{padding-left:0}.wpb-get-quote-admin-app{margin:0 !important;position:relative;--input-placeholder: #9ca3af}.wpb-get-quote-admin-app .no-scrollbar::-webkit-scrollbar{display:none}.wpb-get-quote-admin-app .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}*{box-sizing:border-box}.wpb-get-quote-admin-app input[type=text]:focus,.wpb-get-quote-admin-app input[type=search]:focus,.wpb-get-quote-admin-app input[type=email]:focus,.wpb-get-quote-admin-app input[type=password]:focus,.wpb-get-quote-admin-app select:focus,.wpb-get-quote-admin-app textarea:focus{outline:none !important;border-color:var(--tw-ring-color) !important;box-shadow:0 0 0 3px rgba(59,130,246,.1) !important}.wpb-get-quote-admin-app input[type=text]::-moz-placeholder, .wpb-get-quote-admin-app input[type=search]::-moz-placeholder, .wpb-get-quote-admin-app input[type=email]::-moz-placeholder, .wpb-get-quote-admin-app input[type=password]::-moz-placeholder, .wpb-get-quote-admin-app select::-moz-placeholder, .wpb-get-quote-admin-app textarea::-moz-placeholder{color:var(--input-placeholder) !important}.wpb-get-quote-admin-app input[type=text]::placeholder,.wpb-get-quote-admin-app input[type=search]::placeholder,.wpb-get-quote-admin-app input[type=email]::placeholder,.wpb-get-quote-admin-app input[type=password]::placeholder,.wpb-get-quote-admin-app select::placeholder,.wpb-get-quote-admin-app textarea::placeholder{color:var(--input-placeholder) !important}.wpb-get-quote-admin-app select.appearance-none{background-image:none !important}.wpb-get-quote-admin-app input[type=date],.wpb-get-quote-admin-app input[type=datetime-local],.wpb-get-quote-admin-app input[type=datetime],.wpb-get-quote-admin-app input[type=email],.wpb-get-quote-admin-app input[type=month],.wpb-get-quote-admin-app input[type=number],.wpb-get-quote-admin-app input[type=password],.wpb-get-quote-admin-app input[type=search],.wpb-get-quote-admin-app input[type=tel],.wpb-get-quote-admin-app input[type=text],.wpb-get-quote-admin-app input[type=time],.wpb-get-quote-admin-app input[type=url],.wpb-get-quote-admin-app input[type=week],.wpb-get-quote-admin-app select{min-height:unset !important}.wpb-get-quote-admin-app .placeholder\:text-gray-400::-moz-placeholder {
+}body.get-a-quote_page_wpb-get-a-quote-buttons{background-color:rgb(249, 250, 251, var(--tw-bg-opacity, 1))}body.get-a-quote_page_wpb-get-a-quote-buttons ul#adminmenu a.wp-has-current-submenu:after{border-right-color:#f9fafb}body.get-a-quote_page_wpb-get-a-quote-buttons #wpcontent{padding-left:0}.wpb-get-quote-admin-app{margin:0 !important;position:relative;--input-placeholder: #9ca3af}.wpb-get-quote-admin-app .no-scrollbar::-webkit-scrollbar{display:none}.wpb-get-quote-admin-app .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}*{box-sizing:border-box}.wpb-get-quote-admin-app input[type=text]:focus,.wpb-get-quote-admin-app input[type=search]:focus,.wpb-get-quote-admin-app input[type=email]:focus,.wpb-get-quote-admin-app input[type=password]:focus,.wpb-get-quote-admin-app select:focus,.wpb-get-quote-admin-app textarea:focus{outline:none !important;border-color:var(--tw-ring-color) !important;box-shadow:0 0 0 3px rgba(59,130,246,.1) !important}.wpb-get-quote-admin-app input[type=text]::-moz-placeholder, .wpb-get-quote-admin-app input[type=search]::-moz-placeholder, .wpb-get-quote-admin-app input[type=email]::-moz-placeholder, .wpb-get-quote-admin-app input[type=password]::-moz-placeholder, .wpb-get-quote-admin-app select::-moz-placeholder, .wpb-get-quote-admin-app textarea::-moz-placeholder{color:var(--input-placeholder) !important}.wpb-get-quote-admin-app input[type=text]::placeholder,.wpb-get-quote-admin-app input[type=search]::placeholder,.wpb-get-quote-admin-app input[type=email]::placeholder,.wpb-get-quote-admin-app input[type=password]::placeholder,.wpb-get-quote-admin-app select::placeholder,.wpb-get-quote-admin-app textarea::placeholder{color:var(--input-placeholder) !important}.wpb-get-quote-admin-app select.appearance-none{background-image:none !important}.wpb-get-quote-admin-app input[type=date],.wpb-get-quote-admin-app input[type=datetime-local],.wpb-get-quote-admin-app input[type=datetime],.wpb-get-quote-admin-app input[type=email],.wpb-get-quote-admin-app input[type=month],.wpb-get-quote-admin-app input[type=number],.wpb-get-quote-admin-app input[type=password],.wpb-get-quote-admin-app input[type=search],.wpb-get-quote-admin-app input[type=tel],.wpb-get-quote-admin-app input[type=text],.wpb-get-quote-admin-app input[type=time],.wpb-get-quote-admin-app input[type=url],.wpb-get-quote-admin-app input[type=week],.wpb-get-quote-admin-app select{min-height:unset !important}html{font-size:16px !important}.wpb-get-quote-admin-app .placeholder\:text-gray-400::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity, 1));
 }.wpb-get-quote-admin-app .placeholder\:text-gray-400::placeholder {

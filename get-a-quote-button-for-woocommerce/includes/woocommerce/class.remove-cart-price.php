@@ -57,6 +57,11 @@ class WPB_GQB_WC_Remove_Cart_Price {
 		if ( $this->hide_price_type === 'programmatically' ) {
 			add_filter( 'woocommerce_get_price_html', array( $this, 'remove_woocommerce_price' ), 100, 2 );
 		}
+
+		// "Selected Variations" shortcodes can only know which variation to hide
+		// cart/price for once the shopper picks it (AJAX, no page reload), so that
+		// case is handled client-side - output the matching variation ids for JS to use.
+		add_action( 'woocommerce_single_product_summary', array( $this, 'output_variation_hide_data' ), 4 );
 	}
 
 	/**
@@ -183,6 +188,12 @@ class WPB_GQB_WC_Remove_Cart_Price {
 	 * @return bool
 	 */
 	private function shortcode_matches_product( $button, $post_id ) {
+		// "Selected Variations" hide rules only take effect once the shopper selects
+		// one of the matched variations - handled client-side, see get_variation_hide_ids().
+		if ( isset( $button->show_btn ) && $button->show_btn === 'selected_variations' ) {
+			return false;
+		}
+
 		// Modes without product-scoping rules apply to all products
 		if ( ! isset( $button->show_btn ) || $button->show_btn !== 'selected_products' ) {
 			return true;
@@ -245,6 +256,89 @@ class WPB_GQB_WC_Remove_Cart_Price {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Collect the variation ids that a "Selected Variations" shortcode's
+	 * hide_cart/hide_price option applies to, for the given (parent) product.
+	 *
+	 * @param int    $post_id Parent product ID.
+	 * @param string $field 'hide_cart' or 'hide_price'.
+	 * @return int[]
+	 */
+	private function get_variation_hide_ids( $post_id, $field ) {
+		$buttons = $this->quote_buttons;
+		$ids     = array();
+
+		if ( ! $buttons || empty( $buttons ) ) {
+			return $ids;
+		}
+
+		foreach ( $buttons as $button ) {
+			if ( isset( $button->shortcode_status ) && $button->shortcode_status !== 'active' ) {
+				continue;
+			}
+
+			if ( ! isset( $button->show_btn ) || $button->show_btn !== 'selected_variations' ) {
+				continue;
+			}
+
+			if ( ! isset( $button->$field ) || $button->$field !== 'yes' ) {
+				continue;
+			}
+
+			if ( empty( $button->product_variations ) ) {
+				continue;
+			}
+
+			$rules = maybe_unserialize( $button->product_variations );
+
+			if ( ! is_array( $rules ) ) {
+				continue;
+			}
+
+			foreach ( $rules as $rule ) {
+				if ( isset( $rule['productId'] ) && (int) $rule['productId'] === (int) $post_id && ! empty( $rule['variationIds'] ) ) {
+					$ids = array_merge( $ids, array_map( 'absint', (array) $rule['variationIds'] ) );
+				}
+			}
+		}
+
+		return array_unique( $ids );
+	}
+
+	/**
+	 * Output the variation ids (for the current product) whose cart button/price
+	 * should be hidden once selected. Read by frontend.js on the WooCommerce
+	 * "found_variation" event to toggle visibility - see frontend.css for the
+	 * matching .wpb-gqb-hide-variation-cart/-price rules.
+	 *
+	 * @return void
+	 */
+	public function output_variation_hide_data() {
+		if ( ! is_product() ) {
+			return;
+		}
+
+		global $product;
+
+		if ( ! $product instanceof WC_Product || ! $product->is_type( 'variable' ) ) {
+			return;
+		}
+
+		$post_id               = $product->get_id();
+		$hide_cart_variations  = $this->get_variation_hide_ids( $post_id, 'hide_cart' );
+		$hide_price_variations = $this->get_variation_hide_ids( $post_id, 'hide_price' );
+
+		if ( empty( $hide_cart_variations ) && empty( $hide_price_variations ) ) {
+			return;
+		}
+
+		printf(
+			'<span class="wpb-gqb-variation-hide-data" style="display:none" data-hide-cart-variations="%1$s" data-hide-price-variations="%2$s"></span>',
+			esc_attr( implode( ',', $hide_cart_variations ) ),
+			esc_attr( implode( ',', $hide_price_variations ) )
+		);
 	}
 
 	/**

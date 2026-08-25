@@ -68,6 +68,14 @@ class WPB_GQB_Database {
 				),
 				'version'     => '1.5',
 			),
+			'add_product_variations_column' => array(
+				'description' => 'add_product_variations_column_desc',
+				'table'       => self::TABLE,
+				'columns'     => array(
+					'product_variations' => 'TEXT AFTER products',
+				),
+				'version'     => '1.6',
+			),
 		);
 
 		return $updates;
@@ -84,6 +92,7 @@ class WPB_GQB_Database {
 			'add_shortcode_status_column_desc'  => __( 'Adding a new shortcode_status column to the quote shortcodes table.', 'get-a-quote-button' ),
 			'update_columns_data_types_desc'    => __( 'Update data types for products, product_tags, product_cats, btn_text, show_btn, and btn_size columns in the quote shortcode table.', 'get-a-quote-button' ),
 			'add_hide_cart_price_columns_desc'  => __( 'Adding hide_cart and hide_price columns to the quote shortcodes table.', 'get-a-quote-button' ),
+			'add_product_variations_column_desc' => __( 'Adding a new product_variations column to the quote shortcodes table.', 'get-a-quote-button' ),
 		);
 
 		return isset( $descriptions[ $key ] ) ? $descriptions[ $key ] : $key;
@@ -391,6 +400,7 @@ class WPB_GQB_Database {
             product_cats TEXT,
             product_tags TEXT,
             products TEXT,
+            product_variations TEXT,
             featured_products TINYTEXT,
             product_type TINYTEXT,
             no_price_products ENUM('yes','no'),

@@ -211,6 +211,12 @@ class WPB_GQB_Quote_List {
 		}
 
 		WC()->session->set( self::SESSION_KEY, $items );
+
+		// Guests only get a persistent session if the real WC cart is non-empty, which
+		// this feature never touches — force the cookie so guest quote lists survive.
+		if ( ! empty( $items ) && is_callable( array( WC()->session, 'set_customer_session_cookie' ) ) ) {
+			WC()->session->set_customer_session_cookie( true );
+		}
 	}
 
 	/**

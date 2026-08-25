@@ -262,7 +262,7 @@ class WPB_GQB_Quote_Button_ShortCodes_Rest_API {
 
 			if ( $data ) {
 				// Fields stored as JSON arrays in DB
-				$json_fields = array( 'product_cats', 'product_tags', 'products' );
+				$json_fields = array( 'product_cats', 'product_tags', 'products', 'product_variations' );
 
 				foreach ( $json_fields as $field ) {
 					if ( ! empty( $data[ $field ] ) ) {
@@ -674,6 +674,30 @@ class WPB_GQB_Quote_Button_ShortCodes_Rest_API {
 				$sanitized_products = array_map( 'sanitize_text_field', $products );
 				$data['products']   = maybe_serialize( $sanitized_products );
 			}
+		}
+
+		if ( isset( $params['productVariations'] ) ) {
+			$rules = (array) $params['productVariations'];
+
+			$sanitized_rules = array();
+			foreach ( $rules as $rule ) {
+				if ( ! is_array( $rule ) || empty( $rule['productId'] ) ) {
+					continue;
+				}
+
+				$variation_ids = isset( $rule['variationIds'] ) ? array_map( 'absint', (array) $rule['variationIds'] ) : array();
+
+				if ( empty( $variation_ids ) ) {
+					continue;
+				}
+
+				$sanitized_rules[] = array(
+					'productId'    => absint( $rule['productId'] ),
+					'variationIds' => $variation_ids,
+				);
+			}
+
+			$data['product_variations'] = empty( $sanitized_rules ) ? '' : maybe_serialize( $sanitized_rules );
 		}
 
 		// Boolean/String fields

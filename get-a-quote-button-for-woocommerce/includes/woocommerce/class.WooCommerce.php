@@ -37,6 +37,8 @@ class WPB_GQB_WooCommerce_Handler {
 			);
 		}
 
+		add_action( 'wpb_gqb_quote_button_hook', array($this, 'woo_add_contact_form_button') );
+
 		$this->file_includes();
 	}
 

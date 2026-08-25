@@ -201,6 +201,21 @@
         if (window.wpforms && typeof window.wpforms.init === "function") {
             window.wpforms.init();
         }
+
+        // Reinitialize WPForms' "modern markup" enhancements (page-break
+        // button enabling, GB-block accent-color theming for icon/image
+        // choices, rating colors, timepicker dropdown theming). This is a
+        // separate module from window.wpforms above and isn't covered by it -
+        // without this, a freshly AJAX-injected multi-step form keeps its
+        // page-break buttons in the server-rendered "disabled" state and
+        // never picks up the color/theme CSS vars applied via JS.
+        if (
+            window.WPForms &&
+            window.WPForms.FrontendModern &&
+            typeof window.WPForms.FrontendModern.init === "function"
+        ) {
+            window.WPForms.FrontendModern.init();
+        }
     }
 
     /**
@@ -317,6 +332,24 @@
             },
             success: function (res) {
                 button.removeClass("wpb-gqf-btn-loading");
+
+                // WPB_GQB_Shortcode_Handler::get_wpforms_add_form() renders a
+                // hidden copy of this same WPForms form into wp_footer (on
+                // page load) purely so WPForms detects the form and enqueues
+                // its assets/conditional-logic config. That hidden copy and
+                // this AJAX-rendered popup form are two separate WPForms
+                // renders in two separate HTTP requests, so WPForms' own
+                // per-request instance counter can't tell them apart and both
+                // end up with identical field IDs. A <label for="..."> always
+                // activates the first element in the DOM with that ID, which
+                // is this hidden copy (it was added first) - so clicking a
+                // checkbox/image-choice label in the popup silently toggles
+                // the invisible footer copy instead of the visible one. It
+                // has already done its job priming asset loading by the time
+                // the user clicks the button, so it's safe to drop here,
+                // right before the real form takes its place.
+                $(".wpb-gqb-popup-content").remove();
+
                 Swal.fire({
                     html: res,
                     showConfirmButton: false,
@@ -464,6 +497,119 @@
     $(document).on("click", ".reset_variations", function (event) {
         $(".wpb-gqb-product-type-variable").removeClass(
             "wpb-gqb-product-type-variable-show",
+        );
+    });
+
+    /**
+     * Show the quote button only when a matching variation is selected
+     * (buttons scoped to "Selected Variations").
+     */
+    $(document).on(
+        "found_variation",
+        "form.variations_form",
+        function (event, variation) {
+            $(".wpb-gqb-selected-variation").each(function () {
+                let allowedIds = (
+                    $(this).attr("data-selected-variations") || ""
+                )
+                    .split(",")
+                    .filter(Boolean);
+
+                if (allowedIds.includes(String(variation.variation_id))) {
+                    $(this).addClass("wpb-gqb-selected-variation-show");
+                } else {
+                    $(this).removeClass("wpb-gqb-selected-variation-show");
+                }
+            });
+        },
+    );
+
+    $(document).on(
+        "reset_data hide_variation",
+        "form.variations_form",
+        function () {
+            $(".wpb-gqb-selected-variation").removeClass(
+                "wpb-gqb-selected-variation-show",
+            );
+        },
+    );
+
+    $(document).on("click", ".reset_variations", function (event) {
+        $(".wpb-gqb-selected-variation").removeClass(
+            "wpb-gqb-selected-variation-show",
+        );
+    });
+
+    /**
+     * Hide the add-to-cart button and/or price once a variation matched by a
+     * "Selected Variations" shortcode's Hide Cart & Price option is selected.
+     */
+    $(document).on(
+        "found_variation",
+        "form.variations_form",
+        function (event, variation) {
+            let $hideData = $(".wpb-gqb-variation-hide-data");
+
+            if (!$hideData.length) {
+                return;
+            }
+
+            let hideCartIds = (
+                $hideData.attr("data-hide-cart-variations") || ""
+            )
+                .split(",")
+                .filter(Boolean);
+            let hidePriceIds = (
+                $hideData.attr("data-hide-price-variations") || ""
+            )
+                .split(",")
+                .filter(Boolean);
+            let variationId = String(variation.variation_id);
+
+            $(this).toggleClass(
+                "wpb-gqb-hide-variation-cart",
+                hideCartIds.includes(variationId),
+            );
+            $(this).toggleClass(
+                "wpb-gqb-hide-variation-price",
+                hidePriceIds.includes(variationId),
+            );
+        },
+    );
+
+    /**
+     * WooCommerce core sets an inline `display: block` on `.quantity` when a
+     * variation is found, which overrides theme CSS (e.g. flex layouts).
+     * Visibility here is already handled by our CSS classes above, so strip
+     * the inline style and let the theme's own CSS take over.
+     */
+    $(document).on(
+        "found_variation",
+        "form.variations_form",
+        function () {
+            $(this)
+                .find(".quantity")
+                .each(function () {
+                    if ($(this).css("display") !== "none") {
+                        $(this).css("display", "");
+                    }
+                });
+        },
+    );
+
+    $(document).on(
+        "reset_data hide_variation",
+        "form.variations_form",
+        function () {
+            $(this).removeClass(
+                "wpb-gqb-hide-variation-cart wpb-gqb-hide-variation-price",
+            );
+        },
+    );
+
+    $(document).on("click", ".reset_variations", function (event) {
+        $("form.variations_form").removeClass(
+            "wpb-gqb-hide-variation-cart wpb-gqb-hide-variation-price",
         );
     });
 
@@ -1048,11 +1194,43 @@
      * ever updated in response to an add/update/remove AJAX call on the same
      * page, so a fresh page load - e.g. after "Redirect to Quote List Page
      * After Adding" navigates away - would otherwise show a stale/empty badge).
+     *
+     * WPB_GQB_Vars.quote_count/quote_count_hover_panel_html are baked into
+     * the page's PHP output at render time, so on a page served from a
+     * full-page cache (WP Rocket, LiteSpeed, etc.) for a logged-out visitor
+     * they can reflect a *different* guest's session - whoever's visit
+     * happened to generate that cached copy. Painting with them first avoids
+     * a flash of "0" while the AJAX request below is in flight, then its
+     * response overwrites everything (badges, the [wpb-quote-widget]
+     * instances, and the hover panel markup used for lazy-initialized
+     * panels) with this visitor's real data.
      */
     $(document).ready(function () {
-        if (typeof WPB_GQB_Vars !== "undefined") {
-            wpb_gqb_update_quote_count(WPB_GQB_Vars.quote_count || 0);
+        if (typeof WPB_GQB_Vars === "undefined") {
+            return;
         }
+
+        wpb_gqb_update_quote_count(WPB_GQB_Vars.quote_count || 0);
+
+        if (WPB_GQB_Vars.quote_system_type !== "multi") {
+            return;
+        }
+
+        wp.ajax.send({
+            ajax_option: "wpb_gqb_refresh_quote_widget",
+            data: {
+                action: "wpb_gqb_refresh_quote_widget",
+            },
+            success: function (data) {
+                data = data || {};
+
+                wpb_gqb_update_quote_count(data.count || 0);
+                wpb_gqb_refresh_quote_widget(data.widget_html);
+
+                WPB_GQB_Vars.quote_count_hover_panel_html =
+                    data.quote_count_hover_panel_html || "";
+            },
+        });
     });
 
     /**

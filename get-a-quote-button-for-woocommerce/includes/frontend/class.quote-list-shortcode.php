@@ -17,6 +17,16 @@ class WPB_GQB_Quote_List_Shortcode {
 	 */
 	public function __construct() {
 		add_shortcode( 'wpb-quote-list', array( $this, 'render' ) );
+
+		$form_plugin = wpb_gqb_get_option( 'wpb_gqb_form_plugin', 'form_settings', 'wpcf7' );
+
+		if ( 'wpcf7' !== $form_plugin ) {
+			// Must run before `wp_enqueue_scripts` - see the matching comment in
+			// WPB_GQB_Shortcode_Handler::__construct(). The [wpforms] shortcode
+			// here is rendered via wc_get_template(), not stored post content,
+			// so WPForms' own content scan never detects it either.
+			add_filter( 'wpforms_global_assets', '__return_true' );
+		}
 	}
 
 	/**
@@ -29,6 +39,15 @@ class WPB_GQB_Quote_List_Shortcode {
 			return '';
 		}
 
+		// Every visitor's item list is unique and session-bound, so this page must
+		// never be served from a full-page cache (WP Rocket, LiteSpeed, etc.) - a
+		// cached copy would freeze whatever items happened to be in the session of
+		// whoever first triggered the cache, and show that to every later visitor.
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true );
+		}
+		nocache_headers();
+
 		if ( function_exists( 'wpcf7_enqueue_scripts' ) ) {
 			wpcf7_enqueue_scripts();
 		}
@@ -36,8 +55,6 @@ class WPB_GQB_Quote_List_Shortcode {
 		if ( function_exists( 'wpcf7_enqueue_styles' ) ) {
 			wpcf7_enqueue_styles();
 		}
-
-		add_filter( 'wpforms_global_assets', '__return_true' );
 
 		$form_plugin = wpb_gqb_get_option( 'wpb_gqb_form_plugin', 'form_settings', 'wpcf7' );
 		$form_id     = 'wpcf7' === $form_plugin

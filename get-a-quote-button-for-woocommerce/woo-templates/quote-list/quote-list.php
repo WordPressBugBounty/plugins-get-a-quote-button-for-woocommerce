@@ -184,7 +184,13 @@ do_action( 'wpb_gqb_before_quote_list', $items );
 				<?php if ( $show_prices ) : ?>
 					<div class="wpb-gqb-quote-list-summary-row wpb-gqb-quote-list-summary-row-total">
 						<span><?php echo esc_html( $text_estimated_total ); ?></span>
-						<span class="wpb-gqb-quote-list-total"><?php echo wp_kses_post( wc_price( $totals['total'] ) ); ?></span>
+						<span class="wpb-gqb-quote-list-total">
+							<?php if ( ! empty( $totals['has_hidden_price_item'] ) ) : ?>
+								<?php echo esc_html( $text_on_request ); ?>
+							<?php else : ?>
+								<?php echo wp_kses_post( wc_price( $totals['total'] ) ); ?>
+							<?php endif; ?>
+						</span>
 					</div>
 				<?php endif; ?>
 

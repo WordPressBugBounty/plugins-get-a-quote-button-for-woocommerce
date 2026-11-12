@@ -53,7 +53,7 @@ class WPB_GQB_WC_Remove_Cart_Price {
 		}
 
 		// Hide the price
-		add_filter( 'wpb_gqb_show_price', array( $this, 'remove_woocommerce_price' ), 10, 2 );
+		add_filter( 'wpb_gqb_show_price', array( $this, 'remove_woocommerce_price' ), 10, 3 );
 		if ( $this->hide_price_type === 'programmatically' ) {
 			add_filter( 'woocommerce_get_price_html', array( $this, 'remove_woocommerce_price' ), 100, 2 );
 		}
@@ -111,10 +111,16 @@ class WPB_GQB_WC_Remove_Cart_Price {
 	/**
 	 * Shared logic for processing buttons and determining if a product should be hidden
 	 *
-	 * @param int $post_id Product ID
+	 * @param int      $match_id Product ID to match against "Selected Products/Categories/Tags"
+	 *                           rules - for a variation this must be the parent product ID,
+	 *                           since those rules are never assigned to individual variations.
+	 * @param int|null $stock_id Product ID to read `_stock_status` from. Defaults to $match_id.
+	 *                           For a variation, pass its own ID so its own stock status
+	 *                           (which can differ from the parent's) is used.
 	 * @return bool True if the product should be hidden, false otherwise
 	 */
-	private function should_hide_product( $post_id ) {
+	private function should_hide_product( $match_id, $stock_id = null ) {
+		$stock_id             = null === $stock_id ? $match_id : $stock_id;
 		$buttons              = $this->quote_buttons;
 		$products             = $product_cats = $product_tags = array();
 		$product_stock_status = '';
@@ -148,13 +154,13 @@ class WPB_GQB_WC_Remove_Cart_Price {
 			$product_cats = $this->array_flatten( $product_cats );
 			$product_tags = $this->array_flatten( $product_tags );
 
-			if ( ! empty( $products ) && in_array( $post_id, $products ) ) {
+			if ( ! empty( $products ) && in_array( $match_id, $products ) ) {
 				return true;
 			}
 
-			if ( ! empty( $product_cats ) && has_term( $product_cats, 'product_cat', $post_id ) ) {
+			if ( ! empty( $product_cats ) && has_term( $product_cats, 'product_cat', $match_id ) ) {
 				if ( $product_stock_status !== '' ) {
-					if ( get_post_meta( $post_id, '_stock_status', true ) === $product_stock_status ) {
+					if ( get_post_meta( $stock_id, '_stock_status', true ) === $product_stock_status ) {
 						return true;
 					}
 				} else {
@@ -162,9 +168,9 @@ class WPB_GQB_WC_Remove_Cart_Price {
 				}
 			}
 
-			if ( ! empty( $product_tags ) && has_term( $product_tags, 'product_tag', $post_id ) ) {
+			if ( ! empty( $product_tags ) && has_term( $product_tags, 'product_tag', $match_id ) ) {
 				if ( $product_stock_status !== '' ) {
-					if ( get_post_meta( $post_id, '_stock_status', true ) === $product_stock_status ) {
+					if ( get_post_meta( $stock_id, '_stock_status', true ) === $product_stock_status ) {
 						return true;
 					}
 				} else {
@@ -172,7 +178,7 @@ class WPB_GQB_WC_Remove_Cart_Price {
 				}
 			}
 
-			if ( $product_stock_status !== '' && $product_stock_status === get_post_meta( $post_id, '_stock_status', true ) ) {
+			if ( $product_stock_status !== '' && $product_stock_status === get_post_meta( $stock_id, '_stock_status', true ) ) {
 				return true;
 			}
 		}
@@ -183,14 +189,26 @@ class WPB_GQB_WC_Remove_Cart_Price {
 	/**
 	 * Check if a single quote button shortcode's own product rules match a product
 	 *
-	 * @param object $button Quote button shortcode row.
-	 * @param int    $post_id Product ID
+	 * @param object   $button Quote button shortcode row.
+	 * @param int      $match_id Product ID to match against the shortcode's product/category/tag
+	 *                           rules - for a variation this must be the parent product ID.
+	 * @param int|null $stock_id Product ID to read `_stock_status` from. Defaults to $match_id.
+	 * @param int|null $variation_id The specific variation ID being evaluated, if known.
+	 * @param string   $context Optional. 'quote_list' when evaluating this for a Quote List item.
 	 * @return bool
 	 */
-	private function shortcode_matches_product( $button, $post_id ) {
-		// "Selected Variations" hide rules only take effect once the shopper selects
-		// one of the matched variations - handled client-side, see get_variation_hide_ids().
+	private function shortcode_matches_product( $button, $match_id, $stock_id = null, $variation_id = null, $context = null ) {
+		$stock_id = null === $stock_id ? $match_id : $stock_id;
+
 		if ( isset( $button->show_btn ) && $button->show_btn === 'selected_variations' ) {
+			// On the Quote List page the exact variation being quoted is already known,
+			// so the rule can be checked directly. On the product page itself this can't
+			// be known until the shopper picks a variation - handled client-side there,
+			// see output_variation_hide_data()/get_variation_hide_ids().
+			if ( 'quote_list' === $context && $variation_id ) {
+				return in_array( (int) $variation_id, $this->get_button_variation_ids( $button, $match_id ), true );
+			}
+
 			return false;
 		}
 
@@ -204,23 +222,23 @@ class WPB_GQB_WC_Remove_Cart_Price {
 		$product_tags         = ( ! empty( $button->product_tags ) ) ? (array) maybe_unserialize( $button->product_tags ) : array();
 		$product_stock_status = ( ! empty( $button->stock_status ) ) ? $button->stock_status : '';
 
-		if ( ! empty( $products ) && in_array( $post_id, $products ) ) {
+		if ( ! empty( $products ) && in_array( $match_id, $products ) ) {
 			return true;
 		}
 
-		if ( ! empty( $product_cats ) && has_term( $product_cats, 'product_cat', $post_id ) ) {
-			if ( $product_stock_status === '' || get_post_meta( $post_id, '_stock_status', true ) === $product_stock_status ) {
+		if ( ! empty( $product_cats ) && has_term( $product_cats, 'product_cat', $match_id ) ) {
+			if ( $product_stock_status === '' || get_post_meta( $stock_id, '_stock_status', true ) === $product_stock_status ) {
 				return true;
 			}
 		}
 
-		if ( ! empty( $product_tags ) && has_term( $product_tags, 'product_tag', $post_id ) ) {
-			if ( $product_stock_status === '' || get_post_meta( $post_id, '_stock_status', true ) === $product_stock_status ) {
+		if ( ! empty( $product_tags ) && has_term( $product_tags, 'product_tag', $match_id ) ) {
+			if ( $product_stock_status === '' || get_post_meta( $stock_id, '_stock_status', true ) === $product_stock_status ) {
 				return true;
 			}
 		}
 
-		if ( empty( $products ) && empty( $product_cats ) && empty( $product_tags ) && $product_stock_status !== '' && $product_stock_status === get_post_meta( $post_id, '_stock_status', true ) ) {
+		if ( empty( $products ) && empty( $product_cats ) && empty( $product_tags ) && $product_stock_status !== '' && $product_stock_status === get_post_meta( $stock_id, '_stock_status', true ) ) {
 			return true;
 		}
 
@@ -230,11 +248,15 @@ class WPB_GQB_WC_Remove_Cart_Price {
 	/**
 	 * Check if a product should be hidden because of a per-shortcode hide option
 	 *
-	 * @param int    $post_id Product ID
-	 * @param string $field 'hide_cart' or 'hide_price'
+	 * @param int      $match_id Product ID to match against the shortcode's product/category/tag
+	 *                           rules - for a variation this must be the parent product ID.
+	 * @param string   $field 'hide_cart' or 'hide_price'
+	 * @param int|null $stock_id Product ID to read `_stock_status` from. Defaults to $match_id.
+	 * @param int|null $variation_id The specific variation ID being evaluated, if known.
+	 * @param string   $context Optional. 'quote_list' when evaluating this for a Quote List item.
 	 * @return bool
 	 */
-	private function is_hidden_by_shortcode_option( $post_id, $field ) {
+	private function is_hidden_by_shortcode_option( $match_id, $field, $stock_id = null, $variation_id = null, $context = null ) {
 		$buttons = $this->quote_buttons;
 
 		if ( ! $buttons || empty( $buttons ) ) {
@@ -250,12 +272,43 @@ class WPB_GQB_WC_Remove_Cart_Price {
 				continue;
 			}
 
-			if ( $this->shortcode_matches_product( $button, $post_id ) ) {
+			if ( $this->shortcode_matches_product( $button, $match_id, $stock_id, $variation_id, $context ) ) {
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Resolve the ID to match against category/tag/"Selected Products" rules and the
+	 * "Disable Quote Button" meta box - for a variation this is always the parent
+	 * product, since none of those are ever assigned to individual variations.
+	 *
+	 * @param WC_Product $product Product object.
+	 * @return int
+	 */
+	private function get_matching_id( $product ) {
+		return $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id();
+	}
+
+	/**
+	 * Whether the product (or, for a variation, its parent) is marked as Featured.
+	 * Variations don't carry their own Featured flag - it's only ever set on the parent.
+	 *
+	 * @param WC_Product $product Product/variation object.
+	 * @param int        $match_id Parent product ID (same as $post_id for non-variations).
+	 * @param int        $post_id The product's own ID.
+	 * @return bool
+	 */
+	private function is_featured_product( $product, $match_id, $post_id ) {
+		if ( $match_id === $post_id ) {
+			return $product->is_featured();
+		}
+
+		$parent = wc_get_product( $match_id );
+
+		return $parent instanceof WC_Product && $parent->is_featured();
 	}
 
 	/**
@@ -287,24 +340,40 @@ class WPB_GQB_WC_Remove_Cart_Price {
 				continue;
 			}
 
-			if ( empty( $button->product_variations ) ) {
-				continue;
-			}
-
-			$rules = maybe_unserialize( $button->product_variations );
-
-			if ( ! is_array( $rules ) ) {
-				continue;
-			}
-
-			foreach ( $rules as $rule ) {
-				if ( isset( $rule['productId'] ) && (int) $rule['productId'] === (int) $post_id && ! empty( $rule['variationIds'] ) ) {
-					$ids = array_merge( $ids, array_map( 'absint', (array) $rule['variationIds'] ) );
-				}
-			}
+			$ids = array_merge( $ids, $this->get_button_variation_ids( $button, $post_id ) );
 		}
 
 		return array_unique( $ids );
+	}
+
+	/**
+	 * The variation ids a single "Selected Variations" shortcode's rules cover, for
+	 * the given parent product.
+	 *
+	 * @param object $button Quote button shortcode row.
+	 * @param int    $parent_id Parent product ID.
+	 * @return int[]
+	 */
+	private function get_button_variation_ids( $button, $parent_id ) {
+		$ids = array();
+
+		if ( empty( $button->product_variations ) ) {
+			return $ids;
+		}
+
+		$rules = maybe_unserialize( $button->product_variations );
+
+		if ( ! is_array( $rules ) ) {
+			return $ids;
+		}
+
+		foreach ( $rules as $rule ) {
+			if ( isset( $rule['productId'] ) && (int) $rule['productId'] === (int) $parent_id && ! empty( $rule['variationIds'] ) ) {
+				$ids = array_merge( $ids, array_map( 'absint', (array) $rule['variationIds'] ) );
+			}
+		}
+
+		return $ids;
 	}
 
 	/**
@@ -349,7 +418,8 @@ class WPB_GQB_WC_Remove_Cart_Price {
 	 * @return bool
 	 */
 	public function remove_woocommerce_cart_button( $purchasable, $product ) {
-		$post_id = $product->get_id();
+		$post_id  = $product->get_id();
+		$match_id = $this->get_matching_id( $product );
 
 		// Remove cart for all the products
 		if ( wpb_gqb_get_option( 'wpb_gqb_hide_cart_button_for_all', 'hide_cart_settings' ) === 'on' ) {
@@ -357,25 +427,25 @@ class WPB_GQB_WC_Remove_Cart_Price {
 		}
 
 		// Remove cart for the featured products
-		if ( wpb_gqb_get_option( 'wpb_gqb_hide_cart_button_for_featured', 'hide_cart_settings' ) === 'on' && $product->is_featured() ) {
+		if ( wpb_gqb_get_option( 'wpb_gqb_hide_cart_button_for_featured', 'hide_cart_settings' ) === 'on' && $this->is_featured_product( $product, $match_id, $post_id ) ) {
 			return false;
 		}
 
 		// Remove cart for the selected products
-		if ( wpb_gqb_get_option( 'wpb_gqb_hide_cart_button_for_selected', 'hide_cart_settings' ) === 'on' && get_post_meta( $post_id, '_wpb_gqb_disable', true ) !== 'yes' ) {
+		if ( wpb_gqb_get_option( 'wpb_gqb_hide_cart_button_for_selected', 'hide_cart_settings' ) === 'on' && get_post_meta( $match_id, '_wpb_gqb_disable', true ) !== 'yes' ) {
 			// Remove for the global quote button
 			if ( is_product() && wpb_gqb_get_option( 'woo_single_show_quote_form', 'woo_settings', 'on' ) === 'on' ) {
 				return false;
 			}
 
 			// Remove for the quote button shortcodes
-			if ( $this->should_hide_product( $post_id ) ) {
+			if ( $this->should_hide_product( $match_id, $post_id ) ) {
 				return false;
 			}
 		}
 
 		// Remove cart based on the per-shortcode "Hide Cart Button" option
-		if ( $this->is_hidden_by_shortcode_option( $post_id, 'hide_cart' ) ) {
+		if ( $this->is_hidden_by_shortcode_option( $match_id, 'hide_cart', $post_id ) ) {
 			return false;
 		}
 
@@ -387,10 +457,14 @@ class WPB_GQB_WC_Remove_Cart_Price {
 	 *
 	 * @param string     $price Product price.
 	 * @param WC_Product $product Product object.
+	 * @param string     $context Optional. Pass 'quote_list' when evaluating this for the
+	 *                            Quote List page (not a singular product page, but should
+	 *                            still hide price wherever the product page would).
 	 * @return string|false
 	 */
-	public function remove_woocommerce_price( $price, $product ) {
-		$post_id = $product->get_id();
+	public function remove_woocommerce_price( $price, $product, $context = null ) {
+		$post_id  = $product->get_id();
+		$match_id = $this->get_matching_id( $product );
 
 		// Remove price for all the products
 		if ( wpb_gqb_get_option( 'wpb_gqb_hide_price_for_all', 'hide_price_settings' ) === 'on' ) {
@@ -398,25 +472,26 @@ class WPB_GQB_WC_Remove_Cart_Price {
 		}
 
 		// Remove price for the featured products
-		if ( wpb_gqb_get_option( 'wpb_gqb_hide_price_for_featured', 'hide_price_settings' ) === 'on' && $product->is_featured() ) {
+		if ( wpb_gqb_get_option( 'wpb_gqb_hide_price_for_featured', 'hide_price_settings' ) === 'on' && $this->is_featured_product( $product, $match_id, $post_id ) ) {
 			return false;
 		}
 
 		// Remove price for the selected products
-		if ( wpb_gqb_get_option( 'wpb_gqb_hide_price_for_selected', 'hide_price_settings' ) === 'on' && get_post_meta( $post_id, '_wpb_gqb_disable', true ) !== 'yes' ) {
-			// Remove for the global quote button
-			if ( is_product() && wpb_gqb_get_option( 'woo_single_show_quote_form', 'woo_settings', 'on' ) === 'on' ) {
+		if ( wpb_gqb_get_option( 'wpb_gqb_hide_price_for_selected', 'hide_price_settings' ) === 'on' && get_post_meta( $match_id, '_wpb_gqb_disable', true ) !== 'yes' ) {
+			// Remove for the global quote button - also applies on the Quote List page,
+			// which isn't a singular product page but should stay consistent with it.
+			if ( ( is_product() || 'quote_list' === $context ) && wpb_gqb_get_option( 'woo_single_show_quote_form', 'woo_settings', 'on' ) === 'on' ) {
 				return false;
 			}
 
 			// Remove for the quote button shortcodes
-			if ( $this->should_hide_product( $post_id ) ) {
+			if ( $this->should_hide_product( $match_id, $post_id ) ) {
 				return false;
 			}
 		}
 
 		// Remove price based on the per-shortcode "Hide Price" option
-		if ( $this->is_hidden_by_shortcode_option( $post_id, 'hide_price' ) ) {
+		if ( $this->is_hidden_by_shortcode_option( $match_id, 'hide_price', $post_id, $post_id, $context ) ) {
 			return false;
 		}
 

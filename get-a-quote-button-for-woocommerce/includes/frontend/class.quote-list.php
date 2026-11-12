@@ -252,12 +252,26 @@ class WPB_GQB_Quote_List {
 	/**
 	 * Calculate quote list totals.
 	 *
-	 * @return array{subtotal: float, total: float}
+	 * Items whose price is hidden (per the same Hide Price rules that hide their
+	 * line price/total in the template) are excluded from the sum, and flagged via
+	 * `has_hidden_price_item` - a partial sum would otherwise misrepresent itself
+	 * as the full total.
+	 *
+	 * @return array{subtotal: float, total: float, has_hidden_price_item: bool}
 	 */
 	public static function get_totals() {
-		$subtotal = 0.0;
+		$items                 = self::get_items();
+		$subtotal              = 0.0;
+		$has_hidden_price_item = false;
 
-		foreach ( self::get_items() as $item ) {
+		foreach ( $items as $item ) {
+			$product = self::get_item_product( $item );
+
+			if ( $product && function_exists( 'is_wpb_gqb_show_price_on_quote_list' ) && ! is_wpb_gqb_show_price_on_quote_list( $product ) ) {
+				$has_hidden_price_item = true;
+				continue;
+			}
+
 			$qty       = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 0;
 			$subtotal += self::get_item_price( $item ) * $qty;
 		}
@@ -265,10 +279,11 @@ class WPB_GQB_Quote_List {
 		return apply_filters(
 			'wpb_gqb_quote_list_totals',
 			array(
-				'subtotal' => $subtotal,
-				'total'    => $subtotal,
+				'subtotal'              => $subtotal,
+				'total'                 => $subtotal,
+				'has_hidden_price_item' => $has_hidden_price_item,
 			),
-			self::get_items()
+			$items
 		);
 	}
 }

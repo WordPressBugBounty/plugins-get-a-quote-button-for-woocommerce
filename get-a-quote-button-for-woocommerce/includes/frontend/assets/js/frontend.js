@@ -9,6 +9,147 @@
     var wpbGqbQuoteListPopupActive = false;
 
     /**
+     * Whether a fallback load of CF7's own script is already in flight (see
+     * wpbGqbEnsureCf7Scripts below) - guards against queuing duplicate
+     * <script> tags if the popup is opened again before the first load finishes.
+     */
+    var wpbGqbCf7FallbackLoading = false;
+
+    /**
+     * Binds CF7's own JS to any `.wpcf7 > form` inside the given jQuery
+     * scope (defaults to the whole document). CF7 only auto-binds forms
+     * present in the page at DOMContentLoaded; forms injected later via our
+     * AJAX popup/inline placeholder need this called manually.
+     */
+    function wpbGqbInitCf7Forms(scope) {
+        var root = scope && scope.length ? scope[0] : document;
+
+        // For CF7 5.3.1 and before
+        if (typeof wpcf7 !== "undefined" && typeof wpcf7.initForm === "function") {
+            wpcf7.initForm($(".wpcf7-form", root));
+        }
+
+        // For CF7 5.4 and after
+        if (typeof wpcf7 !== "undefined" && typeof wpcf7.init === "function") {
+            root.querySelectorAll(".wpcf7 > form").forEach(function (e) {
+                return wpcf7.init(e);
+            });
+        }
+    }
+
+    /**
+     * Runs `callback` once CF7's `wpcf7` JS object is available. Normally
+     * that's immediate, since CF7 already enqueued its own script - but some
+     * page-speed/optimization tools strip contact-form-7's script (or the
+     * inline `var wpcf7 = {...}` bootstrap object CF7 attaches alongside it)
+     * from pages that don't contain a literal [contact-form-7] shortcode in
+     * their content, which is always true here (the form only ever exists
+     * via this plugin's AJAX popup/inline placeholder). When that happens,
+     * CF7's own script logs "wpcf7 is not defined"/"wpcf7.api is not
+     * defined" and never binds, so the popup form's submit button silently
+     * falls back to a native (non-AJAX) submit. To avoid that, fetch CF7's
+     * own script directly - its URL (and the bootstrap object it needs) is
+     * localized as WPB_GQB_CF7_Fallback by class.enqueue-scripts.php, read
+     * straight from WP's script registry (CF7 always registers the handle,
+     * even on pages it decides not to auto-enqueue it on).
+     */
+    function wpbGqbEnsureCf7Scripts(callback) {
+        if (typeof wpcf7 !== "undefined" && typeof wpcf7.init === "function") {
+            callback();
+            return;
+        }
+
+        if (
+            typeof WPB_GQB_CF7_Fallback === "undefined" ||
+            !WPB_GQB_CF7_Fallback.scriptSrc
+        ) {
+            // Nothing we can fall back to (e.g. CF7 isn't even installed).
+            return;
+        }
+
+        if (wpbGqbCf7FallbackLoading) {
+            var wait = setInterval(function () {
+                if (
+                    typeof wpcf7 !== "undefined" &&
+                    typeof wpcf7.init === "function"
+                ) {
+                    clearInterval(wait);
+                    callback();
+                }
+            }, 100);
+            return;
+        }
+
+        wpbGqbCf7FallbackLoading = true;
+
+        if (
+            WPB_GQB_CF7_Fallback.styleSrc &&
+            !document.querySelector(
+                'link[href="' + WPB_GQB_CF7_Fallback.styleSrc + '"]',
+            )
+        ) {
+            var link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = WPB_GQB_CF7_Fallback.styleSrc;
+            document.head.appendChild(link);
+        }
+
+        // index.js reads `wpcf7.api` the moment it runs - it's normally set
+        // by CF7's own inline "before" script (wpcf7_enqueue_scripts()),
+        // which is exactly what a page-speed tool stripping the script also
+        // strips. Without this, the freshly (re)loaded script just logs
+        // "wpcf7 is not defined" and does nothing.
+        if (WPB_GQB_CF7_Fallback.bootstrap) {
+            window.wpcf7 = WPB_GQB_CF7_Fallback.bootstrap;
+        }
+
+        function loadCf7Script() {
+            var script = document.createElement("script");
+            script.src = WPB_GQB_CF7_Fallback.scriptSrc;
+            script.onload = function () {
+                // index.js only self-initializes (defining
+                // wpcf7.init/submit/... and binding every current
+                // `.wpcf7 > form`, including the popup's) inside its own
+                // `document.addEventListener("DOMContentLoaded", ...)`
+                // handler. The real DOMContentLoaded already fired long
+                // before this fallback script was injected, so that handler
+                // would otherwise never run. Re-dispatching the event here
+                // invokes it synchronously - which also takes care of
+                // binding the popup's form for us, so `callback` is
+                // intentionally not called from this path (it would bind
+                // CF7's submit handler a second time on the same form).
+                document.dispatchEvent(
+                    new Event("DOMContentLoaded", {
+                        bubbles: true,
+                        cancelable: true,
+                    }),
+                );
+            };
+            document.body.appendChild(script);
+        }
+
+        // CF7's index.js calls `swv.validate(...)` on submit - it depends on
+        // the separate `swv` script (registered as its own handle and
+        // normally pulled in automatically as a script dependency by
+        // wp_enqueue_script()). Since this fallback loads CF7's script
+        // directly via a plain <script> tag, WP's dependency resolution is
+        // bypassed, so `swv` has to be loaded first here too - otherwise the
+        // popup form appears to submit via AJAX but throws "swv is not
+        // defined" and never actually sends.
+        if (
+            typeof swv === "undefined" &&
+            WPB_GQB_CF7_Fallback.swvScriptSrc
+        ) {
+            var swvScript = document.createElement("script");
+            swvScript.src = WPB_GQB_CF7_Fallback.swvScriptSrc;
+            swvScript.onload = loadCf7Script;
+            document.body.appendChild(swvScript);
+        } else {
+            loadCf7Script();
+        }
+    }
+
+    /**
      * Multi-Product Quote System: refresh every "quote count" badge on the page.
      *
      * `.wpb-gqb-quote-count` is documented as something users attach to arbitrary
@@ -369,25 +510,12 @@
                     },
                 });
 
-                // For CF7 5.3.1 and before
-                if (
-                    typeof wpcf7 !== "undefined" &&
-                    typeof wpcf7.initForm === "function"
-                ) {
-                    wpcf7.initForm($(".wpcf7-form"));
-                }
-
-                // For CF7 5.4 and after
-                if (
-                    typeof wpcf7 !== "undefined" &&
-                    typeof wpcf7.init === "function"
-                ) {
-                    document
-                        .querySelectorAll(".wpcf7 > form")
-                        .forEach(function (e) {
-                            return wpcf7.init(e);
-                        });
-                }
+                // Bind CF7's JS to the popup form - falls back to loading
+                // CF7's script directly if a speed-optimization plugin
+                // stripped it from the page (see wpbGqbEnsureCf7Scripts()).
+                wpbGqbEnsureCf7Scripts(function () {
+                    wpbGqbInitCf7Forms();
+                });
 
                 // Reinitialize reCAPTCHA v3
                 if (
@@ -1393,19 +1521,12 @@
         gqbTurnstileSupport(container);
         reinitWPForms(container);
 
-        // For CF7 5.3.1 and before
-        if (typeof wpcf7 !== "undefined" && typeof wpcf7.initForm === "function") {
-            wpcf7.initForm(container.find(".wpcf7-form"));
-        }
-
-        // For CF7 5.4 and after
-        if (typeof wpcf7 !== "undefined" && typeof wpcf7.init === "function") {
-            container[0]
-                .querySelectorAll(".wpcf7 > form")
-                .forEach(function (e) {
-                    return wpcf7.init(e);
-                });
-        }
+        // Bind CF7's JS to the injected form - falls back to loading CF7's
+        // script directly if a speed-optimization plugin stripped it from
+        // the page (see wpbGqbEnsureCf7Scripts()).
+        wpbGqbEnsureCf7Scripts(function () {
+            wpbGqbInitCf7Forms(container);
+        });
 
         // Reinitialize reCAPTCHA v3
         if (

@@ -13,6 +13,14 @@ class WPB_GQB_WPForms_Custom_Smart_Tags {
 	public $separator = '';
 
 	/**
+	 * Field ID used for the synthetic "Quote Details" field baked into a
+	 * WPForms entry by add_quote_data_to_entry_fields() below. Deliberately
+	 * far outside the range of a form's own real field IDs (which WPForms
+	 * enumerates starting at 1), so it can never collide with one.
+	 */
+	const QUOTE_DATA_ENTRY_FIELD_ID = 999901;
+
+	/**
 	 * Initialize the class.
 	 */
 	public function __construct() {
@@ -26,6 +34,11 @@ class WPB_GQB_WPForms_Custom_Smart_Tags {
 		// Fully automatic quote data delivery (no smart tag required in the form).
 		add_action( 'wpforms_frontend_output', array( $this, 'add_auto_product_data_hidden_field' ) );
 		add_filter( 'wpforms_emails_notifications_message', array( $this, 'append_auto_product_data_to_mail' ), 10, 3 );
+
+		// Save the same quote data alongside the entry, wherever WPForms
+		// (Pro) stores entries.
+		add_filter( 'wpforms_process_filter', array( $this, 'add_quote_data_to_entry_fields' ), 10, 3 );
+		add_filter( 'wpforms_emails_notifications_field_ignored', array( $this, 'exclude_quote_data_field_from_email' ), 10, 2 );
 	}
 
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- these methods only read the popup's own hidden fields (product id, qty, variations, etc.) to render/append quote data; WPForms handles the actual submission's own validation, there is no separate state-changing action here.
@@ -77,7 +90,7 @@ class WPB_GQB_WPForms_Custom_Smart_Tags {
 				? esc_html__( 'Cart is empty.', 'get-a-quote-button' )
 				: $this->build_cart_content();
 
-			$content = str_replace( '{gqb_cart_content}', $cart_content, $content );
+			$content = str_replace( '{gqb_cart_content}', $this->normalize_block_line_breaks( $cart_content ), $content );
 		}
 
 		return $content;
@@ -115,7 +128,21 @@ class WPB_GQB_WPForms_Custom_Smart_Tags {
 			$quote_content = esc_html__( 'Quote list is empty.', 'get-a-quote-button' );
 		}
 
-		return str_replace( '{gqb_quote_list_content}', $quote_content, $content );
+		return str_replace( '{gqb_quote_list_content}', $this->normalize_block_line_breaks( $quote_content ), $content );
+	}
+
+	/**
+	 * Normalize a data block's line breaks to CRLF before it is substituted
+	 * into a notification. WPForms renders every template except "Plain text"
+	 * as HTML and turns CRLF - and only CRLF - into <br/> when it does (see
+	 * WPForms\Emails\Notifications::process_message()), so a block using bare
+	 * LF would arrive there as one run-on line.
+	 *
+	 * @param string $block The built data block.
+	 * @return string
+	 */
+	private function normalize_block_line_breaks( $block ) {
+		return str_replace( array( "\r\n", "\n" ), "\r\n", (string) $block );
 	}
 
 	/**
@@ -369,18 +396,30 @@ class WPB_GQB_WPForms_Custom_Smart_Tags {
 	 * @return void
 	 */
 	public function add_auto_product_data_hidden_field() {
-		$setting = wpb_gqb_get_option( 'wpb_gqb_auto_send_product_data', 'woo_settings', 'off' );
+		$send_with_email = 'on' === wpb_gqb_get_option( 'wpb_gqb_auto_send_product_data', 'woo_settings', 'off' );
+		$save_to_entry   = 'on' === wpb_gqb_get_option( 'wpb_gqb_save_quote_data_to_entry', 'woo_settings', 'off' );
 
-		if ( 'on' !== $setting ) {
+		// The hidden field is the single carrier for both destinations
+		// (email body and, further down, the saved entry) - bake it in as
+		// long as either one wants it; append_auto_product_data_to_mail()
+		// and add_quote_data_to_entry_fields() each re-check their own
+		// setting independently before actually using it.
+		if ( ! $send_with_email && ! $save_to_entry ) {
+			wpb_gqb_quote_debug_log( '60_wpf_hidden_field:setting_off' );
+
 			return;
 		}
 
 		// Only true while rendering the form inside our own "fire_contact_form" AJAX request.
 		if ( ! isset( $_POST['wpb_quote_list'] ) ) {
+			wpb_gqb_quote_debug_log( '60_wpf_hidden_field:not_in_quote_request' );
+
 			return;
 		}
 
 		$block = $this->get_auto_quote_data_block();
+
+		wpb_gqb_quote_debug_log( '61_wpf_hidden_field:block_built', array( 'block_length' => strlen( (string) $block ) ) );
 
 		if ( $block ) {
 			// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- transports the plain-text quote summary through a hidden form field, not code obfuscation.
@@ -398,21 +437,134 @@ class WPB_GQB_WPForms_Custom_Smart_Tags {
 	 * @return string
 	 */
 	public function append_auto_product_data_to_mail( $message, $template = '', $notifications = null ) {
-		if ( empty( $_POST['_wpb_gqb_auto_product_data'] ) || empty( $message ) ) {
+		$send_with_email = 'on' === wpb_gqb_get_option( 'wpb_gqb_auto_send_product_data', 'woo_settings', 'off' );
+
+		wpb_gqb_quote_debug_log(
+			'70_wpf_mail_append:entry',
+			array(
+				'send_with_email_setting' => $send_with_email,
+				'hidden_field_present'    => ! empty( $_POST['_wpb_gqb_auto_product_data'] ),
+				'message_present'         => ! empty( $message ),
+				'template'                => $template,
+			)
+		);
+
+		// The hidden field can also be present purely because "Save Quote
+		// Data To Entry" is on (see add_auto_product_data_hidden_field()) -
+		// don't put it in the email unless the email setting itself is on.
+		if ( ! $send_with_email || empty( $_POST['_wpb_gqb_auto_product_data'] ) || empty( $message ) ) {
 			return $message;
 		}
 
 		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- decodes the plain-text quote summary baked into the hidden field above, not code obfuscation.
 		$block = base64_decode( wp_unslash( $_POST['_wpb_gqb_auto_product_data'] ), true );
 
+		wpb_gqb_quote_debug_log( '71_wpf_mail_append:decoded', array( 'block_length' => strlen( (string) $block ) ) );
+
 		if ( ! $block ) {
 			return $message;
 		}
 
 		$heading = wpb_gqb_get_option( 'wpb_gqb_quote_data_heading', 'quote_settings', esc_html__( 'Quote Details', 'get-a-quote-button' ) );
-		$block   = str_replace( "\n", "\r\n", trim( $block ) );
 
-		return rtrim( $message ) . "\r\n\r\n" . $heading . ":\r\n" . $block;
+		// Every WPForms email template except "Plain text" is sent as
+		// text/html, so the block's line breaks have to become <br> there (on
+		// top of keeping whatever formatting the quote-data templates carry) -
+		// otherwise it arrives as one run-on line.
+		if ( $this->is_html_email_template( $template ) ) {
+			$message = rtrim( $message ) . "\r\n" . '<p><strong>' . wpb_gqb_template_to_html( $heading ) . '</strong><br>' . wpb_gqb_template_to_html( $block ) . '</p>';
+		} else {
+			$block   = str_replace( "\n", "\r\n", wpb_gqb_template_to_plain_text( $block ) );
+			$message = rtrim( $message ) . "\r\n\r\n" . wpb_gqb_template_to_plain_text( $heading ) . ":\r\n" . $block;
+		}
+
+		wpb_gqb_quote_debug_log( '72_wpf_mail_append:message_updated', array( 'new_message_length' => strlen( $message ) ) );
+
+		return $message;
+	}
+
+	/**
+	 * Whether the notification currently being built is sent as HTML. WPForms
+	 * sends every template except "Plain text" (`none`) as text/html - see
+	 * WPForms\Emails\Notifications::get_content_type(). Falls back to
+	 * assuming plain text when that helper isn't available, so an older
+	 * WPForms keeps today's behaviour rather than getting raw markup.
+	 *
+	 * @param string $template The email template name passed by WPForms.
+	 * @return bool
+	 */
+	private function is_html_email_template( $template ) {
+		if ( ! class_exists( '\WPForms\Emails\Helpers' ) ) {
+			return false;
+		}
+
+		return ! \WPForms\Emails\Helpers::is_plain_text_template( $template );
+	}
+
+	/**
+	 * Add the same baked quote-data block (submitted via the hidden field
+	 * above) as a synthetic entry field, so it's saved and displayed
+	 * alongside the submission wherever WPForms stores entries (WPForms
+	 * Pro's Entries screen). Hooked to `wpforms_process_filter`, which runs
+	 * right before WPForms saves the entry - whatever is present in the
+	 * returned $fields array from here on is treated exactly like a real
+	 * form field for storage/display purposes.
+	 *
+	 * @param array $fields    Processed form fields, keyed by field ID.
+	 * @param array $entry     Raw submitted entry data ($_POST['wpforms']).
+	 * @param array $form_data Form data/settings.
+	 * @return array
+	 */
+	public function add_quote_data_to_entry_fields( $fields, $entry, $form_data ) {
+		$setting = wpb_gqb_get_option( 'wpb_gqb_save_quote_data_to_entry', 'woo_settings', 'off' );
+
+		if ( 'on' !== $setting || empty( $_POST['_wpb_gqb_auto_product_data'] ) ) {
+			return $fields;
+		}
+
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- decodes the plain-text quote summary baked into the hidden field by add_auto_product_data_hidden_field(), not code obfuscation.
+		$block = base64_decode( wp_unslash( $_POST['_wpb_gqb_auto_product_data'] ), true );
+
+		wpb_gqb_quote_debug_log( '80_wpf_entry_field:decoded', array( 'block_length' => strlen( (string) $block ) ) );
+
+		if ( ! $block ) {
+			return $fields;
+		}
+
+		$heading = wpb_gqb_get_option( 'wpb_gqb_quote_data_heading', 'quote_settings', esc_html__( 'Quote Details', 'get-a-quote-button' ) );
+
+		$fields[ self::QUOTE_DATA_ENTRY_FIELD_ID ] = array(
+			// Entries are stored and displayed as plain text, so any
+			// formatting the quote-data templates carry is flattened here
+			// rather than saved as raw markup.
+			'name'  => wpb_gqb_template_to_plain_text( $heading ),
+			'value' => wpb_gqb_template_to_plain_text( $block ),
+			'id'    => self::QUOTE_DATA_ENTRY_FIELD_ID,
+			'type'  => 'text',
+		);
+
+		wpb_gqb_quote_debug_log( '81_wpf_entry_field:added' );
+
+		return $fields;
+	}
+
+	/**
+	 * Keep the synthetic "Quote Details" entry field (added above) out of
+	 * the {all_fields} block in notification emails - when "Automatically
+	 * Send Quote Data With The Email" is also on, append_auto_product_data_to_mail()
+	 * already appends the same block to the email body directly, so showing
+	 * it again via {all_fields} would just duplicate it.
+	 *
+	 * @param bool  $ignored Whether the field should be excluded.
+	 * @param array $field   The field being rendered into the email.
+	 * @return bool
+	 */
+	public function exclude_quote_data_field_from_email( $ignored, $field ) {
+		if ( isset( $field['id'] ) && (int) $field['id'] === self::QUOTE_DATA_ENTRY_FIELD_ID ) {
+			return true;
+		}
+
+		return $ignored;
 	}
 
 	// phpcs:enable WordPress.Security.NonceVerification.Missing

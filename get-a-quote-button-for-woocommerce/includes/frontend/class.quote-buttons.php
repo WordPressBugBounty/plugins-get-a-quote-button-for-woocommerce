@@ -115,10 +115,8 @@ class WPB_GQB_Quote_Buttons {
 			return $shortcode;
 		}
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared
-		$query = $wpdb->prepare( 'SELECT * FROM ' . self::$table . ' WHERE id = %d', $id );
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared
-		$shortcode = $wpdb->get_row( $query );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table; result is cached via wp_cache_set() below.
+		$shortcode = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %i WHERE id = %d', self::$table, $id ) );
 
 		// Cache the result (null is also valid to cache).
 		wp_cache_set( $cache_key, $shortcode, self::$cache_group, HOUR_IN_SECONDS );

@@ -13,7 +13,11 @@
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
-.wpb-get-a-quote-button-btn {
+/* Selector is doubled (not a typo) to raise specificity to 0,2,0 - many
+   themes (e.g. Astra's `:is(.btn,.button,button,[type=submit],[type=button])`
+   base button reset) ship a same-specificity 0,1,0 rule that would otherwise
+   win or lose purely based on CSS source order. */
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn {
     display: flex;
     cursor: pointer;
     text-transform: inherit;
@@ -74,13 +78,13 @@
     font-size: 1.25em !important;
     line-height: 1;
 }
-.wpb-get-a-quote-button-btn-default {
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-default {
     color: var(--wpb-gqb-btn-color, #fff);
     background-color: var(--wpb-gqb-btn-bg, #17a2b8);
 }
-.wpb-get-a-quote-button-btn:hover,
-.wpb-get-a-quote-button-btn:focus,
-.wpb-get-a-quote-button-btn:active {
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn:hover,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn:focus,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn:active {
     color: var(--wpb-gqb-btn-hover-color, #fff);
     background-color: var(--wpb-gqb-btn-hover-bg, #138496);
     border: var(--wpb-gqb-btn-hover-border-width, 0)
@@ -88,12 +92,12 @@
         var(--wpb-gqb-btn-hover-border-color, transparent);
     box-shadow: var(--wpb-gqb-btn-hover-shadow, none);
 }
-.wpb-get-a-quote-button-btn-default:hover,
-.wpb-get-a-quote-button-btn-default:focus,
-.wpb-get-a-quote-button-btn-default:active,
-.wpb-get-a-quote-button-btn:hover,
-.wpb-get-a-quote-button-btn:focus,
-.wpb-get-a-quote-button-btn:active {
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-default:hover,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-default:focus,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn-default:active,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn:hover,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn:focus,
+.wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn:active {
     background-image: inherit;
     outline: 0;
     text-decoration: none;

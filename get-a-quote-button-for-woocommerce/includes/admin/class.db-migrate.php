@@ -147,8 +147,8 @@ class WPB_GQB_Database {
 	 */
 	private static function column_exists( $table, $column ) {
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table is a plugin-controlled identifier (esc_sql()'d by the caller), not user input; MySQL identifiers can't be passed as prepare() placeholders.
-		$result = $wpdb->get_results( $wpdb->prepare( "SHOW COLUMNS FROM `$table` LIKE %s", $column ) );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Schema introspection of the plugin's own table; must not be cached.
+		$result = $wpdb->get_results( $wpdb->prepare( 'SHOW COLUMNS FROM %i LIKE %s', $table, $column ) );
 		return ! empty( $result );
 	}
 
@@ -212,21 +212,18 @@ class WPB_GQB_Database {
 
 		$table_name = self::get_table_name( $table );
 
-		// Escape table name just to be safe
-		$table_name = esc_sql( $table_name );
-
 		foreach ( $columns as $col_name => $definition ) {
 			// Sanitize column name to avoid injection
 			$col_name = sanitize_key( $col_name );
 
 			if ( $is_modify ) {
 				if ( self::column_exists( $table_name, $col_name ) ) {
-					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table_name/$col_name are esc_sql()'d/sanitize_key()'d identifiers from the plugin's own update definitions, not user input; MySQL identifiers/column definitions can't be passed as prepare() placeholders.
-					$wpdb->query( "ALTER TABLE `{$table_name}` MODIFY COLUMN `{$col_name}` {$definition}" );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Identifiers use %i; $definition is a hardcoded column definition from get_updates() (never user input) and SQL column definitions can't be passed as placeholders.
+					$wpdb->query( $wpdb->prepare( "ALTER TABLE %i MODIFY COLUMN %i {$definition}", $table_name, $col_name ) );
 				}
 			} elseif ( ! self::column_exists( $table_name, $col_name ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table_name/$col_name are esc_sql()'d/sanitize_key()'d identifiers from the plugin's own update definitions, not user input; MySQL identifiers/column definitions can't be passed as prepare() placeholders.
-				$wpdb->query( "ALTER TABLE `{$table_name}` ADD COLUMN `{$col_name}` {$definition}" );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Identifiers use %i; $definition is a hardcoded column definition from get_updates() (never user input) and SQL column definitions can't be passed as placeholders.
+				$wpdb->query( $wpdb->prepare( "ALTER TABLE %i ADD COLUMN %i {$definition}", $table_name, $col_name ) );
 			}
 		}
 	}
@@ -322,8 +319,8 @@ class WPB_GQB_Database {
 				foreach ( $update['modify'] as $col_name => $new_definition ) {
 					if ( self::column_exists( $table_name, $col_name ) ) {
 						// get current column type (Type field from SHOW COLUMNS)
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table_name is a plugin-controlled identifier, not user input; MySQL identifiers can't be passed as prepare() placeholders.
-						$col_row      = $wpdb->get_row( $wpdb->prepare( "SHOW COLUMNS FROM `$table_name` WHERE Field = %s", $col_name ), ARRAY_A );
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Schema introspection of the plugin's own table; must not be cached.
+						$col_row      = $wpdb->get_row( $wpdb->prepare( 'SHOW COLUMNS FROM %i WHERE Field = %s', $table_name, $col_name ), ARRAY_A );
 						$current_type = isset( $col_row['Type'] ) ? strtolower( $col_row['Type'] ) : '';
 
 						// normalize new_definition for comparison
@@ -367,12 +364,12 @@ class WPB_GQB_Database {
 					$form_id_lan  = 'form_id_' . $lang_code;
 
 					if ( ! self::column_exists( $table, $btn_text_lan ) ) {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table is plugin-controlled, $btn_text_lan is built from a sanitize_key()'d WPML language code, not user input; MySQL identifiers can't be passed as prepare() placeholders.
-						$wpdb->query( "ALTER TABLE $table ADD COLUMN $btn_text_lan TINYTEXT NOT NULL AFTER btn_text" );
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange -- One-time schema migration of the plugin's own table.
+						$wpdb->query( $wpdb->prepare( 'ALTER TABLE %i ADD COLUMN %i TINYTEXT NOT NULL AFTER btn_text', $table, $btn_text_lan ) );
 					}
 					if ( ! self::column_exists( $table, $form_id_lan ) ) {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table is plugin-controlled, $form_id_lan is built from a sanitize_key()'d WPML language code, not user input; MySQL identifiers can't be passed as prepare() placeholders.
-						$wpdb->query( "ALTER TABLE $table ADD COLUMN $form_id_lan BIGINT(20) NOT NULL AFTER form_id" );
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange -- One-time schema migration of the plugin's own table.
+						$wpdb->query( $wpdb->prepare( 'ALTER TABLE %i ADD COLUMN %i BIGINT(20) NOT NULL AFTER form_id', $table, $form_id_lan ) );
 					}
 				}
 			}

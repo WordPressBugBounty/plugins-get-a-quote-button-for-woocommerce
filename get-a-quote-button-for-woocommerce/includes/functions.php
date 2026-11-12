@@ -125,7 +125,119 @@ if ( ! function_exists( 'is_wpb_gqb_show_price_on_quote_list' ) ) {
 			return true;
 		}
 
-		return apply_filters( 'wpb_gqb_show_price', $product->get_price(), $product ) !== false;
+		return apply_filters( 'wpb_gqb_show_price', $product->get_price(), $product, 'quote_list' ) !== false;
+	}
+}
+
+/**
+ * HTML tags the quote-data templates ("Quote List Item Template", "Quote List
+ * Total Template", "Single Product Template", plus the block heading and intro
+ * text) are allowed to contain, so site owners can style the data block in the
+ * outgoing email - e.g. <strong>{product_name}</strong>, a larger font size on
+ * one value, or a link on {product_url}.
+ *
+ * Defaults to WordPress' standard post allow-list, which already permits the
+ * usual formatting tags along with their class/style attributes (style values
+ * themselves are filtered by wp_kses' own safe-CSS list).
+ *
+ * @return array Allow-list in wp_kses() format.
+ */
+if ( ! function_exists( 'wpb_gqb_get_allowed_template_html' ) ) {
+
+	function wpb_gqb_get_allowed_template_html() {
+		return apply_filters( 'wpb_gqb_allowed_template_html', wp_kses_allowed_html( 'post' ) );
+	}
+}
+
+/**
+ * Sanitize a template against the allow-list above. Unlike
+ * sanitize_textarea_field() this keeps the permitted markup, and unlike a bare
+ * wp_kses_post() it goes through the filterable allow-list.
+ *
+ * @param string $value Raw template.
+ * @return string
+ */
+if ( ! function_exists( 'wpb_gqb_kses_template' ) ) {
+
+	function wpb_gqb_kses_template( $value ) {
+		return wp_kses( (string) $value, wpb_gqb_get_allowed_template_html() );
+	}
+}
+
+/**
+ * Whether a template - or an already-built data block - actually uses HTML
+ * formatting. Deliberately matches only the formatting tags a template can
+ * meaningfully contain, so a product name or custom field value that merely
+ * includes a "<" is never mistaken for markup.
+ *
+ * @param string $value Template or built block.
+ * @return bool
+ */
+if ( ! function_exists( 'wpb_gqb_template_has_html' ) ) {
+
+	function wpb_gqb_template_has_html( $value ) {
+		$tags = 'a|abbr|b|big|blockquote|br|center|code|del|div|em|font|h[1-6]|hr|i|img|ins|li|ol|p|pre|s|small|span|strike|strong|sub|sup|table|tbody|td|tfoot|th|thead|tr|u|ul';
+
+		return (bool) preg_match( '#</?(?:' . $tags . ')(?:\s[^<>]*)?/?>#i', (string) $value );
+	}
+}
+
+/**
+ * Render a template/data block into an HTML email body: keep the allowed
+ * markup, escape anything else, and turn the template own line breaks into
+ * <br> so a plain-text template keeps rendering exactly as it does today.
+ *
+ * @param string $value Template or built block.
+ * @return string
+ */
+if ( ! function_exists( 'wpb_gqb_template_to_html' ) ) {
+
+	function wpb_gqb_template_to_html( $value ) {
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
+			return '';
+		}
+
+		$value = wpb_gqb_template_has_html( $value ) ? wpb_gqb_kses_template( $value ) : esc_html( $value );
+
+		// A newline that only separates two block-level tags is already a line
+		// break once rendered - don't stack a second one on top of it.
+		$value = preg_replace( '#(</(?:p|div|ul|ol|li|table|thead|tbody|tr|td|th|h[1-6]|blockquote)>|<(?:br|hr)\s*/?>)\s*\n#i', '$1', $value );
+		$value = preg_replace( '#\n\s*(<(?:p|div|ul|ol|table|h[1-6]|blockquote)[\s>])#i', '$1', $value );
+
+		return nl2br( $value );
+	}
+}
+
+/**
+ * Flatten a template/data block back to plain text - for plain-text emails and
+ * for stored form entries, both of which would otherwise show the raw markup.
+ *
+ * @param string $value Template or built block.
+ * @return string
+ */
+if ( ! function_exists( 'wpb_gqb_template_to_plain_text' ) ) {
+
+	function wpb_gqb_template_to_plain_text( $value ) {
+		$value = (string) $value;
+
+		if ( ! wpb_gqb_template_has_html( $value ) ) {
+			return trim( $value );
+		}
+
+		// A tag that already ends the line, followed by the template's own
+		// newline, is one line break - not two.
+		$value = preg_replace( '#(<(?:br|hr)\s*/?>|</(?:p|div|li|tr|ul|ol|table|h[1-6]|blockquote)>)[ \t]*\n#i', '$1', $value );
+		$value = preg_replace( '#<(?:br|hr)\s*/?>#i', "\n", $value );
+		$value = preg_replace( '#</(?:p|div|li|tr|ul|ol|table|h[1-6]|blockquote)>#i', "\n", $value );
+		$value = preg_replace( '#</t[dh]>#i', ' ', $value );
+		$value = wp_strip_all_tags( $value );
+		$value = html_entity_decode( $value, ENT_QUOTES, 'UTF-8' );
+		$value = preg_replace( "/[ \t]+\n/", "\n", $value );
+		$value = preg_replace( "/\n{3,}/", "\n\n", $value );
+
+		return trim( $value );
 	}
 }
 
@@ -140,6 +252,11 @@ if ( ! function_exists( 'is_wpb_gqb_show_price_on_quote_list' ) ) {
  * Available tags for the item template: {product_name}, {sku}, {price},
  * {quantity}, {subtotal}, {product_id}, {product_url}.
  * Available tags for the total template: {total}, {subtotal}, {items_count}.
+ *
+ * The templates may also carry basic HTML formatting - see
+ * wpb_gqb_get_allowed_template_html(). The block is returned with that markup
+ * intact; each destination then renders it with wpb_gqb_template_to_html() or
+ * flattens it with wpb_gqb_template_to_plain_text().
  *
  * @return string Empty string when the quote list is empty/unavailable.
  */
@@ -156,12 +273,24 @@ if ( ! function_exists( 'wpb_gqb_build_quote_list_content' ) ) {
 			return '';
 		}
 
-		$currency_symbol   = get_woocommerce_currency_symbol();
+		// Decoded up front so the symbol is a real character in every
+		// destination: a plain-text mail would otherwise show a literal
+		// "&pound;", and an HTML mail would escape it into "&amp;pound;".
+		$currency_symbol   = html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, 'UTF-8' );
 		$show_totals_block = wpb_gqb_get_option( 'wpb_gqb_show_prices_on_quote_list', 'quote_settings', 'auto' ) !== 'never';
 
 		$intro_text     = wpb_gqb_get_option( 'wpb_gqb_quote_list_intro_text', 'quote_settings', __( 'Quote List Items:', 'get-a-quote-button' ) );
 		$item_template  = wpb_gqb_get_option( 'wpb_gqb_quote_item_template', 'quote_settings', "- {product_name}\n  SKU: {sku}\n  Price: {price}\n  Quantity: {quantity}\n  Subtotal: {subtotal}" );
 		$total_template = wpb_gqb_get_option( 'wpb_gqb_quote_total_template', 'quote_settings', __( 'Total', 'get-a-quote-button' ) . ': {total}' );
+
+		// The templates may carry basic HTML formatting (see
+		// wpb_gqb_get_allowed_template_html()). When they do, every dynamic
+		// value substituted into them is escaped, so a product name or a
+		// custom field value can't break - or inject into - that markup.
+		$is_html = wpb_gqb_template_has_html( $intro_text . $item_template . $total_template );
+		$esc     = static function ( $value ) use ( $is_html ) {
+			return $is_html ? esc_html( (string) $value ) : (string) $value;
+		};
 
 		$output = $intro_text . "\n";
 
@@ -173,6 +302,7 @@ if ( ! function_exists( 'wpb_gqb_build_quote_list_content' ) ) {
 			}
 
 			$link_product    = $product->is_type( 'variation' ) ? wc_get_product( $product->get_parent_id() ) : $product;
+			$product_url     = $link_product ? get_permalink( $link_product->get_id() ) : '';
 			$sku             = $product->get_sku() ? $product->get_sku() : __( 'N/A', 'get-a-quote-button' );
 			$qty             = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 0;
 			$unit            = WPB_GQB_Quote_List::get_item_price( $item );
@@ -182,19 +312,19 @@ if ( ! function_exists( 'wpb_gqb_build_quote_list_content' ) ) {
 			$item_output = strtr(
 				$item_template,
 				array(
-					'{product_name}' => $product->get_name(),
-					'{sku}'          => $sku,
+					'{product_name}' => $esc( $product->get_name() ),
+					'{sku}'          => $esc( $sku ),
 					'{product_id}'   => $product->get_id(),
-					'{product_url}'  => $link_product ? get_permalink( $link_product->get_id() ) : '',
+					'{product_url}'  => $is_html ? esc_url( $product_url ) : $product_url,
 					'{quantity}'     => $qty,
-					'{price}'        => $show_item_price ? $currency_symbol . wc_format_decimal( $unit, 2 ) : __( 'Price on request', 'get-a-quote-button' ),
-					'{subtotal}'     => $show_item_price ? $currency_symbol . wc_format_decimal( $subtotal, 2 ) : __( 'On request', 'get-a-quote-button' ),
+					'{price}'        => $esc( $show_item_price ? $currency_symbol . wc_format_decimal( $unit, 2 ) : __( 'Price on request', 'get-a-quote-button' ) ),
+					'{subtotal}'     => $esc( $show_item_price ? $currency_symbol . wc_format_decimal( $subtotal, 2 ) : __( 'On request', 'get-a-quote-button' ) ),
 				)
 			);
 
 			if ( ! empty( $item['variation'] ) && is_array( $item['variation'] ) ) {
 				foreach ( $item['variation'] as $attribute => $value ) {
-					$item_output .= "\n  " . ucfirst( str_replace( array( 'attribute_pa_', 'attribute_', 'pa_' ), '', $attribute ) ) . ": {$value}";
+					$item_output .= "\n  " . $esc( ucfirst( str_replace( array( 'attribute_pa_', 'attribute_', 'pa_' ), '', $attribute ) ) ) . ': ' . $esc( $value );
 				}
 			}
 
@@ -204,19 +334,21 @@ if ( ! function_exists( 'wpb_gqb_build_quote_list_content' ) ) {
 			);
 
 			foreach ( $custom_fields as $label => $value ) {
-				$item_output .= "\n  {$label}: {$value}";
+				$item_output .= "\n  " . $esc( $label ) . ': ' . $esc( $value );
 			}
 
 			$output .= $item_output . "\n\n";
 		}
 
 		if ( $show_totals_block ) {
-			$totals  = WPB_GQB_Quote_List::get_totals();
-			$output .= strtr(
+			$totals        = WPB_GQB_Quote_List::get_totals();
+			$on_request     = __( 'On request', 'get-a-quote-button' );
+			$hidden_present = ! empty( $totals['has_hidden_price_item'] );
+			$output        .= strtr(
 				$total_template,
 				array(
-					'{total}'       => $currency_symbol . wc_format_decimal( $totals['total'], 2 ),
-					'{subtotal}'    => $currency_symbol . wc_format_decimal( $totals['subtotal'], 2 ),
+					'{total}'       => $esc( $hidden_present ? $on_request : $currency_symbol . wc_format_decimal( $totals['total'], 2 ) ),
+					'{subtotal}'    => $esc( $hidden_present ? $on_request : $currency_symbol . wc_format_decimal( $totals['subtotal'], 2 ) ),
 					'{items_count}' => WPB_GQB_Quote_List::get_items_count(),
 				)
 			) . "\n";
@@ -301,7 +433,8 @@ if ( ! function_exists( 'wpb_gqb_build_cart_content' ) ) {
  * dynamic tags.
  *
  * Available tags: {product_name}, {product_id}, {sku}, {price}, {quantity},
- * {total}, {product_url}, {variations}, {custom_fields}.
+ * {total}, {product_url}, {variations}, {custom_fields}. The template may also
+ * carry basic HTML formatting - see wpb_gqb_build_quote_list_content().
  *
  * @param object $product The WooCommerce product.
  * @return string
@@ -314,8 +447,11 @@ if ( ! function_exists( 'wpb_gqb_build_single_product_summary' ) ) {
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- reads the popup's own hidden fields to render a mail summary; CF7/WPForms validate the form submission itself, there's no separate state-changing action here.
+		// The currency symbol is decoded up front for the same reason as in
+		// wpb_gqb_build_quote_list_content() - so it reaches the mail as a
+		// real character rather than a literal "&pound;".
 		$id              = $product->get_id();
-		$currency_symbol = get_woocommerce_currency_symbol();
+		$currency_symbol = html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, 'UTF-8' );
 		$qty             = isset( $_POST['wpb_gqb_qty'] ) ? absint( wp_unslash( $_POST['wpb_gqb_qty'] ) ) : 1;
 
 		if ( $product->is_type( 'variable' ) && isset( $_POST['wpb_gqb_variation_price'] ) ) {
@@ -325,6 +461,19 @@ if ( ! function_exists( 'wpb_gqb_build_single_product_summary' ) ) {
 			$price = floatval( $product->get_price() );
 		}
 
+		$template = wpb_gqb_get_option(
+			'wpb_gqb_single_product_template',
+			'quote_settings',
+			"Product: {product_name}\nProduct ID: {product_id}\nSKU: {sku}\n{variations}{custom_fields}Price: {price}\nQuantity: {quantity}\nTotal: {total}\nProduct URL: {product_url}"
+		);
+
+		// See wpb_gqb_build_quote_list_content() - when the template carries
+		// HTML formatting, the values substituted into it are escaped.
+		$is_html = wpb_gqb_template_has_html( $template );
+		$esc     = static function ( $value ) use ( $is_html ) {
+			return $is_html ? esc_html( (string) $value ) : (string) $value;
+		};
+
 		$variations_block = '';
 
 		if ( isset( $_POST['wpb_gqb_variations'] ) ) {
@@ -332,7 +481,7 @@ if ( ! function_exists( 'wpb_gqb_build_single_product_summary' ) ) {
 
 			if ( ! empty( $variations ) && is_array( $variations ) ) {
 				foreach ( $variations as $key => $value ) {
-					$variations_block .= ucfirst( str_replace( array( 'attribute_pa_', 'attribute_', 'pa_' ), '', $key ) ) . ': ' . $value . "\n";
+					$variations_block .= $esc( ucfirst( str_replace( array( 'attribute_pa_', 'attribute_', 'pa_' ), '', $key ) ) ) . ': ' . $esc( $value ) . "\n";
 				}
 			}
 		}
@@ -348,25 +497,19 @@ if ( ! function_exists( 'wpb_gqb_build_single_product_summary' ) ) {
 				continue;
 			}
 
-			$custom_fields_block .= sanitize_text_field( $label ) . ': ' . sanitize_text_field( (string) $value ) . "\n";
+			$custom_fields_block .= $esc( sanitize_text_field( $label ) ) . ': ' . $esc( sanitize_text_field( (string) $value ) ) . "\n";
 		}
-
-		$template = wpb_gqb_get_option(
-			'wpb_gqb_single_product_template',
-			'quote_settings',
-			"Product: {product_name}\nProduct ID: {product_id}\nSKU: {sku}\n{variations}{custom_fields}Price: {price}\nQuantity: {quantity}\nTotal: {total}\nProduct URL: {product_url}"
-		);
 
 		$output = strtr(
 			$template,
 			array(
-				'{product_name}'  => get_the_title( $id ),
+				'{product_name}'  => $esc( get_the_title( $id ) ),
 				'{product_id}'    => $id,
-				'{sku}'           => $product->get_sku(),
-				'{price}'         => $currency_symbol . wc_format_decimal( $price, 2 ),
+				'{sku}'           => $esc( $product->get_sku() ),
+				'{price}'         => $esc( $currency_symbol . wc_format_decimal( $price, 2 ) ),
 				'{quantity}'      => $qty,
-				'{total}'         => $currency_symbol . wc_format_decimal( $price * $qty, 2 ),
-				'{product_url}'   => get_permalink( $id ),
+				'{total}'         => $esc( $currency_symbol . wc_format_decimal( $price * $qty, 2 ) ),
+				'{product_url}'   => $is_html ? esc_url( get_permalink( $id ) ) : get_permalink( $id ),
 				'{variations}'    => $variations_block,
 				'{custom_fields}' => $custom_fields_block,
 			)

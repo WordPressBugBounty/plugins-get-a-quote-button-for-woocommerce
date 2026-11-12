@@ -86,7 +86,24 @@ class WPB_GQB_Ajax {
 
 			ob_start();
 
+			// CF7 builds its <form action="..."> from the *current* request
+			// URI (WPCF7_ContactForm::form_html() -> wpcf7_get_request_uri()).
+			// Since this shortcode is rendered inside this very AJAX request,
+			// that would bake in `/wp-admin/admin-ajax.php` as the form's
+			// native submit target. Harmless while CF7's own JS intercepts
+			// the submit (the JS AJAX path ignores the action attribute) -
+			// but if that JS never binds (see wpbGqbEnsureCf7Scripts() in
+			// frontend.js), the browser falls back to a real, non-JS form
+			// submit straight to admin-ajax.php with no recognized
+			// `action` param, which WordPress core rejects with a bare
+			// 400. Point it at the page the popup was actually opened on
+			// instead, so that fallback submit lands somewhere CF7 can
+			// still process it (its documented no-JS degradation path).
+			add_filter( 'wpcf7_form_action_url', array( $this, 'fix_cf7_form_action_url' ) );
+
 			echo do_shortcode( '[' . esc_attr( $shortcode_tag ) . ' id="' . esc_attr( $contact_form_id ) . '"]' );
+
+			remove_filter( 'wpcf7_form_action_url', array( $this, 'fix_cf7_form_action_url' ) );
 
 			$response .= ob_get_clean();
 
@@ -105,6 +122,27 @@ class WPB_GQB_Ajax {
 			wp_send_json_error( esc_html__( 'Invalid Form ID', 'get-a-quote-button' ) );
 		}
 		// phpcs:enable
+	}
+
+	/**
+	 * Rewrites CF7's rendered form action URL (normally this AJAX request's
+	 * own admin-ajax.php URI) to the referring page, keeping CF7's unit-tag
+	 * fragment intact. See the call site in fire_contact_form() for why.
+	 *
+	 * @param string $url CF7's computed action URL, e.g. "/wp-admin/admin-ajax.php#wpcf7-f6-o1".
+	 * @return string
+	 */
+	public function fix_cf7_form_action_url( $url ) {
+		$referer = wp_get_referer();
+
+		if ( ! $referer ) {
+			return $url;
+		}
+
+		$fragment = strstr( $url, '#' );
+		$referer  = strtok( $referer, '#' );
+
+		return $referer . ( $fragment ? $fragment : '' );
 	}
 
 	/**
@@ -204,20 +242,24 @@ class WPB_GQB_Ajax {
 			WPB_GQB_Quote_List::update_item_qty( $key, $qty );
 		}
 
-		$totals        = WPB_GQB_Quote_List::get_totals();
-		$item          = WPB_GQB_Quote_List::get_item( $key );
-		$item_subtotal = '';
+		$totals         = WPB_GQB_Quote_List::get_totals();
+		$hidden_present = ! empty( $totals['has_hidden_price_item'] );
+		$on_request     = esc_html__( 'On request', 'get-a-quote-button' );
+		$item           = WPB_GQB_Quote_List::get_item( $key );
+		$item_subtotal  = '';
 
 		if ( $item ) {
+			$item_product  = WPB_GQB_Quote_List::get_item_product( $item );
+			$show_item     = $item_product && function_exists( 'is_wpb_gqb_show_price_on_quote_list' ) ? is_wpb_gqb_show_price_on_quote_list( $item_product ) : true;
 			$unit_price    = WPB_GQB_Quote_List::get_item_price( $item );
-			$item_subtotal = function_exists( 'wc_price' ) ? wc_price( $unit_price * absint( $item['quantity'] ) ) : '';
+			$item_subtotal = ! $show_item ? $on_request : ( function_exists( 'wc_price' ) ? wc_price( $unit_price * absint( $item['quantity'] ) ) : '' );
 		}
 
 		wp_send_json_success(
 			array(
 				'count'         => WPB_GQB_Quote_List::get_items_count(),
-				'subtotal'      => function_exists( 'wc_price' ) ? wc_price( $totals['subtotal'] ) : $totals['subtotal'],
-				'total'         => function_exists( 'wc_price' ) ? wc_price( $totals['total'] ) : $totals['total'],
+				'subtotal'      => $hidden_present ? $on_request : ( function_exists( 'wc_price' ) ? wc_price( $totals['subtotal'] ) : $totals['subtotal'] ),
+				'total'         => $hidden_present ? $on_request : ( function_exists( 'wc_price' ) ? wc_price( $totals['total'] ) : $totals['total'] ),
 				'item_subtotal' => $item_subtotal,
 				'is_empty'      => empty( WPB_GQB_Quote_List::get_items() ),
 				'widget_html'   => class_exists( 'WPB_GQB_Quote_Widget_Shortcode' ) ? do_shortcode( '[wpb-quote-widget]' ) : '',

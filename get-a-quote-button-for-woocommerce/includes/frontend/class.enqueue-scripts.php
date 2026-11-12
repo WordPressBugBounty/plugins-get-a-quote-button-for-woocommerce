@@ -14,6 +14,10 @@ class WPB_GQB_Enqueue_Scripts {
 	 */
 	function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
+		// Priority 20: must run after CF7's own `wp_enqueue_scripts` callback
+		// (priority 10) has registered its script/style handles, so the URLs
+		// below are already populated regardless of plugin load order.
+		add_action( 'wp_enqueue_scripts', array( $this, 'localize_cf7_fallback_asset' ), 20 );
 	}
 
 	/**
@@ -68,6 +72,107 @@ class WPB_GQB_Enqueue_Scripts {
 		$this->js_variables();
 		$this->dynamic_styles();
 		$this->quote_list_dynamic_styles();
+	}
+
+	/**
+	 * Expose Contact Form 7's registered script/style URLs so frontend.js can
+	 * load them directly if the popup form ends up with no `wpcf7` JS bound
+	 * to it. CF7 only auto-enqueues its own script on pages containing a
+	 * literal [contact-form-7] shortcode - which this plugin's AJAX-rendered
+	 * popup/inline forms never do - and some page-speed/optimization plugins
+	 * strip CF7's script using that same "shortcode in content" detection, so
+	 * even this plugin's own `wpcf7_enqueue_scripts()` call can end up
+	 * defeated. CF7 always *registers* the handle regardless (just doesn't
+	 * always enqueue it), so it's reliably readable here.
+	 *
+	 * Also carries the `wpcf7` bootstrap object (REST `api.root`/`namespace`,
+	 * `cached` flag) that CF7's own `wpcf7_enqueue_scripts()` normally
+	 * attaches via `wp_add_inline_script( 'contact-form-7', ..., 'before' )`.
+	 * `includes/js/index.js` reads `wpcf7.api` as soon as it runs and bails
+	 * out (logging "wpcf7 is not defined") if that global isn't already set -
+	 * so the fallback script is useless without also reconstructing this,
+	 * which is what previously caused the exact "wpcf7 is not defined"
+	 * console error this fallback was meant to prevent.
+	 *
+	 * @return void
+	 */
+	public function localize_cf7_fallback_asset() {
+		$scripts = wp_scripts();
+
+		if ( ! isset( $scripts->registered['contact-form-7'] ) ) {
+			return;
+		}
+
+		$script_src = $this->resolve_asset_url( $scripts->registered['contact-form-7']->src, $scripts->base_url );
+
+		if ( ! $script_src ) {
+			return;
+		}
+
+		// CF7's own script (includes/js/index.js) calls `swv.validate(...)` -
+		// it depends on the separate `swv` handle (includes/swv/js/index.js,
+		// registered by CF7's own includes/swv/script-loader.php) being
+		// loaded first. WordPress resolves that dependency automatically
+		// when CF7's script is printed normally via wp_enqueue_script(), but
+		// this fallback loads CF7's script directly via a plain <script> tag
+		// in frontend.js, bypassing WP's dependency graph entirely - so
+		// without also exposing/loading `swv` here, CF7's client-side
+		// validation throws "swv is not defined" the moment the popup form
+		// is actually submitted, and the submit silently falls back to a
+		// native (broken) POST, same as when `wpcf7` itself is missing.
+		$swv_script_src = isset( $scripts->registered['swv'] )
+			? $this->resolve_asset_url( $scripts->registered['swv']->src, $scripts->base_url )
+			: '';
+
+		$styles    = wp_styles();
+		$style_src = isset( $styles->registered['contact-form-7'] )
+			? $this->resolve_asset_url( $styles->registered['contact-form-7']->src, $styles->base_url )
+			: '';
+
+		$bootstrap = array(
+			'api' => array(
+				'root'      => sanitize_url( get_rest_url() ),
+				'namespace' => 'contact-form-7/v1',
+			),
+		);
+
+		if ( defined( 'WP_CACHE' ) && WP_CACHE ) {
+			$bootstrap['cached'] = 1;
+		}
+
+		wp_add_inline_script(
+			'wpb-get-a-quote-button-scripts',
+			'window.WPB_GQB_CF7_Fallback = ' . wp_json_encode(
+				array(
+					'scriptSrc'    => $script_src,
+					'swvScriptSrc' => $swv_script_src,
+					'styleSrc'     => $style_src,
+					'bootstrap'    => $bootstrap,
+				)
+			) . ';',
+			'before'
+		);
+	}
+
+	/**
+	 * Resolve a registered script/style's `src` (which may be root-relative)
+	 * to an absolute URL, mirroring how WP_Scripts/WP_Styles itself resolves
+	 * `src` against `base_url` when printing a tag.
+	 *
+	 * @param string $src      Registered src, absolute or root-relative.
+	 * @param string $base_url The registry's base_url (site_url()).
+	 * @return string
+	 */
+	private function resolve_asset_url( $src, $base_url ) {
+		if ( ! $src ) {
+			return '';
+		}
+
+		if ( ! preg_match( '#^(https?:)?//#i', $src ) ) {
+			$src = $base_url . $src;
+		}
+
+		return $src;
 	}
 
 	/**
@@ -407,7 +512,7 @@ class WPB_GQB_Enqueue_Scripts {
 
 		$custom_css = ":root { {$vars} }
 
-        .wpb-get-a-quote-button-btn {
+        .wpb-get-a-quote-button-btn.wpb-get-a-quote-button-btn {
             {$btn_margin}
         }
 

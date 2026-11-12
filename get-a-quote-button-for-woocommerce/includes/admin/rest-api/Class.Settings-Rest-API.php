@@ -331,6 +331,9 @@ class WPB_GQB_Plugin_Settings_REST_API {
 		if ( isset( $params['autoSendProductData'] ) ) {
 			$data['wpb_gqb_auto_send_product_data'] = $params['autoSendProductData'] ? 'on' : 'off';
 		}
+		if ( isset( $params['saveQuoteDataToEntry'] ) ) {
+			$data['wpb_gqb_save_quote_data_to_entry'] = $params['saveQuoteDataToEntry'] ? 'on' : 'off';
+		}
 		if ( isset( $params['variationOn'] ) ) {
 			$data['wpb_gqb_variations_collection'] = sanitize_text_field( $params['variationOn'] );
 		}
@@ -548,21 +551,24 @@ class WPB_GQB_Plugin_Settings_REST_API {
 			$data['wpb_gqb_quote_widget_view_list_btn_text'] = sanitize_text_field( $params['quoteWidgetViewListBtnText'] );
 		}
 
-		// Automatic Quote Data Template (CF7 / WPForms dynamic tags)
+		// Automatic Quote Data Template (CF7 / WPForms dynamic tags). These
+		// five carry basic HTML formatting, so they go through
+		// wpb_gqb_kses_template() rather than sanitize_text(area)_field(),
+		// which would strip every tag out of them.
 		if ( isset( $params['quoteDataHeading'] ) ) {
-			$data['wpb_gqb_quote_data_heading'] = sanitize_text_field( $params['quoteDataHeading'] );
+			$data['wpb_gqb_quote_data_heading'] = wpb_gqb_kses_template( $params['quoteDataHeading'] );
 		}
 		if ( isset( $params['quoteListIntroText'] ) ) {
-			$data['wpb_gqb_quote_list_intro_text'] = sanitize_text_field( $params['quoteListIntroText'] );
+			$data['wpb_gqb_quote_list_intro_text'] = wpb_gqb_kses_template( $params['quoteListIntroText'] );
 		}
 		if ( isset( $params['quoteItemTemplate'] ) ) {
-			$data['wpb_gqb_quote_item_template'] = sanitize_textarea_field( $params['quoteItemTemplate'] );
+			$data['wpb_gqb_quote_item_template'] = wpb_gqb_kses_template( $params['quoteItemTemplate'] );
 		}
 		if ( isset( $params['quoteTotalTemplate'] ) ) {
-			$data['wpb_gqb_quote_total_template'] = sanitize_textarea_field( $params['quoteTotalTemplate'] );
+			$data['wpb_gqb_quote_total_template'] = wpb_gqb_kses_template( $params['quoteTotalTemplate'] );
 		}
 		if ( isset( $params['singleProductTemplate'] ) ) {
-			$data['wpb_gqb_single_product_template'] = sanitize_textarea_field( $params['singleProductTemplate'] );
+			$data['wpb_gqb_single_product_template'] = wpb_gqb_kses_template( $params['singleProductTemplate'] );
 		}
 
 		// Quote List Style

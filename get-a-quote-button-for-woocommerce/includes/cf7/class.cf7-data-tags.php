@@ -24,6 +24,13 @@ class WPB_GQB_CF7_Product_Data_Tags {
 		// Fully automatic quote data delivery (no shortcode/tag required in the form).
 		add_filter( 'wpcf7_form_hidden_fields', array( $this, 'add_auto_product_data_hidden_field' ) );
 		add_filter( 'wpcf7_mail_components', array( $this, 'append_auto_product_data_to_mail' ) );
+
+		// CF7 esc_html()s every mail-tag value it substitutes into an HTML
+		// mail body. That is right for a visitor-typed field, but it would
+		// also flatten the formatting a site owner deliberately put in the
+		// quote-data templates - so our own tag types opt out of it.
+		add_filter( 'wpcf7_mail_tag_replaced_gqb_product_data', array( $this, 'keep_quote_data_formatting' ), 10, 3 );
+		add_filter( 'wpcf7_mail_tag_replaced_gqb_product_data*', array( $this, 'keep_quote_data_formatting' ), 10, 3 );
 	}
 
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- these methods only read the popup's own hidden fields (product id, qty, variations, etc.) to render/append quote data; CF7 handles the actual submission's own validation, there is no separate state-changing action here.
@@ -583,8 +590,12 @@ class WPB_GQB_CF7_Product_Data_Tags {
 		$heading = wpb_gqb_get_option( 'wpb_gqb_quote_data_heading', 'quote_settings', esc_html__( 'Quote Details', 'get-a-quote-button' ) );
 		$is_html = false !== stripos( $components['body'], '<html' );
 
+		// wpb_gqb_template_to_html()/_to_plain_text() keep whatever formatting
+		// the templates carry in an HTML mail, and flatten it back to readable
+		// plain text in a text/plain one - a template with no markup at all
+		// comes out of both exactly as it does today.
 		if ( $is_html ) {
-			$addition = '<p><strong>' . $heading . '</strong><br>' . nl2br( esc_html( trim( $block ) ) ) . '</p>' . "\n";
+			$addition = '<p><strong>' . wpb_gqb_template_to_html( $heading ) . '</strong><br>' . wpb_gqb_template_to_html( $block ) . '</p>' . "\n";
 
 			if ( false !== stripos( $components['body'], '</body>' ) ) {
 				$components['body'] = preg_replace( '/<\/body>/i', $addition . '</body>', $components['body'], 1 );
@@ -592,7 +603,7 @@ class WPB_GQB_CF7_Product_Data_Tags {
 				$components['body'] .= $addition;
 			}
 		} else {
-			$components['body'] = rtrim( $components['body'] ) . "\n\n" . $heading . ":\n" . trim( $block ) . "\n";
+			$components['body'] = rtrim( $components['body'] ) . "\n\n" . wpb_gqb_template_to_plain_text( $heading ) . ":\n" . wpb_gqb_template_to_plain_text( $block ) . "\n";
 		}
 
 		wpb_gqb_quote_debug_log(
@@ -604,6 +615,28 @@ class WPB_GQB_CF7_Product_Data_Tags {
 		);
 
 		return $components;
+	}
+
+	/**
+	 * Re-apply the quote-data templates' own formatting to a [gqb_product_data]
+	 * mail-tag value. CF7 hands us both the value it already escaped and the
+	 * raw submitted one; we only step in when the submitted value actually
+	 * carries markup from our templates, so a form where the data field is
+	 * editable and a visitor typed "<" into it is left escaped as before.
+	 *
+	 * @param string $replaced  The value CF7 is about to put in the mail.
+	 * @param mixed  $submitted The raw submitted value (string or array).
+	 * @param bool   $html      Whether the mail component is HTML.
+	 * @return string
+	 */
+	public function keep_quote_data_formatting( $replaced, $submitted, $html ) {
+		$raw = is_array( $submitted ) ? implode( "\n", $submitted ) : (string) $submitted;
+
+		if ( '' === trim( $raw ) || ! wpb_gqb_template_has_html( $raw ) ) {
+			return $replaced;
+		}
+
+		return $html ? wpb_gqb_template_to_html( $raw ) : wpb_gqb_template_to_plain_text( $raw );
 	}
 
 	// phpcs:enable WordPress.Security.NonceVerification.Missing

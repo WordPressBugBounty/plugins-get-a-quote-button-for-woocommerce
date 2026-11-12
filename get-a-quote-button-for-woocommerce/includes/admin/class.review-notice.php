@@ -65,10 +65,9 @@ class WPB_GQB_Review_Notice
 	{
 		$nonce = wp_create_nonce(self::NONCE_ACTION);
 
-		$rate_url    = esc_url(add_query_arg(array('wpb_gqb_review_action' => 'rate', '_wpnonce' => $nonce)));
-		$later_url   = esc_url(add_query_arg(array('wpb_gqb_review_action' => 'later', '_wpnonce' => $nonce)));
-		$dismiss_url = esc_url(add_query_arg(array('wpb_gqb_review_action' => 'dismiss', '_wpnonce' => $nonce)));
-		$review_url  = esc_url(self::REVIEW_URL);
+		$later_url   = add_query_arg(array('wpb_gqb_review_action' => 'later', '_wpnonce' => $nonce));
+		$dismiss_url = add_query_arg(array('wpb_gqb_review_action' => 'dismiss', '_wpnonce' => $nonce));
+		$review_url  = self::REVIEW_URL;
 ?>
 		<div class="wpb-gqb-review-notice notice" style="border-left: 4px solid #f0b429; padding: 0; margin: 15px 0; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.06);">
 			<div style="display: flex; align-items: center; padding: 14px 18px; gap: 14px;">
@@ -81,17 +80,17 @@ class WPB_GQB_Review_Notice
 						<?php esc_html_e("You've been using the plugin for a week — thank you! If it's been helpful, a quick 5-star review would mean the world to us and help others discover it.", 'get-a-quote-button'); ?>
 					</p>
 					<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-						<a href="<?php echo $review_url; ?>"
+						<a href="<?php echo esc_url($review_url); ?>"
 							target="_blank"
 							rel="noopener noreferrer"
 							style="display:inline-flex;align-items:center;gap:4px;background:#f0b429;color:#1d2327;text-decoration:none;padding:6px 13px;border-radius:3px;font-size:12.5px;font-weight:600;line-height:1.4;">
 							&#9733; <?php esc_html_e('You deserve it!', 'get-a-quote-button'); ?>
 						</a>
-						<a href="<?php echo $later_url; ?>"
+						<a href="<?php echo esc_url($later_url); ?>"
 							style="display:inline-flex;align-items:center;text-decoration:none;padding:6px 13px;font-size:12.5px;color:#50575e;background:#fff;border:1px solid #c3c4c7;border-radius:3px;line-height:1.4;">
 							<?php esc_html_e('Maybe Later', 'get-a-quote-button'); ?>
 						</a>
-						<a href="<?php echo $dismiss_url; ?>"
+						<a href="<?php echo esc_url($dismiss_url); ?>"
 							style="display:inline-flex;align-items:center;text-decoration:none;padding:6px 10px;font-size:12.5px;color:#787c82;line-height:1.4;">
 							<?php esc_html_e('I Already Did', 'get-a-quote-button'); ?>
 						</a>

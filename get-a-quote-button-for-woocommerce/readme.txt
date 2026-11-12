@@ -2,20 +2,20 @@
 Author URI: https://wpbean.com/
 Plugin URI: https://wpbean.com/
 Contributors: wpbean
-Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce get a quote
-Requires at least: 5.0
-Tested up to: 7.1.3
-Stable tag: 6.6.9
+Tags: quote, request a quote, request a quote button, woocommerce request for quote, woocommerce contact form 7
+Requires at least: 6.2
+Tested up to: 7.1
+Stable tag: 6.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Request a Quote for WooCommerce with Contact Form 7 or WPForms shows a quote popup on button click. Get a Quote for WooCommerce with price on request.
+Request a Quote for WooCommerce and Elementor plugin shows a Contact Form 7 or WPForms popup on button click. Quote for WooCommerce, price on request.
 
 == Description ==
 
-**Request a Quote for WooCommerce** and let customers get pricing before they buy. This powerful **WooCommerce quote plugin** adds a customizable **Get a Quote button** to your products, allowing customers to request prices for bulk orders, custom products, specific variations, shipping details, or alternative products. Build a complete WooCommerce product enquiry and quotation system with seamless integration with Contact Form 7 and WPForms.
-
 <strong>WooCommerce Contact Form 7</strong> or <strong>WooCommerce WPForms</strong>. This plugin makes it very simple to integrate these two plugins.
+
+This <strong>request a quote</strong> plugin for WooCommerce is a valuable addition to any online store that requires flexible pricing. It allows customers to request prices directly instead of purchasing immediately, making it ideal for bulk orders or custom products. With seamless integration with Contact Form 7 and WPForms, you can create a powerful WooCommerce product enquiry and quotation system. Customers can request bulk pricing, ask about specific product variations, shipping details, alternative recommendations, and more—all through a streamlined and user-friendly quote request process.
 
 <strong>Get a Quote/Request a Quote</strong> button can be added to a <strong>WooCommerce</strong> single product page or below the product grid using this plugin. A <strong>Contact Form 7</strong> or <strong>WPForms</strong> popup form will show up on the quote button click.
 
@@ -25,7 +25,7 @@ For the form, it supports the two most popular form plugins. This quotation pop-
 
 The plugin options allow you to alter the quotation button's text, color, size, and location. Additionally, it offers WooCommerce choices; the quote button is only visible for featured or out-of-stock items.
 
-== ⭐⭐⭐⭐⭐ Rated 5.0 by 25 Users ==
+== ⭐⭐⭐⭐⭐ Rated 5.0 by 24 Users ==
 Request a Quote for WooCommerce proudly holds a perfect 5.0-star rating based on feedback from 23 satisfied users.
 
 == 🚀 6,000+ Active Installations ==
@@ -77,6 +77,10 @@ https://youtu.be/_0gT9mKoVHI
 
 ### Support and Documentation:
 Our extensive <a href="http://docs.wpbean.com/docs/get-a-quote-button-for-woocommerce/installing/">online documentation</a> makes getting started easy. Our knowledgeable support staff is always there to assist you if you run into any problems; simply open a ticket in our <a href="https://wpbean.com/support">support forum</a>.
+
+### Do you use other form plugins?
+We have another <a href="https://wordpress.org/plugins/wpb-form-popup/"><b>popup form</b></a> plugin that is compatible with all of the other popular form plugins. Examples include WPForms, Mailchimp, Forminator, Ninja Forms, Formidable, Form Maker by 10Web, weForms, Fluent Forms, HappyForms, WS Form, WPEverest User Registration, Bookly, Everest Forms, Kali Forms, and Bit Form. More integrations are in the works.
+
 
 == Installation ==
 
@@ -347,5 +351,33 @@ With this plugin, you can hide the cart button and product price. Additionally, 
 
 = Version 6.6.9 =
 * Fixed quote button custom hook shortcode display issue. 
+
+= Version 6.7 =
+* Fixed quote list page price display issue.
+
+= Version 6.7.2 =
+* Fixed popup CF7 form not submitting via AJAX when CF7's own scripts aren't auto-enqueued on the page (form action URL, missing "swv" dependency).
+
+= Version 6.7.1 =
+* Fixed CF7 form submission error.
+* Fixed quote button bg and color settings not applying issue.
+
+= Version 6.7.2 =
+* Fixed CF7 form submission error.
+
+= Version 6.7.3 =
+* Added WPForms Entries support for the Quotes.
+* Added basic HTML support to the Quote Data Template fields (block heading, intro text, quote list item/total templates and the single product template), so values like {product_name} can be bolded, italicised or resized in the quote email.
+* Fixed the currency symbol showing as "&pound;" instead of the symbol itself in the automatically sent quote data.
+
+= Version 6.7.4 =
+* Added automatic quote data template formatting support.
+
+= Version 6.7.5 =
+* Security: Escaped the review notice action URLs at output, following the WordPress.org escaping guidelines.
+* Security: All custom table database queries now use `$wpdb->prepare()` with the `%i` identifier placeholder for table and column names.
+* Improved: Database update and WPML migration queries hardened to meet the WordPress Plugin Check standards.
+* Removed an unused variable from the review notice.
+* Updated the minimum required WordPress version to 6.2.
 
 == Upgrade notice ==
